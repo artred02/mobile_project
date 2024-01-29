@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { firebase } from '../../firebase/config'
 import styles from './styles';
 
-export default function RegistrationScreen({navigation}) {
+export default function RegistrationScreen({navigation, setUser}) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -33,7 +33,8 @@ export default function RegistrationScreen({navigation}) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', {user: data})
+                        setUser(data)
+                        navigation.navigate('Home', {user: data, setUser: setUser})
                     })
                     .catch((error) => {
                         alert(error)

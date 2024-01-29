@@ -20,12 +20,16 @@ export default function App() {
       <Stack.Navigator>
         { user ? (
           <Stack.Screen name="Home">
-            {props => <HomeScreen {...props} extraData={user} />}
+            {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
         ) : (
           <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
+            <Stack.Screen name="Login">
+              {props => <LoginScreen {...props} setUser={setUser} />}
+            </Stack.Screen>
+            <Stack.Screen name="Registration">
+              {props => <RegistrationScreen {...props} setUser={setUser} />}
+            </Stack.Screen>
           </>
         )}
       </Stack.Navigator>
