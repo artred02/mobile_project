@@ -54,5 +54,14 @@ export default StyleSheet.create({
         color: "#788eec",
         fontWeight: "bold",
         fontSize: 16
-    }
+    },
+    error: {
+        color: 'red',
+        fontSize: 16,
+        fontWeight: "bold",
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 20,
+        textAlign: 'center'
+    },
 })

@@ -5,8 +5,9 @@ import { firebase } from '../../firebase/config'
 import styles from './styles';
 
 export default function LoginScreen({navigation, setUser}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
@@ -24,19 +25,19 @@ export default function LoginScreen({navigation, setUser}) {
                     .get()
                     .then(firestoreDocument => {
                         if (!firestoreDocument.exists) {
-                            alert("User does not exist anymore.")
+                            setError("User does not exist anymore.")
                             return;
                         }
                         const user = firestoreDocument.data()
                         setUser(user)
-                        navigation.navigate('Home', {user: user, setUser: setUser})
+                        navigation.navigate('Home', {user: user})
                     })
                     .catch(error => {
-                        alert(error)
+                        setError(error.message)
                     });
             })
             .catch(error => {
-                alert(error)
+                setError(error.message)
             })
     }
 
@@ -49,6 +50,7 @@ export default function LoginScreen({navigation, setUser}) {
                     style={styles.logo}
                     source={require('./../../../assets/firebase.png')}
                 />
+                {error ? <Text style={styles.error} >{error}</Text> : null}
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
