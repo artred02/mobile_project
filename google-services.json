@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "376553348599",
+    "firebase_url": "https://mobileproject-d77de-default-rtdb.firebaseio.com",
+    "project_id": "mobileproject-d77de",
+    "storage_bucket": "mobileproject-d77de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376553348599:android:7c377400244a8145d2a2f2",
+        "android_client_info": {
+          "package_name": "com.test.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376553348599-kobfue32e4rnluth86iuft4mhlhlimk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHr7ENFZthYaWX2LfL5SR94c2MoF1Zamg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376553348599-kobfue32e4rnluth86iuft4mhlhlimk2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
