@@ -34,7 +34,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                     .set(data)
                     .then(() => {
                         setUser(data)
-                        navigation.navigate('Home', {user: data, setUser: setUser})
+                        navigation.navigate('Home', {user: data})
                     })
                     .catch((error) => {
                         alert(error)
