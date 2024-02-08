@@ -78,10 +78,10 @@ export default function LoginScreen({navigation, setUser}) {
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
+            </KeyboardAwareScrollView>
                 <View style={styles.citationView}>
                     <Text style={styles.citationText}>"Soyez maître de vos finances en suivant attentivement vos comptes bancaires. Chaque euro compte pour bâtir un avenir financier solide."</Text>
                 </View>
-            </KeyboardAwareScrollView>
         </View>
     )
 }

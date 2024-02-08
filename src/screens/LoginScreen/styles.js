@@ -7,11 +7,7 @@ export default StyleSheet.create({
         backgroundColor: "#34495e",
 
     },
-    title: {
-
-    },
     logo: {
-        flex: 1,
         height: 120,
         width: 90,
         alignSelf: "center",
@@ -45,7 +41,6 @@ export default StyleSheet.create({
         fontWeight: "bold"
     },
     footerView: {
-        flex: 1,
         alignItems: "center",
         marginTop: 20
     },
@@ -68,15 +63,15 @@ export default StyleSheet.create({
         textAlign: 'center'
     },
     citationView:{
-        flex: 1,
-        marginTop: 100,
         justifyContent: 'flex-end',
-
+        marginBottom:30,
     },
     citationText:{
         color: '#fff',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: "bold",
-        textAlign: 'center'
+        textAlign: 'justify',
+        margin:15,
+        
     }
 })
