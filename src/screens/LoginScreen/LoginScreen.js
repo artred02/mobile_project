@@ -80,7 +80,7 @@ export default function LoginScreen({navigation, setUser}) {
                 </View>
             </KeyboardAwareScrollView>
                 <View style={styles.citationView}>
-                    <Text style={styles.citationText}>"Soyez maître de vos finances en suivant attentivement vos comptes bancaires. Chaque euro compte pour bâtir un avenir financier solide."</Text>
+                    <Image style={styles.citation} source={require("./../../../assets/citation.png")}/>
                 </View>
         </View>
     )

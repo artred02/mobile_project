@@ -66,12 +66,8 @@ export default StyleSheet.create({
         justifyContent: 'flex-end',
         marginBottom:30,
     },
-    citationText:{
-        color: '#fff',
-        fontSize: 12,
-        fontWeight: "bold",
-        textAlign: 'justify',
-        margin:15,
-        
+    citation:{
+        height: 160,
+        width: 350,
     }
 })
