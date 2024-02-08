@@ -76,7 +76,10 @@ export default function LoginScreen({navigation, setUser}) {
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+                    <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+                </View>
+                <View style={styles.citationView}>
+                    <Text style={styles.citationText}>"Soyez maître de vos finances en suivant attentivement vos comptes bancaires. Chaque euro compte pour bâtir un avenir financier solide."</Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>
