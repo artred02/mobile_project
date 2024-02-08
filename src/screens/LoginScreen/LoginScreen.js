@@ -50,6 +50,9 @@ export default function LoginScreen({navigation, setUser}) {
                     style={styles.logo}
                     source={require('./../../../assets/logo.png')}
                 />
+
+                <Text style={styles.nameapp}>CoinKeeper</Text>
+
                 {error ? <Text style={styles.error} >{error}</Text> : null}
                 <TextInput
                     style={styles.input}

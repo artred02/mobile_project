@@ -14,6 +14,13 @@ export default StyleSheet.create({
         margin: 30,
         marginTop: 100
     },
+    nameapp:{
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: "bold",
+        textAlign: 'center',
+        marginBottom: 50,
+    },
     input: {
         height: 48,
         borderRadius: 5,
