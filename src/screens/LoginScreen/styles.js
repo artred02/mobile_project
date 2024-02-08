@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -17,7 +18,7 @@ export default StyleSheet.create({
     nameapp:{
         color: '#fff',
         fontSize: 30,
-        fontWeight: "bold",
+        fontFamily: 'ProtestRiot',
         textAlign: 'center',
         marginBottom: 50,
     },

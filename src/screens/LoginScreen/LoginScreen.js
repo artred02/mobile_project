@@ -3,6 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config'
 import styles from './styles';
+import { useFonts } from 'expo-font';
 
 export default function LoginScreen({navigation, setUser}) {
     const [email, setEmail] = useState('');
@@ -12,6 +13,11 @@ export default function LoginScreen({navigation, setUser}) {
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
+
+    const [fontsLoaded, fontError] = useFonts({
+        'Inter-Black': require('../../../assets/fonts/Inter-Black.otf'),
+        'ProtestRiot': require('../../../assets/fonts/ProtestRiot.ttf'),
+    });
 
     const onLoginPress = () => {
         firebase
