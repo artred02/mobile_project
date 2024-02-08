@@ -5,6 +5,7 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: "#34495e",
+
     },
     title: {
 
@@ -14,7 +15,8 @@ export default StyleSheet.create({
         height: 120,
         width: 90,
         alignSelf: "center",
-        margin: 30
+        margin: 30,
+        marginTop: 100
     },
     input: {
         height: 48,

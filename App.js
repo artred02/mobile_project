@@ -35,7 +35,7 @@ export default function App() {
               name="Login"
               options={{ 
                 headerStyle: {
-                  backgroundColor: '#34495e',
+                  height: 0,
                 },
             }}>
               {props => <LoginScreen {...props} setUser={setUser} />}
