@@ -3,17 +3,22 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
-    },
-    title: {
-
+        alignItems: 'center',
+        backgroundColor: "#34495e",
     },
     logo: {
-        flex: 1,
         height: 120,
         width: 90,
         alignSelf: "center",
-        margin: 30
+        margin:10,
+        marginTop: 100,
+    },
+    nameapp:{
+        color: '#fff',
+        fontSize: 30,
+        fontFamily: 'ProtestRiot',
+        textAlign: 'center',
+        marginBottom: 50,
     },
     input: {
         height: 48,
@@ -27,12 +32,12 @@ export default StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        backgroundColor: '#788eec',
+        backgroundColor: '#2ecc71',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
         height: 48,
-        borderRadius: 5,
+        borderRadius: 30,
         alignItems: "center",
         justifyContent: 'center'
     },
@@ -48,10 +53,10 @@ export default StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        color: '#2e2e2d'
+        color: '#fff'
     },
     footerLink: {
-        color: "#788eec",
+        color: "#2ecc71",
         fontWeight: "bold",
         fontSize: 16
     }

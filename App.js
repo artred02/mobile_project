@@ -44,7 +44,7 @@ export default function App() {
               name="Registration"
               options={{ 
                 headerStyle: {
-                  backgroundColor: '#34495e',
+                  height: 0,
                 },
             }}>
               {props => <RegistrationScreen {...props} setUser={setUser}/>}

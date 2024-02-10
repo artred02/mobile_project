@@ -54,6 +54,8 @@ export default function RegistrationScreen({navigation, setUser}) {
                     style={styles.logo}
                     source={require('../../../assets/logo.png')}
                 />
+                <Text style={styles.nameapp}>CoinKeeper</Text>
+
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'
