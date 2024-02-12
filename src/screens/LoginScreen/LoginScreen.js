@@ -4,6 +4,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { firebase } from '../../firebase/config'
 import styles from './styles';
 import { useFonts } from 'expo-font';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 
 export default function LoginScreen({navigation, setUser}) {
     const [email, setEmail] = useState('');
@@ -49,7 +51,7 @@ export default function LoginScreen({navigation, setUser}) {
 
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView
+            <KeyboardAwareScrollView 
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
                 <Image
@@ -87,10 +89,16 @@ export default function LoginScreen({navigation, setUser}) {
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
-            </KeyboardAwareScrollView>
                 <View style={styles.citationView}>
-                    <Image style={styles.citation} source={require("./../../../assets/citation.png")}/>
+                    {/* <Image style={styles.citation} source={require("./../../../assets/citation.png")}/> */}
+                    <Text style={styles.citationText}>
+                        "Soyez maître de vos finances en suivant attentivement vos comptes banquaires{"\n"}
+                        Chaque euro compte pour bâtir un avenir financier solide"
+                        
+                        <FontAwesomeIcon icon={faMugSaucer} />
+                    </Text>
                 </View>
+            </KeyboardAwareScrollView>
         </View>
     )
 }

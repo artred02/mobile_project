@@ -5,8 +5,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#34495e",
-
+        backgroundColor: "#34495e"
     },
     logo: {
         height: 120,
@@ -74,8 +73,12 @@ export default StyleSheet.create({
         justifyContent: 'flex-end',
         marginBottom:30,
     },
-    citation:{
-        height: 160,
-        width: 350,
+    citationText:{
+        color: 'white',
+        fontFamily: 'ProtestRiot',
+        paddingLeft: 10,
+        paddingRight: 10,
+        textAlign: "justify",
+        paddingTop: 50
     }
 })
