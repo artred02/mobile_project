@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { StyleSheet, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen } from './src/screens'
 import { useFonts } from 'expo-font';
 import {decode, encode} from 'base-64'
 if (!global.btoa) {  global.btoa = encode }
@@ -23,15 +23,26 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         { user ? (
+          <>
           <Stack.Screen
-            name="Home"
+          name="Home"
+          options={{ 
+            headerStyle: {
+              height:0
+            },
+          }}>
+            {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Settings"
             options={{ 
               headerStyle: {
                 height:0
               },
             }}>
-            {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
+            {props => <SettingsScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
+          </>
         ) : (
           <>
         { fontsLoaded ? (

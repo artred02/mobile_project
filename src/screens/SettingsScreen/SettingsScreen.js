@@ -4,11 +4,9 @@ import { firebase } from '../../firebase/config'
 import { collection, query, where } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
-import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
 
-export default function HomeScreen(props) {
+
+export default function SettingsScreen(props) {
     const [objects, setObjects] = useState([]);
 
     useEffect(() => {
@@ -27,9 +25,8 @@ export default function HomeScreen(props) {
         firebase.auth().signOut()
         props.setUser(null)
     }
-
     const parametre = () => {
-        props.navigation.navigate('Settings')
+        alert("Parametre")
     }
 
     return (
@@ -38,18 +35,8 @@ export default function HomeScreen(props) {
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
-                <View style={styles.header}>
-                    <TouchableOpacity 
-                        onPress={logout} 
-                        style={styles.logoutTouchable}
-                    >
-                        <FontAwesomeIcon icon={faRightFromBracket} style={styles.buttonIcon} size={25}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={parametre} style={styles.parametreTouchable}>
-                        <FontAwesomeIcon icon={faGear} style={styles.buttonIcon} size={25}/>
-                    </TouchableOpacity>
-                    <Text style={styles.headerTxt}>Bonjour {props.extraData.fullName} !</Text>
-                </View>
+                
+                <Text style={styles.headerTxt}>Settings page {props.extraData.fullName} !</Text>
                 {/* <Text>Home Screen</Text>
                 <Text>Nom : {props.extraData.fullName}</Text>
                 <Text>Email : {props.extraData.email}</Text>
