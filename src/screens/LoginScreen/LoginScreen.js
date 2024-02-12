@@ -4,7 +4,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { firebase } from '../../firebase/config'
 import styles from './styles';
 
-export default function LoginScreen({navigation, setUser, layout}) {
+
+export default function LoginScreen({navigation, setUser}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -42,7 +43,7 @@ export default function LoginScreen({navigation, setUser, layout}) {
     }
 
     return (
-        <View style={styles.container} onLayout={layout}>
+        <View style={styles.container}>
             <KeyboardAwareScrollView 
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">

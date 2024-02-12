@@ -11,24 +11,12 @@ if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 import * as SplashScreen from 'expo-splash-screen';
 
-SplashScreen.preventAutoHideAsync();
-
 const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     'ProtestRiot': require('./assets/fonts/ProtestRiot.ttf')
   });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
-
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
 
   const [user, setUser] = useState(null)
 
@@ -43,7 +31,7 @@ export default function App() {
                 backgroundColor: '#34495e',
               },
             }}>
-            {props => <HomeScreen {...props} extraData={user} setUser={setUser} isLoading={isLoading} />}
+            {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
         ) : (
           <>
@@ -54,7 +42,7 @@ export default function App() {
                   height: 0,
                 },
             }}>
-              {props => <LoginScreen {...props} setUser={setUser} layout={onLayoutRootView} />}
+              {props => <LoginScreen {...props} setUser={setUser} />}
             </Stack.Screen>
             <Stack.Screen
               name="Registration"
