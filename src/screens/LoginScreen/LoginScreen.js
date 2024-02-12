@@ -3,20 +3,8 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config'
 import styles from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
-import { fa0 } from '@fortawesome/free-solid-svg-icons/fa0';
 
-
-const Title = (isLoading) => {
-    if(!isLoading){
-        return <Text>TEST</Text>;
-    } else {
-        return <Text style={styles.nameapp}>CoinKeeper</Text>;
-    }
-}
-
-export default function LoginScreen({navigation, setUser, isLoading}) {
+export default function LoginScreen({navigation, setUser, layout}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -54,7 +42,7 @@ export default function LoginScreen({navigation, setUser, isLoading}) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={layout}>
             <KeyboardAwareScrollView 
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
@@ -63,7 +51,7 @@ export default function LoginScreen({navigation, setUser, isLoading}) {
                     source={require('./../../../assets/logo.png')}
                 />
 
-                <Title isLoading={isLoading} />                
+                <Text style={styles.nameapp}>CoinKeeper</Text>
 
                 {error ? <Text style={styles.error} >{error}</Text> : null}
                 <TextInput

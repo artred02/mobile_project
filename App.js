@@ -1,6 +1,6 @@
 
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -11,22 +11,26 @@ if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 import * as SplashScreen from 'expo-splash-screen';
 
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
 
 export default function App() {
-
-  const [isLoading, setLoading] = useState(true);
-
   const [fontsLoaded, fontError] = useFonts({
     'ProtestRiot': require('./assets/fonts/ProtestRiot.ttf')
   });
 
-  const [user, setUser] = useState(null)
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
 
-  React.useEffect(() => {
-		setLoading(false)
-	}, [fontsLoaded]);
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
+  const [user, setUser] = useState(null)
 
   return (
     <NavigationContainer>
@@ -50,7 +54,7 @@ export default function App() {
                   height: 0,
                 },
             }}>
-              {props => <LoginScreen {...props} setUser={setUser} />}
+              {props => <LoginScreen {...props} setUser={setUser} layout={onLayoutRootView} />}
             </Stack.Screen>
             <Stack.Screen
               name="Registration"
