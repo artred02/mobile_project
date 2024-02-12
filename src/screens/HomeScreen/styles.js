@@ -51,4 +51,8 @@ export default StyleSheet.create({
         marginRight: 30,
         paddingLeft: 16
     },
+    navbar:{
+        
+
+    }
 })

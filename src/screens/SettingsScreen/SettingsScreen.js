@@ -4,6 +4,7 @@ import { firebase } from '../../firebase/config'
 import { collection, query, where } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
+import NavBottomBar from '../../../components/NavBottomBar'
 
 
 export default function SettingsScreen(props) {
@@ -30,13 +31,14 @@ export default function SettingsScreen(props) {
     }
 
     return (
+        <>
         <View style={styles.container}>
             <KeyboardAwareScrollView
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
                 
-                <Text style={styles.headerTxt}>Settings page {props.extraData.fullName} !</Text>
+                <Text style={styles.headerTxt}>Paramètres</Text>
                 {/* <Text>Home Screen</Text>
                 <Text>Nom : {props.extraData.fullName}</Text>
                 <Text>Email : {props.extraData.email}</Text>
@@ -51,5 +53,10 @@ export default function SettingsScreen(props) {
                 
             </KeyboardAwareScrollView>
         </View>
+        <View>
+            <NavBottomBar/>
+        </View>
+        </>
+        
     )
 }

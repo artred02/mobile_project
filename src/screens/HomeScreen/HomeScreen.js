@@ -7,6 +7,7 @@ import styles from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
 import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
+import NavBottomBar from '../../../components/NavBottomBar'
 
 export default function HomeScreen(props) {
     const [objects, setObjects] = useState([]);
@@ -33,6 +34,7 @@ export default function HomeScreen(props) {
     }
 
     return (
+        <>
         <View style={styles.container}>
             <KeyboardAwareScrollView
                 style={styles.scrollView}
@@ -49,20 +51,25 @@ export default function HomeScreen(props) {
                         <FontAwesomeIcon icon={faGear} style={styles.buttonIcon} size={25}/>
                     </TouchableOpacity>
                     <Text style={styles.headerTxt}>Bonjour {props.extraData.fullName} !</Text>
+
                 </View>
                 {/* <Text>Home Screen</Text>
                 <Text>Nom : {props.extraData.fullName}</Text>
                 <Text>Email : {props.extraData.email}</Text>
-
+                
                 <Text>Objects:</Text>
                 {objects.map((object) => (
                     <View key={object.id}>
-                        <Text>{object.name}</Text>
-                        <Text>{object.value}</Text>
+                    <Text>{object.name}</Text>
+                    <Text>{object.value}</Text>
                     </View>
                 ))} */}
                 
             </KeyboardAwareScrollView>
         </View>
+        <View style={styles.navbar}>
+            <NavBottomBar/>
+        </View>
+        </>
     )
 }
