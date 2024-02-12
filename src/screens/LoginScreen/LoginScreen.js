@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config'
@@ -6,6 +6,10 @@ import styles from './styles';
 import { useFonts } from 'expo-font';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
+import { fa0 } from '@fortawesome/free-solid-svg-icons/fa0';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function LoginScreen({navigation, setUser}) {
     const [email, setEmail] = useState('');
@@ -17,9 +21,14 @@ export default function LoginScreen({navigation, setUser}) {
     }
 
     const [fontsLoaded, fontError] = useFonts({
-        'Inter-Black': require('../../../assets/fonts/Inter-Black.otf'),
         'ProtestRiot': require('../../../assets/fonts/ProtestRiot.ttf'),
     });
+
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded || fontError) {
+          await SplashScreen.hideAsync();
+        }
+      }, [fontsLoaded, fontError]);
 
     const onLoginPress = () => {
         firebase
@@ -50,7 +59,7 @@ export default function LoginScreen({navigation, setUser}) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
             <KeyboardAwareScrollView 
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
@@ -94,8 +103,6 @@ export default function LoginScreen({navigation, setUser}) {
                     <Text style={styles.citationText}>
                         "Soyez maître de vos finances en suivant attentivement vos comptes banquaires{"\n"}
                         Chaque euro compte pour bâtir un avenir financier solide"
-                        
-                        <FontAwesomeIcon icon={faMugSaucer} />
                     </Text>
                 </View>
             </KeyboardAwareScrollView>
