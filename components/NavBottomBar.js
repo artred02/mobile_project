@@ -3,11 +3,21 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faPlus, faUser, faMessage } from '@fortawesome/free-solid-svg-icons';
 
-export default function NavBottomBar() {
+export default function NavBottomBar({navigation}) {
+
+  const home = () => {
+    navigation.navigate('Home')
+  }
+
+  const chatbot = () => {
+    navigation.navigate('Chatbot')
+  }
+  
+
   return (
     <View style={styles.background}>
         <View style={styles.icon}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={home} >
             <FontAwesomeIcon icon={faHome} size={30} />
           </TouchableOpacity>
         </View>
@@ -22,7 +32,7 @@ export default function NavBottomBar() {
           </TouchableOpacity>
         </View>
         <View style={styles.icon}>
-          <TouchableOpacity >
+          <TouchableOpacity onPress={chatbot} >
             <FontAwesomeIcon icon={faMessage} size={30} />
           </TouchableOpacity>
         </View>

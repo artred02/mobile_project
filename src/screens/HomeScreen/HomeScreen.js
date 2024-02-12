@@ -68,7 +68,7 @@ export default function HomeScreen(props) {
             </KeyboardAwareScrollView>
         </View>
         <View style={styles.navbar}>
-            <NavBottomBar/>
+            <NavBottomBar navigation={props.navigation} />
         </View>
         </>
     )
