@@ -29,7 +29,7 @@
     "plugins": [
       ["expo-font",
       {
-        "fonts":["./assets/fonts/ProtestRiot.ttf"]
+        "fonts":["node_modules/@expo-google-fonts/knewave/Knewave_400Regular.ttf"]
       }
 
       ]

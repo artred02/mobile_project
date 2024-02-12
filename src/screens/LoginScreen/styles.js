@@ -17,7 +17,7 @@ export default StyleSheet.create({
     nameapp:{
         color: '#fff',
         fontSize: 30,
-        fontFamily: 'ProtestRiot',
+        fontFamily: 'knewave',
         textAlign: 'center',
         marginBottom: 50,
     },
@@ -75,7 +75,7 @@ export default StyleSheet.create({
     },
     citationText:{
         color: 'white',
-        fontFamily: 'ProtestRiot',
+        fontFamily: 'knewave',
         paddingLeft: 10,
         paddingRight: 10,
         textAlign: "justify",

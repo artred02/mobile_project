@@ -16,7 +16,7 @@ export default StyleSheet.create({
     nameapp:{
         color: '#fff',
         fontSize: 30,
-        fontFamily: 'ProtestRiot',
+        fontFamily: 'knewave',
         textAlign: 'center',
         marginBottom: 50,
     },

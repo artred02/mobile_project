@@ -49,7 +49,4 @@ const styles = StyleSheet.create({
         justifyContent:'space-around',
         alignItems:'center'
     },
-    icon:{
-
-    }
 })

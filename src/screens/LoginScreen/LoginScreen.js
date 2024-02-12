@@ -5,7 +5,7 @@ import { firebase } from '../../firebase/config'
 import styles from './styles';
 
 
-export default function LoginScreen({navigation, setUser}) {
+export default function LoginScreen({navigation, setUser, layout}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -43,7 +43,7 @@ export default function LoginScreen({navigation, setUser}) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={layout}>
             <KeyboardAwareScrollView 
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
@@ -52,7 +52,7 @@ export default function LoginScreen({navigation, setUser}) {
                     source={require('./../../../assets/logo.png')}
                 />
 
-                <Text style={styles.nameapp}>CoinKeeper</Text>
+                <Text style={styles.nameapp} >CoinKeeper</Text>
 
                 {error ? <Text style={styles.error} >{error}</Text> : null}
                 <TextInput

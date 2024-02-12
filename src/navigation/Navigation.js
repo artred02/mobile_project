@@ -6,7 +6,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen
 const Stack = createStackNavigator();
 
 
-export default function Navigation ({user, setUser}) {
+export default function Navigation ({user, setUser, layout}) {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -49,7 +49,7 @@ export default function Navigation ({user, setUser}) {
                   height: 0,
                 },
             }}>
-              {props => <LoginScreen {...props} setUser={setUser} />}
+              {props => <LoginScreen {...props} setUser={setUser} layout={layout} />}
             </Stack.Screen>
             <Stack.Screen
               name="Registration"
