@@ -1,15 +1,43 @@
 import { StyleSheet } from 'react-native';
 
+
 export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 20,
+        backgroundColor: "#34495e",
+
+    },
+    header:{
+        justifyContent:'flex-start',
+        marginTop:75,
+        height:50,
+        display:'flex'
+    },
+    headerTxt:{
+        color:'#fff',
+        fontSize:30,
+        margin:10,
+        marginLeft:20,
+        fontStyle:'italic',
+        fontWeight:"bold", 
+        position:'absolute'
+
+    },
+    logoutTouchable: {
+        marginLeft:'auto',
+        
+    },
+    parametreTouchable:{
+        position:'absolute',
+        right:0,
+        marginRight: 40
+    },
+    buttonIcon:{
+        color:'#2ecc71',
+        margin:15,
     },
     scrollView: {
-        flex: 1,
         width: '100%',
     },
     input: {
@@ -23,17 +51,4 @@ export default StyleSheet.create({
         marginRight: 30,
         paddingLeft: 16
     },
-    button: {
-        backgroundColor: '#788eec',
-        marginTop: 20,
-        height: 48,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center'
-    },
-    buttonTitle: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: "bold"
-    }
 })

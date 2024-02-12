@@ -4,6 +4,9 @@ import { firebase } from '../../firebase/config'
 import { collection, query, where } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
+import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
 
 export default function HomeScreen(props) {
     const [objects, setObjects] = useState([]);
@@ -24,6 +27,9 @@ export default function HomeScreen(props) {
         firebase.auth().signOut()
         props.setUser(null)
     }
+    const parametre = () => {
+        alert("Parametre")
+    }
 
     return (
         <View style={styles.container}>
@@ -31,7 +37,19 @@ export default function HomeScreen(props) {
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
-                <Text>Home Screen</Text>
+                <View style={styles.header}>
+                    <TouchableOpacity 
+                        onPress={logout} 
+                        style={styles.logoutTouchable}
+                    >
+                        <FontAwesomeIcon icon={faRightFromBracket} style={styles.buttonIcon} size={25}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={parametre} style={styles.parametreTouchable}>
+                        <FontAwesomeIcon icon={faGear} style={styles.buttonIcon} size={25}/>
+                    </TouchableOpacity>
+                    <Text style={styles.headerTxt}>Bonjour {props.extraData.fullName} !</Text>
+                </View>
+                {/* <Text>Home Screen</Text>
                 <Text>Nom : {props.extraData.fullName}</Text>
                 <Text>Email : {props.extraData.email}</Text>
 
@@ -41,14 +59,8 @@ export default function HomeScreen(props) {
                         <Text>{object.name}</Text>
                         <Text>{object.value}</Text>
                     </View>
-                ))}
+                ))} */}
                 
-                <TouchableOpacity 
-                    onPress={logout} 
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonTitle} >Logout</Text>
-                </TouchableOpacity>
             </KeyboardAwareScrollView>
         </View>
     )

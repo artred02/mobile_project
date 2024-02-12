@@ -9,7 +9,6 @@ import { useFonts } from 'expo-font';
 import {decode, encode} from 'base-64'
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
-import * as SplashScreen from 'expo-splash-screen';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +27,7 @@ export default function App() {
             name="Home"
             options={{ 
               headerStyle: {
-                backgroundColor: '#34495e',
+                height:0
               },
             }}>
             {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
