@@ -1,7 +1,7 @@
 
 import 'react-native-gesture-handler';
 import React, { useEffect, useState, useCallback } from 'react'
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
@@ -35,6 +35,8 @@ export default function App() {
           </Stack.Screen>
         ) : (
           <>
+        { fontsLoaded ? (
+          <>
             <Stack.Screen
               name="Login"
               options={{ 
@@ -53,6 +55,20 @@ export default function App() {
             }}>
               {props => <RegistrationScreen {...props} setUser={setUser}/>}
             </Stack.Screen>
+          </>
+        ) : (
+          <>
+          <Stack.Screen
+            name="Login"
+            options={{ 
+              headerStyle: {
+                height: 0,
+              },
+          }}>
+            {props => <LoginScreen {...props} setUser={setUser} />}
+          </Stack.Screen>
+          </>
+        )}
           </>
         )}
       </Stack.Navigator>
