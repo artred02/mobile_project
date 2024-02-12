@@ -37,8 +37,10 @@ export default function SettingsScreen(props) {
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
-                
-                <Text style={styles.headerTxt}>Paramètres</Text>
+                <View style={styles.header}>
+                    <Text style={styles.headerTxt}>Paramètres</Text>
+
+                </View>
                 {/* <Text>Home Screen</Text>
                 <Text>Nom : {props.extraData.fullName}</Text>
                 <Text>Email : {props.extraData.email}</Text>

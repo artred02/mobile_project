@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     header:{
         justifyContent:'flex-start',
-        marginTop:75,
+        marginTop:60,
         height:50,
         display:'flex'
     },
