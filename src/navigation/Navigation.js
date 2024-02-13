@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen } from '../screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen } from '../screens'
 
 
 const Stack = createStackNavigator();
@@ -30,15 +30,24 @@ export default function Navigation ({user, setUser, layout}) {
             }}>
             {props => <SettingsScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
-            <Stack.Screen
-              name="Chatbot"
-              options={{ 
-                headerStyle: {
-                  height: 0,
-                },
-            }}>
-              {props => <ChatScreen {...props} />}
-            </Stack.Screen>
+          <Stack.Screen
+            name="Chatbot"
+            options={{ 
+              headerStyle: {
+                height: 0,
+              },
+          }}>
+            {props => <ChatScreen {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Confidentialite"
+            options={{ 
+              headerStyle: {
+                height: 0,
+              },
+          }}>
+            {props => <ConfidentialiteScreen {...props} />}
+          </Stack.Screen>
           </>
         ) : (
           <>
