@@ -16,24 +16,24 @@ export default function NavBottomBar({navigation}) {
 
   return (
     <View style={styles.background}>
-        <View style={styles.icon}>
+        <View>
           <TouchableOpacity onPress={home} >
-            <FontAwesomeIcon icon={faHome} size={30} />
+            <FontAwesomeIcon icon={faHome} style={styles.icon} size={30} />
           </TouchableOpacity>
         </View>
-        <View style={styles.icon}>
+        <View>
           <TouchableOpacity>
-            <FontAwesomeIcon icon={faPlus} size={30} />
+            <FontAwesomeIcon icon={faPlus} style={styles.icon} size={30} />
           </TouchableOpacity>
         </View>
-        <View style={styles.icon}>
+        <View>
           <TouchableOpacity>
-            <FontAwesomeIcon icon={faUser} size={30} />
+            <FontAwesomeIcon icon={faUser} style={styles.icon} size={30} />
           </TouchableOpacity>
         </View>
-        <View style={styles.icon}>
+        <View>
           <TouchableOpacity onPress={chatbot} >
-            <FontAwesomeIcon icon={faMessage} size={30} />
+            <FontAwesomeIcon icon={faMessage} style={styles.icon} size={30} />
           </TouchableOpacity>
         </View>
     </View>
@@ -41,15 +41,19 @@ export default function NavBottomBar({navigation}) {
 }
 
 const styles = StyleSheet.create({
+    icon:{
+      color:'#2ecc71',
+      
+    },
     background:{
-        width:'90%',
-        marginBottom:20,
-        height:80,
-        alignSelf:'center',
-        borderRadius:20,
-        backgroundColor:'#95a5a6',
-        flexDirection:'row',
-        justifyContent:'space-around',
-        alignItems:'center',
+      width:'95%',
+      backgroundColor:'#2c3e50',
+      marginBottom:20,
+      height:80,
+      alignSelf:'center',
+      borderRadius:25,
+      flexDirection:'row',
+      justifyContent:'space-around',
+      alignItems:'center',
     },
 })
