@@ -63,12 +63,12 @@ export default function SettingsScreen(props) {
                 </View>
                 <View style={styles.body}>
                     <Text style={styles.title}>Mes Informations</Text>
-                    <View style={styles.information}>
-                        <TouchableOpacity onPress={confidentialite}>
+                    <TouchableOpacity onPress={confidentialite}>
+                        <View style={styles.information}>
                             <FontAwesomeIcon icon={faGear} style={styles.Icon} size={25}/>
                             <Text style={styles.bodyTxt}>Confidentialité</Text>
-                        </TouchableOpacity>
-                    </View>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
         </View>

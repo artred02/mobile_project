@@ -49,12 +49,11 @@ export default StyleSheet.create({
         fontSize: 20,
         width:'100%',
         color:'#fff',
-        marginLeft:35,
+        marginLeft:10,
         marginTop:1,
       },
     Icon:{
         color:'#fff',
-        position:'absolute',
     },
     navbar:{
         backgroundColor:'#34495e',
