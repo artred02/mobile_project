@@ -52,7 +52,6 @@ export default StyleSheet.create({
         paddingLeft: 16
     },
     navbar:{
-        
-
-    }
+        backgroundColor:'#34495e',
+    },
 })

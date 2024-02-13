@@ -42,11 +42,14 @@ export default function NavBottomBar({navigation}) {
 
 const styles = StyleSheet.create({
     background:{
+        width:'90%',
+        marginBottom:20,
         height:80,
-        backgroundColor:'#2ecc71',
-        display:'flex',
+        alignSelf:'center',
+        borderRadius:20,
+        backgroundColor:'#95a5a6',
         flexDirection:'row',
         justifyContent:'space-around',
-        alignItems:'center'
+        alignItems:'center',
     },
 })
