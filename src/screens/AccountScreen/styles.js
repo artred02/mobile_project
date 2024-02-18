@@ -79,4 +79,9 @@ export default StyleSheet.create({
         color:'#fff',
         fontSize:20,
     },
+    modalText:{
+        color:'#fff',
+        fontSize:20,
+        margin:10,
+    },
 });

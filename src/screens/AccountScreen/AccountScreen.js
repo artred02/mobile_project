@@ -13,6 +13,7 @@ import NavBottomBar from '../../../components/NavBottomBar';
 export default function AccountScreen(props) {
     const account = props.route.params.account
     const [modalVisible, setModalVisible] = useState(false);
+    const [balance, setBalance] = useState(props.route.params.account.balance);
 
     const logout = () => {
         firebase.auth().signOut()
@@ -23,12 +24,36 @@ export default function AccountScreen(props) {
         props.navigation.navigate('Settings')
     }
 
+    const addToBalance = () => {
+        const user = props.extraData
+        const accountRef = firebase.firestore().collection('accounts').doc(account.id)
+        accountRef.update({
+            balance: parseFloat(balance)
+        })
+        .then(() => {
+            setModalVisible(false)
+            // Update the account balance on account screen
+            props.navigation.navigate('Account', { account: {...account, balance: parseFloat(balance)}})
+        })
+        .catch((error) => {
+            alert(error)
+        });
+    }
+
     const modalContent = (
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
                 <Text style={styles.modalText}>Nouveau Solde</Text>
-                <TextInput></TextInput>
-                <Button title="Ajouter" onPress={() => setModalVisible(!modalVisible)} style={styles.btnAddBalance} textStyle={styles.textStyle} />
+                <TextInput
+                    style={styles.input}
+                    keyboardType = 'numeric'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setBalance(text)}
+                    value={balance.toString()}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <Button title="Sauvegarder" onPress={() => addToBalance()} style={styles.btnAddBalance} textStyle={styles.textStyle} />
             </View>
         </View>
     );
@@ -54,7 +79,7 @@ export default function AccountScreen(props) {
                 <View style={styles.account} >
                     <Text style={styles.accountText} >Nom : {account.AccountName}</Text>
                     <Text style={styles.accountText} >Solde : {account.balance} €</Text>
-                    <Button title="Ajouter du solde" onPress={() => setModalVisible(true)} style={styles.btnAddBalance} textStyle={styles.textStyle} />
+                    <Button title="Gérer le solde" onPress={() => setModalVisible(true)} style={styles.btnAddBalance} textStyle={styles.textStyle} />
                 </View>
                 {Modale(modalVisible, setModalVisible, modalContent)}
             </KeyboardAwareScrollView>

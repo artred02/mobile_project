@@ -40,7 +40,7 @@ export default function Navigation ({user, setUser, layout}) {
               },
               headerLeft: null,
           }}>
-            {props => <ChatScreen {...props} />}
+            {props => <ChatScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
           <Stack.Screen
             name="Confidentialite"
@@ -50,7 +50,7 @@ export default function Navigation ({user, setUser, layout}) {
               },
               headerLeft: null,
           }}>
-            {props => <ConfidentialiteScreen {...props} />}
+            {props => <ConfidentialiteScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
           <Stack.Screen
             name="Account"
@@ -60,7 +60,7 @@ export default function Navigation ({user, setUser, layout}) {
               },
               headerLeft: null,
           }}>
-            {props => <AccountScreen {...props} />}
+            {props => <AccountScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
           </>
         ) : (

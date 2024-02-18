@@ -7,6 +7,9 @@ export default function Modale (modalVisible, setModalVisible, modalContent) {
             animationType="slide"
             transparent={true}
             visible={modalVisible}
+            onRequestClose={() => {
+                setModalVisible(!modalVisible);
+            }}
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: 'white',
+      backgroundColor: '#2c3e50',
       borderRadius: 20,
       padding: 35,
       alignItems: 'center',
@@ -38,25 +41,5 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
-    },
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2,
-    },
-    buttonOpen: {
-      backgroundColor: '#F194FF',
-    },
-    buttonClose: {
-      backgroundColor: '#2196F3',
-    },
-    textStyle: {
-      color: 'white',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: 'center',
     },
   });
