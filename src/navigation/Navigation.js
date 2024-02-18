@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen } from '../screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen } from '../screens'
 
 
 const Stack = createStackNavigator();
@@ -18,6 +18,7 @@ export default function Navigation ({user, setUser, layout}) {
             headerStyle: {
               height:0
             },
+            headerLeft: null,
           }}>
             {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
@@ -27,6 +28,7 @@ export default function Navigation ({user, setUser, layout}) {
               headerStyle: {
                 height:0
               },
+              headerLeft: null,
             }}>
             {props => <SettingsScreen {...props} extraData={user} setUser={setUser} />}
           </Stack.Screen>
@@ -36,6 +38,7 @@ export default function Navigation ({user, setUser, layout}) {
               headerStyle: {
                 height: 0,
               },
+              headerLeft: null,
           }}>
             {props => <ChatScreen {...props} />}
           </Stack.Screen>
@@ -45,8 +48,19 @@ export default function Navigation ({user, setUser, layout}) {
               headerStyle: {
                 height: 0,
               },
+              headerLeft: null,
           }}>
             {props => <ConfidentialiteScreen {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Account"
+            options={{
+              headerStyle: {
+                height: 0,
+              },
+              headerLeft: null,
+          }}>
+            {props => <AccountScreen {...props} />}
           </Stack.Screen>
           </>
         ) : (

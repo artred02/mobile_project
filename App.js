@@ -1,7 +1,6 @@
 
 import 'react-native-gesture-handler';
 import React, { useState, useCallback } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
 import Navigation from './src/navigation/Navigation';
 import { useFonts, Knewave_400Regular } from '@expo-google-fonts/knewave';
 import * as SplashScreen from 'expo-splash-screen';

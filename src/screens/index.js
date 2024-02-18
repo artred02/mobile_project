@@ -4,4 +4,4 @@ export { default as RegistrationScreen } from './RegistrationScreen/Registration
 export  {default as SettingsScreen } from './SettingsScreen/SettingsScreen'
 export { default as ChatScreen } from './ChatScreen/ChatScreen'
 export { default as ConfidentialiteScreen } from './ConfidentialiteScreen/ConfidentialiteScreen'
-
+export { default as AccountScreen } from './AccountScreen/AccountScreen'

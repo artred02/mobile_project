@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { firebase } from '../../firebase/config'
-import { query } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
-import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
+import { faRightFromBracket, faGear, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { firebase } from '../../firebase/config'
+import styles from './styles';
 import NavBottomBar from '../../../components/NavBottomBar'
 
 export default function HomeScreen(props) {
-    const [objects, setObjects] = useState([]);
+    const [accounts, setAccounts] = useState([]);
 
     useEffect(() => {
-        const objectsRef = firebase.firestore().collection('objects');
-        const q = query(objectsRef);
+        const objectsRef = firebase.firestore().collection('accounts');
+        const q = objectsRef.where('userId', '==', props.extraData.id);
         q.onSnapshot((snapshot) => {
             const objects = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
-            setObjects(objects);
+            setAccounts(objects);
         });
     }, []);
 
@@ -52,18 +50,17 @@ export default function HomeScreen(props) {
                     </TouchableOpacity>
                     <Text style={styles.headerTxt}>Bonjour {props.extraData.fullName} !</Text>
 
-                </View>
-                {/* <Text>Home Screen</Text>
-                <Text>Nom : {props.extraData.fullName}</Text>
-                <Text>Email : {props.extraData.email}</Text>
-                
-                <Text>Objects:</Text>
-                {objects.map((object) => (
-                    <View key={object.id}>
-                    <Text>{object.name}</Text>
-                    <Text>{object.value}</Text>
+                </View>                
+                <Text style={styles.accountsTitle} >Accounts:</Text>
+                {accounts.map((account) => (
+                    <TouchableOpacity key={account.id} onPress={() => props.navigation.navigate('Account', {account: account})}>
+                    <View style={styles.accountCard} >
+                        <Text>{account.AccountName}</Text>
+                        <Text>{account.balance} €</Text>
+                        <FontAwesomeIcon icon={faArrowRight} style={styles.buttonIcon} size={25}/>
                     </View>
-                ))} */}
+                    </TouchableOpacity>
+                ))}
                 
             </KeyboardAwareScrollView>
         </View>

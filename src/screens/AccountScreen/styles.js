@@ -58,23 +58,25 @@ export default StyleSheet.create({
         margin:10,
         marginTop:50,
         marginLeft:20,
-        fontStyle:'italic',
-        fontWeight:"bold", 
     },
-
-    accountCard:{
-        backgroundColor:'#2980b9',
-        height:75,
+    account:{
+        display:'flex',
         margin:10,
         padding:10,
         borderRadius:10,
-        display:'flex',
-        alignItems: 'center',
-        justifyContent: "space-between",
-        flexDirection:'row',
     },
-
-    navbar:{
-        backgroundColor:'#34495e',
+    accountText:{
+        color:'#fff',
+        fontSize:20,
+        margin:10,
+        marginLeft:20,
     },
-})
+    btnAddBalance:{
+        width:200,
+        height:50,
+    },
+    textStyle:{
+        color:'#fff',
+        fontSize:20,
+    },
+});
