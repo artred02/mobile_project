@@ -37,6 +37,15 @@ export default StyleSheet.create({
         color:'#2ecc71',
         margin:15,
     },
+    viewRow:{
+        flexDirection:'row',
+    },
+    penTouchable:{
+        paddingLeft:20,
+    },
+    buttonIconPen:{
+        color:'#2ecc71',
+    },
     scrollView: {
         width: '100%',
     },

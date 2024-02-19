@@ -1,5 +1,7 @@
 import React from 'react';
 import { Modal, Pressable, Text, View, StyleSheet } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function Modale (modalVisible, setModalVisible, modalContent) {
     return (
@@ -11,6 +13,12 @@ export default function Modale (modalVisible, setModalVisible, modalContent) {
                 setModalVisible(!modalVisible);
             }}
         >
+            <Pressable
+                style={styles.centeredView}
+                onPress={() => setModalVisible(!modalVisible)}
+            >
+                <FontAwesomeIcon icon={faTimes} size={30} onPress={() => setModalVisible(!modalVisible)} style={{color: '#fff', position: 'absolute', top: 0, right: 0}} />
+            </Pressable>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     {modalContent}

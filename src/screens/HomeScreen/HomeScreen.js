@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, FlatList, Pressable } from 'react-native'
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faGear, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -21,6 +22,10 @@ export default function HomeScreen(props) {
             setAccounts(objects);
         });
     }, []);
+    
+    const accountRedirect = (account) => {
+        props.navigation.navigate('Account', {account: account})
+    }
 
     const logout = () => {
         firebase.auth().signOut()
@@ -31,38 +36,68 @@ export default function HomeScreen(props) {
         props.navigation.navigate('Settings')
     }
 
+    const Item = ({ account }) => (
+        <View style={styles.accountCard}>
+            <Text style={styles.title}>{account.AccountName}</Text>
+            <Text style={styles.title}>{account.balance} €</Text>
+            <FontAwesomeIcon icon={faArrowRight} style={styles.buttonIcon} size={25}/>
+        </View>
+    );
+
+    const RightActions = (account) => {
+        return (
+            <TouchableOpacity style={styles.rightAction}>
+                <Pressable onPress={() => accountRedirect(account)}>
+                    <Text style={styles.actionText}>Redirect</Text>
+                </Pressable>
+            </TouchableOpacity>
+        );
+    };
+
     return (
         <>
         <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={styles.scrollView}
-                keyboardShouldPersistTaps="always"
-            >
-                <View style={styles.header}>
-                    <TouchableOpacity 
-                        onPress={logout} 
-                        style={styles.logoutTouchable}
-                    >
-                        <FontAwesomeIcon icon={faRightFromBracket} style={styles.buttonIcon} size={25}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={parametre} style={styles.parametreTouchable}>
-                        <FontAwesomeIcon icon={faGear} style={styles.buttonIcon} size={25}/>
-                    </TouchableOpacity>
-                    <Text style={styles.headerTxt}>Bonjour {props.extraData.fullName} !</Text>
+            <View style={styles.containerView}>
+            <View style={styles.header}>
+                <TouchableOpacity 
+                    onPress={logout} 
+                    style={styles.logoutTouchable}
+                >
+                    <FontAwesomeIcon icon={faRightFromBracket} style={styles.buttonIcon} size={25}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={parametre} style={styles.parametreTouchable}>
+                    <FontAwesomeIcon icon={faGear} style={styles.buttonIcon} size={25}/>
+                </TouchableOpacity>
+                <Text style={styles.headerTxt}>Bonjour {props.extraData.fullName} !</Text>
 
-                </View>                
-                <Text style={styles.accountsTitle} >Accounts:</Text>
-                {accounts.map((account) => (
-                    <TouchableOpacity key={account.id} onPress={() => props.navigation.navigate('Account', {account: account})}>
-                    <View style={styles.accountCard} >
-                        <Text>{account.AccountName}</Text>
-                        <Text>{account.balance} €</Text>
-                        <FontAwesomeIcon icon={faArrowRight} style={styles.buttonIcon} size={25}/>
-                    </View>
-                    </TouchableOpacity>
-                ))}
-                
-            </KeyboardAwareScrollView>
+            </View>                
+            <Text style={styles.accountsTitle} >Accounts:</Text>
+            {/* {accounts.map((account) => (
+                <TouchableOpacity key={account.id} onPress={() => props.navigation.navigate('Account', {account: account})}>
+                <View style={styles.accountCard} >
+                    <Text>{account.AccountName}</Text>
+                    <Text>{account.balance} €</Text>
+                    <FontAwesomeIcon icon={faArrowRight} style={styles.buttonIcon} size={25}/>
+                </View>
+                </TouchableOpacity>
+            ))} */}
+            <View>
+                <FlatList
+                    data={accounts}
+                    ItemSeparatorComponent={() => <View style={styles.separator} />}
+                    renderItem={({ item, index }) => (
+                        // <Swipeable renderRightActions={() => RightActions(item)}>
+                        //     <Item account={item} />
+                        // </Swipeable>
+                        <Pressable onPress={() => accountRedirect(item)}>
+                            <Item account={item} />
+                        </Pressable>
+                    )}
+                    keyExtractor={item => item.id}
+                    style={styles.flatList}
+                />
+            </View>
+        </View>
         </View>
         <View style={styles.navbar}>
             <NavBottomBar navigation={props.navigation} />

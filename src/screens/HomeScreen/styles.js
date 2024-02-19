@@ -37,7 +37,7 @@ export default StyleSheet.create({
         color:'#2ecc71',
         margin:15,
     },
-    scrollView: {
+    containerView: {
         width: '100%',
     },
     input: {
@@ -72,6 +72,32 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: "space-between",
         flexDirection:'row',
+    },
+
+    separator:{
+        height:1,
+        backgroundColor:'black',
+        marginHorizontal: 16,
+    },
+
+    title: {
+        color: 'black',
+    },
+
+    rightAction: {
+        backgroundColor: '#dd2c00',
+        justifyContent: 'center',
+        alignContent: 'flex-end',
+        flex: 1,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        borderRadius: 10,
+    },
+
+    actionText: {
+        color: 'white',
+        fontWeight: '600',
+        padding: 20,
     },
 
     navbar:{

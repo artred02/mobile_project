@@ -8,10 +8,15 @@ export default function NavBottomBar({navigation}) {
   const home = () => {
     navigation.navigate('Home')
   }
+  
+  const addAccount = () => {
+    navigation.navigate('AddAccount')
+  }
 
   const chatbot = () => {
     navigation.navigate('Chatbot')
   }
+
   
 
   return (
@@ -22,7 +27,7 @@ export default function NavBottomBar({navigation}) {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={addAccount} >
             <FontAwesomeIcon icon={faPlus} style={styles.icon} size={30} />
           </TouchableOpacity>
         </View>
