@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { firebase } from "../../firebase/config";
 import NavBottomBar from "../../../components/NavBottomBar";
 import styles from "./styles";
+import Button from "../../../components/Button";
 
 export default function AddAccountScreen(props) {
     const [accountName, setAccountName] = React.useState('')
@@ -32,11 +33,10 @@ export default function AddAccountScreen(props) {
         <>
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={styles.scrollView}
-                keyboardShouldPersistTaps="always"
+                style={{ flex: 1, width: '100%' }}
             >
                 <View style={styles.header}>
-                    <Text style={styles.headerTxt}>Confidentialite</Text>
+                    <Text style={styles.headerTxt}>Nouveau Compte</Text>
                 </View>
                 <TextInput
                     style={styles.input}
@@ -56,16 +56,9 @@ export default function AddAccountScreen(props) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => addAccount()}
-                >
-                    <Text style={styles.buttonTitle}>Créer</Text>
-                </TouchableOpacity>
+                <Button style={styles.buttonAdd} title={"Créer"} onPress={() => addAccount()} />
             </KeyboardAwareScrollView>
-            <View style={styles.navbar}>
-                <NavBottomBar navigation={props.navigation} />
-            </View>
+            <NavBottomBar navigation={props.navigation} />
         </View>
         
         </>

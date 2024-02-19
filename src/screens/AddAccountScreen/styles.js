@@ -9,6 +9,7 @@ export default StyleSheet.create({
     header: {
         justifyContent: "flex-start",
         marginTop: 60,
+        marginBottom: 60,
         height: 50,
         display: "flex"
     },
@@ -21,21 +22,6 @@ export default StyleSheet.create({
         fontWeight: "bold",
         position: "absolute"
     },
-    logoutTouchable: {
-        marginLeft: "auto"
-    },
-    parametreTouchable: {
-        position: "absolute",
-        right: 0,
-        marginRight: 40
-    },
-    buttonIcon: {
-        color: "#2ecc71",
-        margin: 15
-    },
-    containerView: {
-        width: "100%"
-    },
     input: {
         height: 48,
         borderRadius: 5,
@@ -47,11 +33,20 @@ export default StyleSheet.create({
         marginRight: 30,
         paddingLeft: 16
     },
-    accountsTitle: {
+    buttonAdd: {
         color: "#fff",
         fontSize: 20,
-        margin: 10,
-        marginTop: 50,
-        marginLeft: 20
+        width: "50%",
+    },
+    navbar: {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
+        height: 60,
+        backgroundColor: "#2c3e50",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     }
 });

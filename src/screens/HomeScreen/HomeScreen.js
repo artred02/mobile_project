@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View, FlatList, Pressable } from 'react-native'
+import { Text, TouchableOpacity, View, FlatList, Pressable, ScrollView } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -81,7 +81,6 @@ export default function HomeScreen(props) {
                 </View>
                 </TouchableOpacity>
             ))} */}
-            <View>
                 <FlatList
                     data={accounts}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -93,10 +92,11 @@ export default function HomeScreen(props) {
                             <Item account={item} />
                         </Pressable>
                     )}
+                    showsVerticalScrollIndicator={true}
+                    scrollEnabled={true}
                     keyExtractor={item => item.id}
                     style={styles.flatList}
                 />
-            </View>
         </View>
         </View>
         <View style={styles.navbar}>

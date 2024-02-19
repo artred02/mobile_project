@@ -13,14 +13,14 @@ export default function Modale (modalVisible, setModalVisible, modalContent) {
                 setModalVisible(!modalVisible);
             }}
         >
-            <Pressable
-                style={styles.centeredView}
-                onPress={() => setModalVisible(!modalVisible)}
-            >
-                <FontAwesomeIcon icon={faTimes} size={30} onPress={() => setModalVisible(!modalVisible)} style={{color: '#fff', position: 'absolute', top: 0, right: 0}} />
-            </Pressable>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
+                    <Pressable
+                    style={styles.fontAwesomeIcon}
+                        onPress={() => setModalVisible(!modalVisible)}
+                    >
+                        <FontAwesomeIcon icon={faTimes} size={30} style={styles.fontAwesomeIcon} />
+                    </Pressable>
                     {modalContent}
                 </View>
             </View>
@@ -49,5 +49,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+    },
+    fontAwesomeIcon: {
+        color: 'white',
+        alignSelf: 'flex-end',
     },
   });

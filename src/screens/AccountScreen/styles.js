@@ -6,7 +6,6 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: "#34495e",
-
     },
     header:{
         justifyContent:'flex-start',
