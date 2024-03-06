@@ -12,18 +12,6 @@ import NavBottomBar from '../../../components/NavBottomBar';
 export default function SettingsScreen(props) {
     const [objects, setObjects] = useState([]);
 
-    useEffect(() => {
-        const objectsRef = firebase.firestore().collection('objects');
-        const q = query(objectsRef);
-        q.onSnapshot((snapshot) => {
-            const objects = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setObjects(objects);
-        });
-    }, []);
-
     const confidentialite = () => {
         props.navigation.navigate('Confidentialite')
     }

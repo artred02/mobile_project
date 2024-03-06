@@ -90,6 +90,7 @@ export default function Navigation ({user, setUser}) {
               },
           }}>
             {props => <RegistrationScreen {...props} setUser={setUser}/>}
+            {props => <ConfidentialiteScreen extraData={user} props={props} />}
           </Stack.Screen>
         </>
       )}

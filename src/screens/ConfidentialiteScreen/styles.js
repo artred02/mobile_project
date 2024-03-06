@@ -41,17 +41,24 @@ export default StyleSheet.create({
     title:{
         fontSize: 15,
         fontWeight: 'bold',
-        marginBottom: 0,
         marginLeft:20,
+        marginTop:5,
         color:'#fff'
     },
-    bodyTxt:{
+    bodyPassword:{
         fontSize: 20,
         width:'100%',
         color:'#fff',
-        marginLeft:35,
-        marginTop:1,
-      },
+        marginLeft:10,
+        marginTop:5,
+    },
+    bodyEmail:{
+        color:'#fff',
+        marginTop:5,
+        marginRight:100,
+        fontStyle:'italic'
+    },
+
     Icon:{
         color:'#fff',
         position:'absolute',
@@ -59,6 +66,13 @@ export default StyleSheet.create({
     navbar:{
         backgroundColor:'#34495e',
     },
+    buttonIcon:{
+        color:'#fff',
+        position:'absolute',
+        right:20,
+        top:10,
+        marginTop:5
+    }
     
     
 })

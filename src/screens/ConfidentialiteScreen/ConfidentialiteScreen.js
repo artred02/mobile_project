@@ -1,48 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { firebase } from '../../firebase/config'
 import { query } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
+import { faPen } from '@fortawesome/free-solid-svg-icons/';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import NavBottomBar from '../../../components/NavBottomBar';
 
 export default function ConfidentialiteScreen(props) {
-    const [objects, setObjects] = useState([]);
+    console.log()
 
-    useEffect(() => {
-        const objectsRef = firebase.firestore().collection('objects');
-        const q = query(objectsRef);
-        q.onSnapshot((snapshot) => {
-            const objects = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setObjects(objects);
-        });
-    }, []);
 
-    changePassword = (currentPassword, newPassword) => {
-        this.reauthenticate(currentPassword).then(() => {
-          var user = firebase.auth().currentUser;
-          user.updatePassword(newPassword).then(() => {
-            console.log("Password updated!");
-          }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-      }
-      changeEmail = (currentPassword, newEmail) => {
-        this.reauthenticate(currentPassword).then(() => {
-          var user = firebase.auth().currentUser;
-          user.updateEmail(newEmail).then(() => {
-            console.log("Email updated!");
-          }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-      }
-    reauthenticate = (currentPassword) => {
-        var user = firebase.auth().currentUser;
-        var cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword)
-        return user.reauthenticateWithCredential(cred);
-    }
 
     return (
         <>
@@ -52,10 +22,27 @@ export default function ConfidentialiteScreen(props) {
                 keyboardShouldPersistTaps="always"
             >
                 <View style={styles.header}>
-                    <Text style={styles.headerTxt}>Confidentialite</Text>
+                    <Text style={styles.headerTxt}>Confidentialité</Text>
                 </View>
-                
+                <TouchableOpacity onPress={changePassword("kachow2","kachow")}>
+                  <View style={styles.information}>
+                      <Text style={styles.title}>Changer mot de passe :</Text>
+                      <Text style={styles.bodyPassword}>********</Text>
+                      <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15}/>
+
+                  </View>  
+                </TouchableOpacity>
+                <TouchableOpacity onPress={changeEmail("kachow","kachow2")}>
+                  <View style={styles.information}>
+                      <Text style={styles.title}>Changer email :</Text>
+                      <Text style={styles.bodyEmail}>your@mail.com</Text>
+
+                      <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15}/>
+
+                  </View>
+                </TouchableOpacity>
             </KeyboardAwareScrollView>
+
         </View>
         <View style={styles.navbar}>
             <NavBottomBar navigation={props.navigation} />
