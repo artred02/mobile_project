@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View, FlatList, Pressable, ScrollView } from 'react-native'
+import { Text, TouchableOpacity, View, FlatList, Pressable, RefreshControl } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faGear, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { firebase } from '../../firebase/config'
+import { GetAccountsList } from '../../../components/Api'
 import styles from './styles';
 import Header from '../../../components/Header';
 import NavBottomBar from '../../../components/NavBottomBar'
+import Button from '../../../components/Button';
 
 export default function HomeScreen(props) {
     const [accounts, setAccounts] = useState([]);
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+        setRefreshing(false);
+        reloadList();
+        }, 1000);
+    }, []);
+
+    const reloadList = async () => {
+        GetAccountsList({ userId: props.extraData.id, setAccounts: setAccounts });
+    };
 
     useEffect(() => {
-        const objectsRef = firebase.firestore().collection('accounts');
-        const q = objectsRef.where('userId', '==', props.extraData.id);
-        q.onSnapshot((snapshot) => {
-            const objects = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setAccounts(objects);
-        });
+        reloadList();
     }, []);
     
     const accountRedirect = (account) => {
@@ -29,7 +36,7 @@ export default function HomeScreen(props) {
 
     const Item = ({ account }) => (
         <View style={styles.accountCard}>
-            <Text style={styles.title}>{account.AccountName}</Text>
+            <Text style={styles.title}>{account.name}</Text>
             <Text style={styles.title}>{account.balance} €</Text>
             <FontAwesomeIcon icon={faArrowRight} style={styles.buttonIcon} size={25}/>
         </View>
@@ -50,9 +57,13 @@ export default function HomeScreen(props) {
         <View style={styles.container}>
             <View style={styles.containerView}>
                 <Header title={"Accounts"} navigation={props.navigation} setUser={props.setUser} />
+                {/* <Button title={"Accounts"} onPress={() => reloadList() } /> */}
                 <FlatList
                     data={accounts}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
                     renderItem={({ item, index }) => (
                         // <Swipeable renderRightActions={() => RightActions(item)}>
                         //     <Item account={item} />

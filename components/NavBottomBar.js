@@ -30,11 +30,11 @@ export default function NavBottomBar({navigation}) {
               <FontAwesomeIcon icon={faPlus} style={styles.icon} size={30} />
             </TouchableOpacity>
           </View>
-          <View>
+          {/* <View>
             <TouchableOpacity>
               <FontAwesomeIcon icon={faUser} style={styles.icon} size={30} />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View>
             <TouchableOpacity onPress={chatbot} >
               <FontAwesomeIcon icon={faMessage} style={styles.icon} size={30} />

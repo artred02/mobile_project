@@ -44,6 +44,7 @@ export default StyleSheet.create({
     },
     buttonIconPen:{
         color:'#2ecc71',
+        marginTop:5,
     },
     scrollView: {
         width: '100%',
@@ -91,5 +92,12 @@ export default StyleSheet.create({
         color:'#fff',
         fontSize:20,
         margin:10,
+    },
+    btnDelete:{
+        width:200,
+        height:50,
+        backgroundColor:'#e74c3c',
+        alignSelf:'center',
+        marginTop:20,
     },
 });

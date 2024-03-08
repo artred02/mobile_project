@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
 import { firebase } from '../../firebase/config';
+import { UpdateAccount, DeleteAccount } from '../../../components/Api';
 import Button from '../../../components/Button';
 import Modale from '../../../components/Modale';
 import NavBottomBar from '../../../components/NavBottomBar';
@@ -14,7 +15,7 @@ export default function AccountScreen(props) {
     const account = props.route.params.account
     const [modalNameVisible, setModalNameVisible] = useState(false);
     const [modalBalanceVisible, setModalBalanceVisible] = useState(false);
-    const [accountName, setAccountName] = useState(props.route.params.account.AccountName);
+    const [accountName, setAccountName] = useState(props.route.params.account.name);
     const [balance, setBalance] = useState(props.route.params.account.balance);
 
     const logout = () => {
@@ -27,33 +28,11 @@ export default function AccountScreen(props) {
     }
 
     const addToBalance = () => {
-        const accountRef = firebase.firestore().collection('accounts').doc(account.id)
-        accountRef.update({
-            balance: parseFloat(balance)
-        })
-        .then(() => {
-            setModalBalanceVisible(false)
-            // Update the account balance on account screen
-            props.navigation.navigate('Account', { account: {...account, balance: parseFloat(balance)}})
-        })
-        .catch((error) => {
-            alert(error)
-        });
+        UpdateAccount({ account: {...account, balance: parseFloat(balance)}, setModalVisible: setModalBalanceVisible, navigation: props.navigation });
     }
 
     const modifyName = () => {
-        const accountRef = firebase.firestore().collection('accounts').doc(account.id)
-        accountRef.update({
-            AccountName: accountName
-        })
-        .then(() => {
-            setModalNameVisible(false)
-            // Update the account name on account screen
-            props.navigation.navigate('Account', { account: {...account, AccountName: accountName}})
-        })
-        .catch((error) => {
-            alert(error)
-        });
+        UpdateAccount({ account: {...account, name: accountName}, setModalVisible: setModalNameVisible, navigation: props.navigation });
     }
 
     const nameModalContent = (
@@ -91,6 +70,7 @@ export default function AccountScreen(props) {
     );
 
     return (
+        <>
         <View style={styles.container}>
             <KeyboardAwareScrollView
                 style={styles.scrollView}
@@ -110,7 +90,7 @@ export default function AccountScreen(props) {
                 <Text style={styles.accountsTitle} >Account:</Text>
                 <View style={styles.account} >
                     <View style={styles.viewRow}>
-                        <Text style={styles.accountText} >Nom : {account.AccountName}</Text>
+                        <Text style={styles.accountText} >Nom : {account.name}</Text>
                         <TouchableOpacity onPress={() => setModalNameVisible(true)} style={styles.penTouchable}>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIconPen} size={25}/>
                         </TouchableOpacity>
@@ -122,10 +102,12 @@ export default function AccountScreen(props) {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <Button title="Supprimer" onPress={() => DeleteAccount({accountId: account.id, navigation: props.navigation}) } style={styles.btnDelete} textStyle={styles.textStyle} />
                 {Modale(modalBalanceVisible, setModalBalanceVisible, balanceModalContent)}
                 {Modale(modalNameVisible, setModalNameVisible, nameModalContent)}
             </KeyboardAwareScrollView>
-            <NavBottomBar navigation={props.navigation} />
         </View>
+        <NavBottomBar navigation={props.navigation} />
+        </>
     );
 }

@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { firebase } from "../../firebase/config";
+import { AddAccount } from "../../../components/Api";
 import NavBottomBar from "../../../components/NavBottomBar";
+import Header from "../../../components/Header";
 import styles from "./styles";
 import Button from "../../../components/Button";
 
@@ -11,22 +12,8 @@ export default function AddAccountScreen(props) {
     const [balance, setBalance] = React.useState('')
 
     const addAccount = () => {
-        const accountRef = firebase.firestore().collection('accounts')
-        const userID = props.extraData.id
-        const data = {
-            AccountName: accountName,
-            balance: parseFloat(balance),
-            userId: userID
-        }
-        accountRef.add(data)
-        .then(() => {
-            props.navigation.navigate('Home')
-        })
-        .catch((error) => {
-            alert(error)
-        });
+        AddAccount({ account: {name: accountName, balance: parseFloat(balance), userId: props.extraData.id }, navigation: props.navigation });
     }
-
     
     return (
         // formulaire création de compte
@@ -35,9 +22,7 @@ export default function AddAccountScreen(props) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
             >
-                <View style={styles.header}>
-                    <Text style={styles.headerTxt}>Nouveau Compte</Text>
-                </View>
+                <Header title={"Nouveau Compte"} navigation={props.navigation} setUser={props.setUser} />
                 <TextInput
                     style={styles.input}
                     placeholder='Nom du compte'
@@ -58,8 +43,8 @@ export default function AddAccountScreen(props) {
                 />
                 <Button style={styles.buttonAdd} title={"Créer"} onPress={() => addAccount()} />
             </KeyboardAwareScrollView>
-            <NavBottomBar navigation={props.navigation} />
         </View>
+        <NavBottomBar navigation={props.navigation} />
         
         </>
     )

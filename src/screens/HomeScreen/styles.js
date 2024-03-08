@@ -49,7 +49,6 @@ export default StyleSheet.create({
 
     title: {
         color: 'white',
-        fontFamily: 'knewave',
     },
 
     rightAction: {

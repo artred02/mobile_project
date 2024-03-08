@@ -36,25 +36,25 @@ const styles = StyleSheet.create({
         marginTop:60,
         marginBottom:20,
         height:50,
-        display:'flex'
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
     },
     headerTxt:{
         color:'#fff',
-        fontSize:30,
+        fontSize:25,
         margin:10,
         marginLeft:20,
-        fontFamily: 'knewave',
+        fontFamily: 'eagleLake',
         position:'absolute'
     },
     logoutTouchable: {
         marginLeft:'auto',
-        marginTop:10,
     },
     parametreTouchable:{
         position:'absolute',
         right:0,
         marginRight: 40,
-        margin:10,
     },
     buttonIcon:{
         color:'#2ecc71',

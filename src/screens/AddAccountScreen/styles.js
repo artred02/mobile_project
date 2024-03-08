@@ -38,15 +38,4 @@ export default StyleSheet.create({
         fontSize: 20,
         width: "50%",
     },
-    navbar: {
-        position: "absolute",
-        bottom: 0,
-        width: "100%",
-        height: 60,
-        backgroundColor: "#2c3e50",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
-    }
 });

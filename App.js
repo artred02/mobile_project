@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import Navigation from './src/navigation/Navigation';
 import { useFonts, Knewave_400Regular } from '@expo-google-fonts/knewave';
-
-import {decode, encode} from 'base-64'
-if (!global.btoa) {  global.btoa = encode }
-if (!global.atob) { global.atob = decode }
+import { EagleLake_400Regular } from '@expo-google-fonts/eagle-lake';
 
 
 export default function App() {
@@ -13,6 +10,7 @@ export default function App() {
 
   let [fontsLoaded] = useFonts({
     knewave: Knewave_400Regular,
+    eagleLake: EagleLake_400Regular,
   });
 
   if (!fontsLoaded) {
