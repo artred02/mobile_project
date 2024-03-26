@@ -27,12 +27,19 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      ["expo-font",
-      {
-        "fonts":["node_modules/@expo-google-fonts/knewave/Knewave_400Regular.ttf"]
-      }
-
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/knewave/Knewave_400Regular.ttf"
+          ]
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b8877247-5a3f-4218-b0e0-e1875aaaaa2b"
+      }
+    }
   }
 }
