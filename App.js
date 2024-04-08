@@ -1,13 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Text, View, Button, Platform } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
+import React, { useState, useEffect, useRef } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import Navigation from './src/navigation/Navigation';
 import { useFonts, Knewave_400Regular } from '@expo-google-fonts/knewave';
 import { EagleLake_400Regular } from '@expo-google-fonts/eagle-lake';
-import {PermissionsAndroid} from 'react-native';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 export default function App() {
   const [user, setUser] = useState(null)
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
 
   let [fontsLoaded] = useFonts({
     knewave: Knewave_400Regular,
@@ -32,16 +41,10 @@ export default function App() {
 // import Constants from 'expo-constants';
 
 
-// Notifications.setNotificationHandler({
-//   handleNotification: async () => ({
-//     shouldShowAlert: true,
-//     shouldPlaySound: false,
-//     shouldSetBadge: false,
-//   }),
-// });
 
 
-// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
+
+// // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 // async function sendPushNotification(expoPushToken) {
 //   const message = {
 //     to: expoPushToken,

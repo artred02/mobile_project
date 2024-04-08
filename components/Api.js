@@ -7,7 +7,7 @@ const GetAccountsList = async ({ userId, setAccounts }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.243.70:8000/api/bank_accounts/user/${userId}`;
+    const url = `http://192.168.19.70:8000/api/bank_accounts/user/${userId}`;
     axios.get(url, headers)
         .then((response) => {
             setAccounts(response.data);
@@ -22,7 +22,7 @@ const AddAccount = async ({ account, navigation }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.243.70:8000/api/bank_accounts`;
+    const url = `http://192.168.19.70:8000/api/bank_accounts`;
     axios({
         method: 'post',
         url: url,
@@ -45,7 +45,7 @@ const UpdateAccount = async ({ account, setModalVisible, navigation }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.243.70:8000/api/bank_accounts/${account.id}`;
+    const url = `http://192.168.19.70:8000/api/bank_accounts/${account.id}`;
     axios({
         method: 'put',
         url: url,
@@ -69,7 +69,7 @@ const DeleteAccount = async ({ accountId, navigation }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.243.70:8000/api/bank_accounts/${accountId}`;
+    const url = `http://192.168.19.70:8000/api/bank_accounts/${accountId}`;
     axios({
         method: 'delete',
         url: url,
