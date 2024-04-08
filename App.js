@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Navigation from './src/navigation/Navigation';
 import { useFonts, Knewave_400Regular } from '@expo-google-fonts/knewave';
@@ -6,9 +7,36 @@ import { EagleLake_400Regular } from '@expo-google-fonts/eagle-lake';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import Button from './components/Button';
+
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = await Notifications.getExpoPushTokenAsync({
+      projectId: Constants.expoConfig.extra.eas.projectId,
+    });
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  return token.data;
+}
 
 export default function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [expoPushToken, setExpoPushToken] = useState('');
 
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -17,6 +45,10 @@ export default function App() {
       shouldSetBadge: false,
     }),
   });
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+  }, []);
 
   let [fontsLoaded] = useFonts({
     knewave: Knewave_400Regular,
@@ -28,9 +60,9 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Navigation user={user} setUser={setUser} />
-    </NavigationContainer>
+      <NavigationContainer>
+        <Navigation user={user} setUser={setUser} tokenNotification={expoPushToken} />
+      </NavigationContainer>
   );
 }
 
@@ -44,7 +76,7 @@ export default function App() {
 
 
 
-// // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
+// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 // async function sendPushNotification(expoPushToken) {
 //   const message = {
 //     to: expoPushToken,
@@ -65,39 +97,7 @@ export default function App() {
 //   });
 // }
 
-// async function registerForPushNotificationsAsync() {
-//   let token;
 
-//   if (Platform.OS === 'android') {
-//     Notifications.setNotificationChannelAsync('default', {
-//       name: 'default',
-//       importance: Notifications.AndroidImportance.MAX,
-//       vibrationPattern: [0, 250, 250, 250],
-//       lightColor: '#FF231F7C',
-//     });
-//   }
-
-//   if (Device.isDevice) {
-//     const { status: existingStatus } = await Notifications.getPermissionsAsync();
-//     let finalStatus = existingStatus;
-//     if (existingStatus !== 'granted') {
-//       const { status } = await Notifications.requestPermissionsAsync();
-//       finalStatus = status;
-//     }
-//     if (finalStatus !== 'granted') {
-//       alert('Failed to get push token for push notification!');
-//       return;
-//     }
-//     token = await Notifications.getExpoPushTokenAsync({
-//       projectId: Constants.expoConfig.extra.eas.projectId,
-//     });
-//     console.log(token);
-//   } else {
-//     alert('Must use physical device for Push Notifications');
-//   }
-
-//   return token.data;
-// }
 
 // export default function App() {
 //   const [expoPushToken, setExpoPushToken] = useState('');

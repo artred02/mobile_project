@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 
+const ip_address = 'http://192.168.19.70:8000';
+
 const GetAccountsList = async ({ userId, setAccounts }) => {
     const headers = {
         headers: {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.19.70:8000/api/bank_accounts/user/${userId}`;
+    const url = `${ip_address}/api/bank_accounts/user/${userId}`;
     axios.get(url, headers)
         .then((response) => {
             setAccounts(response.data);
@@ -22,7 +24,7 @@ const AddAccount = async ({ account, navigation }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.19.70:8000/api/bank_accounts`;
+    const url = `${ip_address}/api/bank_accounts`;
     axios({
         method: 'post',
         url: url,
@@ -45,7 +47,7 @@ const UpdateAccount = async ({ account, setModalVisible, navigation }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.19.70:8000/api/bank_accounts/${account.id}`;
+    const url = `${ip_address}/api/bank_accounts/${account.id}`;
     axios({
         method: 'put',
         url: url,
@@ -69,7 +71,7 @@ const DeleteAccount = async ({ accountId, navigation }) => {
             Accept: 'application/json'
         },
     };
-    const url = `http://192.168.19.70:8000/api/bank_accounts/${accountId}`;
+    const url = `${ip_address}/api/bank_accounts/${accountId}`;
     axios({
         method: 'delete',
         url: url,
@@ -81,4 +83,22 @@ const DeleteAccount = async ({ accountId, navigation }) => {
     });
 }
 
-export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount };
+const SetTokenNotification = async ({ userId, tokenNotification }) => {
+    const headers = {
+        headers: {
+            Accept: 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/users/${userId}/${tokenNotification}`;
+    axios({
+        method: 'get',
+        url: url,
+        headers: headers
+    }).then(() => {
+        console.log('Token saved');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification };

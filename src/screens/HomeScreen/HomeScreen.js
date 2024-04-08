@@ -4,7 +4,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faGear, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { firebase } from '../../firebase/config'
-import { GetAccountsList } from '../../../components/Api'
+import { GetAccountsList, SetTokenNotification } from '../../../components/Api'
 import styles from './styles';
 import Header from '../../../components/Header';
 import NavBottomBar from '../../../components/NavBottomBar'
@@ -28,6 +28,10 @@ export default function HomeScreen(props) {
 
     useEffect(() => {
         reloadList();
+        // Wait 2 s
+        setTimeout(() => {
+            SetTokenNotification({ userId: props.extraData.id, tokenNotification: props.tokenNotification })
+        }, 2000);
     }, []);
     
     const accountRedirect = (account) => {

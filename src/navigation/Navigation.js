@@ -5,7 +5,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen
 const Stack = createStackNavigator();
 
 
-export default function Navigation ({user, setUser}) {
+export default function Navigation ({user, setUser, tokenNotification}) {
   return (
     <Stack.Navigator>
       { user ? (
@@ -18,7 +18,7 @@ export default function Navigation ({user, setUser}) {
           },
           headerLeft: null,
         }}>
-          {props => <HomeScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <HomeScreen {...props} extraData={user} setUser={setUser} tokenNotification={tokenNotification} />}
         </Stack.Screen>
         <Stack.Screen
           name="Settings"
