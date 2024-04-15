@@ -3,12 +3,12 @@ import styles from './styles';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faRightFromBracket, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
-import { firebase } from '../../firebase/config';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { UpdateAccount, DeleteAccount } from '../../../components/Api';
 import Button from '../../../components/Button';
 import Modale from '../../../components/Modale';
 import NavBottomBar from '../../../components/NavBottomBar';
+import Header from '../../../components/Header';
 
 
 export default function AccountScreen(props) {
@@ -17,15 +17,6 @@ export default function AccountScreen(props) {
     const [modalBalanceVisible, setModalBalanceVisible] = useState(false);
     const [accountName, setAccountName] = useState(props.route.params.account.name);
     const [balance, setBalance] = useState(props.route.params.account.balance);
-
-    const logout = () => {
-        firebase.auth().signOut()
-        props.setUser(null)
-    }
-
-    const parametre = () => {
-        props.navigation.navigate('Settings')
-    }
 
     const addToBalance = () => {
         UpdateAccount({ account: {...account, balance: parseFloat(balance)}, setModalVisible: setModalBalanceVisible, navigation: props.navigation });
@@ -76,17 +67,7 @@ export default function AccountScreen(props) {
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
-                <View style={styles.header}>
-                    <TouchableOpacity 
-                        onPress={logout} 
-                        style={styles.logoutTouchable}
-                    >
-                        <FontAwesomeIcon icon={faRightFromBracket} style={styles.buttonIcon} size={25}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={parametre} style={styles.parametreTouchable}>
-                        <FontAwesomeIcon icon={faGear} style={styles.buttonIcon} size={25}/>
-                    </TouchableOpacity>
-                </View>                
+                <Header title={"Compte"} navigation={props.navigation} setUser={props.setUser} />
                 <Text style={styles.accountsTitle} >Account:</Text>
                 <View style={styles.account} >
                     <View style={styles.viewRow}>

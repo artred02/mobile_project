@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const ip_address = 'http://192.168.19.70:8000';
+const ip_address = 'https://artred02.fr';
 
 const GetAccountsList = async ({ userId, setAccounts }) => {
     const headers = {
@@ -99,6 +99,21 @@ const SetTokenNotification = async ({ userId, tokenNotification }) => {
     }).catch((error) => {
         console.log(error);
     });
+}
+
+const GetAllUsers = async () => {
+    const headers = {
+        headers: {
+            Accept: 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/users`;
+    axios.get(url, headers)
+        .then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+        });
 }
 
 export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification };

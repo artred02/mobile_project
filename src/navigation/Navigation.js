@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen, AddAccountScreen } from '../screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen, AddAccountScreen, TransfersScreen } from '../screens'
 
 
 const Stack = createStackNavigator();
@@ -69,6 +69,16 @@ export default function Navigation ({user, setUser, tokenNotification}) {
             headerLeft: null,
         }}>
           {props => <AddAccountScreen {...props} extraData={user} setUser={setUser} />}
+        </Stack.Screen>
+        <Stack.Screen
+          name="Transfers"
+          options={{ 
+            headerStyle: {
+              height: 0,
+            },
+            headerLeft: null,
+        }}>
+          {props => <TransfersScreen {...props} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         </>
       ) : (
