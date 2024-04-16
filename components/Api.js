@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const ip_address = 'https://artred02.fr';
+const ip_address = 'https://api.artred02.fr';
 
 const GetAccountsList = async ({ userId, setAccounts }) => {
     const headers = {
