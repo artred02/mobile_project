@@ -31,6 +31,7 @@ export default function LoginScreen({navigation, setUser, setUserApi}) {
                             return;
                         }
                         const user = firestoreDocument.data()
+                        user.currentPassword = password;
                         setUser(user)
                         navigation.navigate('Home', {user: user})
                     })

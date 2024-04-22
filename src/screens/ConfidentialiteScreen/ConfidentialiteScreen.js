@@ -10,12 +10,29 @@ import NavBottomBar from '../../../components/NavBottomBar';
 import { TextInput } from 'react-native-gesture-handler';
 import Button from '../../../components/Button';
 
-export default function ConfidentialiteScreen(props, userApi) {
+const reauthenticate = (currentPassword) => {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+        user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+}
+
+const changeEmail = (currentPassword, newEmail) => {
+    reauthenticate(currentPassword).then(() => {
+        var user = firebase.auth().currentUser;
+        user.updateEmail(newEmail).then(() => {
+            console.log("Email updated!");
+        }).catch((error) => { console.log(error); });
+    }).catch((error) => { console.log(error); });
+};
+
+export default function ConfidentialiteScreen(props) {
     const [email, setEmail ] = useState(props.extraData.email);
     const [ModaleVisibleName, setModaleVisibleName] = useState(false);
     const [ModaleVisiblemail, setModaleVisiblemail] = useState(false);
     const [ModaleVisiblePassword, setModaleVisiblePassword] = useState(false);
     const [newFullName, setNewFullName] = useState(props.extraData.fullName);
+
     const modifyName = () => {
         firebase.firestore().collection('users').doc(props.extraData.id).update({
             fullName: newFullName
@@ -46,32 +63,6 @@ export default function ConfidentialiteScreen(props, userApi) {
         })
         .catch(error => {
             console.error('Erreur lors de la modification de l\'email via Firebase Auth :', error);
-        });
-    };
-
-    const changeEmail = (currentPassword, newEmail) => {
-        const userApi = props.userApi
-        console.log(userApi)
-        const user = firebase.auth().userApi;
-        
-        if (!userApi) {
-            console.error("Utilisateur non connecté.");
-            return;
-        }
-    
-        if (userApi.email !== email) {
-            console.error("L'utilisateur n'est pas correctement authentifié.");
-            return;
-        }
-    
-        reauthenticate(currentPassword).then(() => {
-            userApi.updateEmail(newEmail).then(() => {
-                console.log("Adresse e-mail mise à jour avec succès.");
-            }).catch((error) => {
-                console.error("Erreur lors de la mise à jour de l'adresse e-mail :", error);
-            });
-        }).catch((error) => {
-            console.error("Erreur lors de la réauthentification de l'utilisateur :", error);
         });
     };
 
@@ -114,7 +105,7 @@ export default function ConfidentialiteScreen(props, userApi) {
                     value={email}
                     autoCapitalize="none"
                 />
-                <Button title="Sauvegarder" onPress={changeEmail(email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+                <Button title="Sauvegarder" onPress={changeEmail(props.extraData.currentPassword, email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );
