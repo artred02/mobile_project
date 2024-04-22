@@ -43,6 +43,7 @@ export default function ConfidentialiteScreen(props) {
                     console.log('Email modifié dans Firestore.');
                     setEmail(newEmail);
                     props.extraData.email = newEmail;
+                    alert('Email modifié avec succès.');
                     setModaleVisiblemail(false);
                 })
                 .catch(error => {
@@ -62,6 +63,7 @@ export default function ConfidentialiteScreen(props) {
             console.log('Nom d\'utilisateur modifié avec succès.');
             setNewFullName(newFullName);
             props.extraData.fullName = newFullName;
+            alert('Nom d\'utilisateur modifié avec succès.')
             setModaleVisibleName(false); 
         })
         .catch(error => {
@@ -70,11 +72,13 @@ export default function ConfidentialiteScreen(props) {
     };
 
     changePassword = (currentPassword, newPassword) => {
-        this.reauthenticate(currentPassword).then(() => {
+        reauthenticate(currentPassword).then(() => {
           var user = firebase.auth().currentUser;
           user.updatePassword(newPassword).then(() => {
             console.log("Password updated!");
-            setModaleVisiblePassword5(false);
+            props.extraData.currentPassword = newPassword;
+            alert('Mot de passe modifié avec succès.');
+            setModaleVisiblePassword(false);
           }).catch((error) => { console.log(error); });
         }).catch((error) => { console.log(error); });
       }
