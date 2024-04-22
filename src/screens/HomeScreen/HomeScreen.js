@@ -3,12 +3,10 @@ import { Text, TouchableOpacity, View, FlatList, Pressable, RefreshControl } fro
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faGear, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { firebase } from '../../firebase/config'
 import { GetAccountsList, SetTokenNotification } from '../../../components/Api'
 import styles from './styles';
 import Header from '../../../components/Header';
 import NavBottomBar from '../../../components/NavBottomBar'
-import Button from '../../../components/Button';
 
 export default function HomeScreen(props) {
     const [accounts, setAccounts] = useState([]);

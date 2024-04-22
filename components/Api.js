@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-const ip_address = 'https://api.artred02.fr';
+// const ip_address = 'https://api.artred02.fr';
+const ip_address = 'http://192.168.96.70:8000';
 
 const GetAccountsList = async ({ userId, setAccounts }) => {
     const headers = {
@@ -107,13 +108,31 @@ const GetAllUsers = async () => {
             Accept: 'application/json'
         },
     };
-    const url = `${ip_address}/api/users`;
+    const url = `${ip_address}/api/users/all`;
     axios.get(url, headers)
         .then((response) => {
-            console.log(response.data);
+            return response.data;
         }).catch((error) => {
             console.log(error);
         });
 }
 
-export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification };
+const Transfert = async ({ fromAccountId, toAccountId, amount, navigation }) => {
+    const headers = {
+        headers: {
+            Accept: 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/transferts/${fromAccountId}/${toAccountId}/${amount}`;
+    axios({
+        method: 'get',
+        url: url,
+        headers: headers
+    }).then(() => {
+        navigation.navigate('Home');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert };

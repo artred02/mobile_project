@@ -36,6 +36,7 @@ async function registerForPushNotificationsAsync() {
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [userApi, setUserApi] = useState(null);
   const [expoPushToken, setExpoPushToken] = useState('');
 
   Notifications.setNotificationHandler({
@@ -61,7 +62,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-        <Navigation user={user} setUser={setUser} tokenNotification={expoPushToken} />
+        <Navigation user={user} setUser={setUser} userApi={userApi} setUserApi={setUserApi} tokenNotification={expoPushToken} />
       </NavigationContainer>
   );
 }
