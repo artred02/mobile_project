@@ -89,7 +89,7 @@ export default function ConfidentialiteScreen(props) {
                     autoCapitalize="none"
                 />
 
-                <Button title="Sauvegarder" onPress={modifyName} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+                <Button title="Sauvegarder" onPress={() => modifyName()} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );
@@ -105,7 +105,7 @@ export default function ConfidentialiteScreen(props) {
                     value={email}
                     autoCapitalize="none"
                 />
-                <Button title="Sauvegarder" onPress={changeEmail(props.extraData.currentPassword, email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+                <Button title="Sauvegarder" onPress={() => changeEmail(props.extraData.currentPassword, email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );
