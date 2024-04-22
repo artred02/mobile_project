@@ -35,7 +35,10 @@ export default StyleSheet.create({
     },
     buttonAdd: {
         color: "#fff",
+        backgroundColor: "#2c3e50",
         fontSize: 20,
         width: "50%",
+        height: 40,
+        borderRadius: 10,
     },
 });
