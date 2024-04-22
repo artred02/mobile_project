@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View,Button,Modal,Alert, Pressable } from 'react-native'
+import React from 'react'
+import { Text, TouchableOpacity, View,Alert } from 'react-native'
 import { firebase } from '../../firebase/config'
-import { collection, query, where } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';

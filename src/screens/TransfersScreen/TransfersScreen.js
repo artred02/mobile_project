@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { View, TextInput } from 'react-native';
 import NavBottomBar from '../../../components/NavBottomBar';
 import Header from '../../../components/Header';
-import { firebase } from '../../firebase/config'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faRightFromBracket, faGear, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../../components/Button';
 import styles from './styles';
 

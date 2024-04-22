@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef} from 'react';
 import { View, Button, Text } from 'react-native';
 import BpWidget from "../../../components/BpWidget";
 import BpIncommingMessagesListener from '../../../components/BpIncommingMessagesListener'
