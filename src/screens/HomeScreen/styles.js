@@ -25,7 +25,7 @@ export default StyleSheet.create({
     },
 
     accountCard:{
-        backgroundColor:'#2980b9',
+        backgroundColor:'#2c3e50',
         height:75,
         margin:10,
         padding:10,
