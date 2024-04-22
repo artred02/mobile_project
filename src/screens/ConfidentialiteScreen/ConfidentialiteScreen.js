@@ -83,18 +83,6 @@ export default function ConfidentialiteScreen(props) {
         }).catch((error) => { console.log(error); });
       }
 
-
-    const handleFullNameChange = (text) => {
-        setNewFullName(text); 
-    };
-
-    const handleEmailChange = (text) => {
-        setEmail(text); 
-    };
-    const handlePasswordChange = (text) => {
-        setPassword(text); 
-    };
-
     useEffect(() => {
         setNewFullName(props.extraData.fullName);
     }, [props.extraData.fullName]);
@@ -105,7 +93,7 @@ export default function ConfidentialiteScreen(props) {
                 <Text style={styles.modalText}>Changer le nom d'utilisateur</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text) => handleFullNameChange(text)}
+                    onChangeText={(text) => setNewFullName(text)}
                     value={newFullName}
                     autoCapitalize="none"
                 />
@@ -122,7 +110,7 @@ export default function ConfidentialiteScreen(props) {
                 
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text) => handleEmailChange(text)}
+                    onChangeText={(text) => setEmail(text)}
                     value={email}
                     autoCapitalize="none"
                 />
@@ -136,7 +124,7 @@ export default function ConfidentialiteScreen(props) {
                 <Text style={styles.modalText}>Changer le mot de passe</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text) => handlePasswordChange(text)}
+                    onChangeText={(text) => setPassword(text)}
                     placeholder='*********'
                     autoCapitalize="none"
                 />
