@@ -20,6 +20,7 @@ const reauthenticate = (currentPassword) => {
 
 export default function ConfidentialiteScreen(props) {
     const [email, setEmail ] = useState(props.extraData.email);
+    const [password, setPassword ] = useState(props.extraData.password);
     const [ModaleVisibleName, setModaleVisibleName] = useState(false);
     const [ModaleVisiblemail, setModaleVisiblemail] = useState(false);
     const [ModaleVisiblePassword, setModaleVisiblePassword] = useState(false);
@@ -68,12 +69,25 @@ export default function ConfidentialiteScreen(props) {
         });
     };
 
+    changePassword = (currentPassword, newPassword) => {
+        this.reauthenticate(currentPassword).then(() => {
+          var user = firebase.auth().currentUser;
+          user.updatePassword(newPassword).then(() => {
+            console.log("Password updated!");
+          }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+      }
+
+
     const handleFullNameChange = (text) => {
         setNewFullName(text); 
     };
 
     const handleEmailChange = (text) => {
         setEmail(text); 
+    };
+    const handlePasswordChange = (text) => {
+        setPassword(text); 
     };
 
     useEffect(() => {
@@ -117,18 +131,11 @@ export default function ConfidentialiteScreen(props) {
                 <Text style={styles.modalText}>Changer le mot de passe</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text) => handleEmailChange(text)}
-                    value='*********'
+                    onChangeText={(text) => handlePasswordChange(text)}
+                    placeholder='*********'
                     autoCapitalize="none"
                 />
-                <Text style={styles.confirmmodalText}>Confirmer le mot de passe *</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) => handleEmailChange(text)}
-                    value='*********'
-                    autoCapitalize="none"
-                />
-                <Button title="Sauvegarder" onPress={() => changeEmail(props.extraData.currentPassword, email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+                <Button title="Sauvegarder" onPress={() => changePassword(props.extraData.currentPassword, password)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );

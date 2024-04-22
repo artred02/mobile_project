@@ -16,28 +16,7 @@ export default function SettingsScreen(props) {
         props.navigation.navigate('Confidentialite')
     }
 
-    changePassword = (currentPassword, newPassword) => {
-        this.reauthenticate(currentPassword).then(() => {
-          var user = firebase.auth().currentUser;
-          user.updatePassword(newPassword).then(() => {
-            console.log("Password updated!");
-          }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-      }
-      changeEmail = (currentPassword, newEmail) => {
-        this.reauthenticate(currentPassword).then(() => {
-          var user = firebase.auth().currentUser;
-          user.updateEmail(newEmail).then(() => {
-            console.log("Email updated!");
-          }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-      }
-    reauthenticate = (currentPassword) => {
-        var user = firebase.auth().currentUser;
-        var cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword)
-        return user.reauthenticateWithCredential(cred);
-    }
-    const [modalVisible, setModalVisible] = useState(false);
+
 
     return (
         <>
