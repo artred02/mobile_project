@@ -5,7 +5,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen
 const Stack = createStackNavigator();
 
 
-export default function Navigation ({user, setUser, userApi, setUserApi, tokenNotification}) {
+export default function Navigation ({user, setUser, tokenNotification}) {
   return (
     <Stack.Navigator>
       { user ? (
@@ -28,7 +28,7 @@ export default function Navigation ({user, setUser, userApi, setUserApi, tokenNo
             },
             headerLeft: null,
           }}>
-          {props => <SettingsScreen {...props} extraData={user} setUser={setUser} userApi={userApi} />}
+          {props => <SettingsScreen {...props} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="Chatbot"
@@ -48,7 +48,7 @@ export default function Navigation ({user, setUser, userApi, setUserApi, tokenNo
             },
             headerLeft: null,
         }}>
-          {props => <ConfidentialiteScreen {...props} extraData={user} setUser={setUser} userApi={userApi} />}
+          {props => <ConfidentialiteScreen {...props} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="Account"
@@ -90,7 +90,7 @@ export default function Navigation ({user, setUser, userApi, setUserApi, tokenNo
                 height: 0,
               },
           }}>
-            {props => <LoginScreen {...props} setUser={setUser} setUserApi={setUserApi} />}
+            {props => <LoginScreen {...props} setUser={setUser} />}
           </Stack.Screen>
           <Stack.Screen
             name="Registration"

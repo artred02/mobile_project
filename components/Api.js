@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-const ip_address = 'https://api.artred02.fr'
-//const ip_address = 'http://192.168.96.70:8000';
+const ip_address = 'https://api.artred02.fr';
+// const ip_address = 'http://192.168.96.70:8000';
 
 const GetAccountsList = async ({ userId, setAccounts }) => {
     const headers = {
@@ -25,6 +25,7 @@ const AddAccount = async ({ account, navigation }) => {
             Accept: 'application/json'
         },
     };
+    console.log(account);
     const url = `${ip_address}/api/bank_accounts`;
     axios({
         method: 'post',
@@ -32,7 +33,8 @@ const AddAccount = async ({ account, navigation }) => {
         data: {
             "userId": account.userId,
             "name": account.name,
-            "balance": account.balance
+            "balance": account.balance,
+            "current": true
         },
         headers: headers
     }).then(() => {

@@ -7,7 +7,7 @@ import Modale from '../../../components/Modale';
 import Button from '../../../components/Button';
 
 
-export default function LoginScreen({navigation, setUser, setUserApi}) {
+export default function LoginScreen({navigation, setUser}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -48,7 +48,6 @@ export default function LoginScreen({navigation, setUser, setUserApi}) {
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid
-                setUserApi(response.user)
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
                     .doc(uid)

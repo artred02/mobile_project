@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Navigation from './src/navigation/Navigation';
 import { useFonts, Knewave_400Regular } from '@expo-google-fonts/knewave';
@@ -7,7 +6,6 @@ import { EagleLake_400Regular } from '@expo-google-fonts/eagle-lake';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
-import Button from './components/Button';
 
 async function registerForPushNotificationsAsync() {
   let token;
@@ -36,7 +34,6 @@ async function registerForPushNotificationsAsync() {
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [userApi, setUserApi] = useState(null);
   const [expoPushToken, setExpoPushToken] = useState('');
 
   Notifications.setNotificationHandler({
@@ -62,7 +59,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-        <Navigation user={user} setUser={setUser} userApi={userApi} setUserApi={setUserApi} tokenNotification={expoPushToken} />
+        <Navigation user={user} setUser={setUser} tokenNotification={expoPushToken} />
       </NavigationContainer>
   );
 }

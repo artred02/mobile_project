@@ -82,6 +82,9 @@ export default function AccountScreen(props) {
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIconPen} size={25}/>
                         </TouchableOpacity>
                     </View>
+                    <View style={styles.viewRow}>
+                        <Text style={styles.accountText} >Iban : {account.iban}</Text>
+                    </View>
                 </View>
                 <Button title="Supprimer" onPress={() => DeleteAccount({accountId: account.id, navigation: props.navigation}) } style={styles.btnDelete} textStyle={styles.textStyle} />
                 {Modale(modalBalanceVisible, setModalBalanceVisible, balanceModalContent)}
