@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-// const ip_address = 'https://api.artred02.fr';
-const ip_address = 'http://192.168.96.70:8000';
+const ip_address = 'https://api.artred02.fr'
+//const ip_address = 'http://192.168.96.70:8000';
 
 const GetAccountsList = async ({ userId, setAccounts }) => {
     const headers = {
