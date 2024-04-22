@@ -74,6 +74,7 @@ export default function ConfidentialiteScreen(props) {
           var user = firebase.auth().currentUser;
           user.updatePassword(newPassword).then(() => {
             console.log("Password updated!");
+            setModaleVisiblePassword5(false);
           }).catch((error) => { console.log(error); });
         }).catch((error) => { console.log(error); });
       }
