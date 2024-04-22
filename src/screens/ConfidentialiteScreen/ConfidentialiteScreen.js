@@ -10,19 +10,19 @@ import NavBottomBar from '../../../components/NavBottomBar';
 import { TextInput } from 'react-native-gesture-handler';
 import Button from '../../../components/Button';
 
-export default function ConfidentialiteScreen(props) {
+export default function ConfidentialiteScreen(props, userApi) {
     const [email, setEmail ] = useState(props.extraData.email);
-    const [ModaleVisible, setModaleVisible] = useState(false);
+    const [ModaleVisibleName, setModaleVisibleName] = useState(false);
     const [ModaleVisiblemail, setModaleVisiblemail] = useState(false);
+    const [ModaleVisiblePassword, setModaleVisiblePassword] = useState(false);
     const [newFullName, setNewFullName] = useState(props.extraData.fullName);
-
     const modifyName = () => {
         firebase.firestore().collection('users').doc(props.extraData.id).update({
             fullName: newFullName
         })
         .then(() => {
             console.log('Nom d\'utilisateur modifié avec succès.');
-            setModaleVisible(false); 
+            ModaleVisibleName(false); 
         })
         .catch(error => {
             console.error('Erreur lors de la modification du nom d\'utilisateur :', error);
@@ -30,17 +30,54 @@ export default function ConfidentialiteScreen(props) {
     };
 
     const modifyEmail = () => {
-        firebase.firestore().collection('users').doc(props.extraData.id).update({
-            email: email 
-        })
+        firebase.auth().currentUser.updateEmail(email)
         .then(() => {
             console.log('Email modifié avec succès.');
-            setModaleVisiblemail(false);
+            firebase.firestore().collection('users').doc(props.extraData.id).update({
+                email: email
+            })
+            .then(() => {
+                console.log('Email modifié dans Firestore.');
+                setModaleVisiblemail(false);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la modification de l\'email dans Firestore :', error);
+            });
         })
         .catch(error => {
-            console.error('Erreur lors de la modification de l email :', error);
+            console.error('Erreur lors de la modification de l\'email via Firebase Auth :', error);
         });
     };
+
+    const changeEmail = (currentPassword, newEmail) => {
+        const userApi = props.userApi
+        console.log(userApi)
+        const user = firebase.auth().userApi;
+        
+        if (!userApi) {
+            console.error("Utilisateur non connecté.");
+            return;
+        }
+    
+        if (userApi.email !== email) {
+            console.error("L'utilisateur n'est pas correctement authentifié.");
+            return;
+        }
+    
+        reauthenticate(currentPassword).then(() => {
+            userApi.updateEmail(newEmail).then(() => {
+                console.log("Adresse e-mail mise à jour avec succès.");
+            }).catch((error) => {
+                console.error("Erreur lors de la mise à jour de l'adresse e-mail :", error);
+            });
+        }).catch((error) => {
+            console.error("Erreur lors de la réauthentification de l'utilisateur :", error);
+        });
+    };
+
+    useEffect(() => {
+        console.log(props.userApi)
+    }, []);
 
     const handleFullNameChange = (text) => {
         setNewFullName(text); 
@@ -60,6 +97,7 @@ export default function ConfidentialiteScreen(props) {
                     value={newFullName}
                     autoCapitalize="none"
                 />
+
                 <Button title="Sauvegarder" onPress={modifyName} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
@@ -69,10 +107,32 @@ export default function ConfidentialiteScreen(props) {
         <View id='mail' style={styles.centeredView}>
             <View style={styles.modalView}>
                 <Text style={styles.modalText}>Changer l'adresse Email</Text>
+                
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => handleEmailChange(text)}
                     value={email}
+                    autoCapitalize="none"
+                />
+                <Button title="Sauvegarder" onPress={changeEmail(email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+            </View>
+        </View>
+    );
+    const passwordModalContent = (
+        <View id='mail' style={styles.centeredView}>
+            <View style={styles.modalView}>
+                <Text style={styles.modalText}>Changer le mot de passe</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text) => handleEmailChange(text)}
+                    value='*********'
+                    autoCapitalize="none"
+                />
+                <Text style={styles.confirmmodalText}>Confirmer le mot de passe *</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text) => handleEmailChange(text)}
+                    value='*********'
                     autoCapitalize="none"
                 />
                 <Button title="Sauvegarder" onPress={modifyEmail} style={styles.btnAddBalance} textStyle={styles.textbutton} />
@@ -95,12 +155,12 @@ export default function ConfidentialiteScreen(props) {
                     <View style={styles.header}>
                         <Text style={styles.headerTxt}>Confidentialité</Text>
                     </View>
-                    <TouchableOpacity onPress={() => setModaleVisible(true)}>
+                    <TouchableOpacity onPress={() => setModaleVisibleName(true)}>
                         <View style={styles.information}>
                             <Text style={styles.title}>Nom d'utilisateur :</Text>
                             <Text style={styles.bodyText}>{newFullName}</Text>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15} />
-                            {Modale(ModaleVisible, setModaleVisible, nameModalContent)}
+                            {Modale(ModaleVisibleName, setModaleVisibleName, nameModalContent)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setModaleVisiblemail(true)}>
@@ -111,12 +171,12 @@ export default function ConfidentialiteScreen(props) {
                             {Modale(ModaleVisiblemail, setModaleVisiblemail, mailModalContent)}
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setModaleVisible(true)}>
+                    <TouchableOpacity onPress={() => setModaleVisiblePassword(true)}>
                         <View style={styles.information}>
                             <Text style={styles.title}>Mot de passe :</Text>
                             <Text style={styles.bodyText}>*********</Text>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15} />
-                            {Modale(ModaleVisible, setModaleVisible, nameModalContent)}
+                            {Modale(ModaleVisiblePassword, setModaleVisiblePassword, passwordModalContent)}
                         </View>
                     </TouchableOpacity>
                 </KeyboardAwareScrollView>

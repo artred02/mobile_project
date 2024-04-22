@@ -93,5 +93,12 @@ export default StyleSheet.create({
         color:'#fff',
         fontSize:20
     },
+    confirmmodalText:{
+        marginBottom: 10,
+        textAlign: "center",
+        color: '#fff',
+        paddingTop:10,
+
+    },
     
 })
