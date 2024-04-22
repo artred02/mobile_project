@@ -17,14 +17,6 @@ const reauthenticate = (currentPassword) => {
     return user.reauthenticateWithCredential(cred);
 }
 
-const changeEmail = (currentPassword, newEmail) => {
-    reauthenticate(currentPassword).then(() => {
-        var user = firebase.auth().currentUser;
-        user.updateEmail(newEmail).then(() => {
-            console.log("Email updated!");
-        }).catch((error) => { console.log(error); });
-    }).catch((error) => { console.log(error); });
-};
 
 export default function ConfidentialiteScreen(props) {
     const [email, setEmail ] = useState(props.extraData.email);
@@ -32,6 +24,32 @@ export default function ConfidentialiteScreen(props) {
     const [ModaleVisiblemail, setModaleVisiblemail] = useState(false);
     const [ModaleVisiblePassword, setModaleVisiblePassword] = useState(false);
     const [newFullName, setNewFullName] = useState(props.extraData.fullName);
+    
+    const changeEmail = (currentPassword, newEmail) => {
+        reauthenticate(currentPassword).then(() => {
+            var user = firebase.auth().currentUser;
+            user.updateEmail(newEmail).then(() => {
+                console.log("Email updated!");
+            }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+        firebase.auth().currentUser.updateEmail(newEmail)
+            .then(() => {
+                console.log('Email modifié avec succès.');
+                firebase.firestore().collection('users').doc(props.extraData.id).update({
+                    email: newEmail
+                })
+                .then(() => {
+                    console.log('Email modifié dans Firestore.');
+                    setModaleVisiblemail(false);
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la modification de l\'email dans Firestore :', error);
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors de la modification de l\'email via Firebase Auth :', error);
+            });
+    };
 
     const modifyName = () => {
         firebase.firestore().collection('users').doc(props.extraData.id).update({
@@ -39,7 +57,9 @@ export default function ConfidentialiteScreen(props) {
         })
         .then(() => {
             console.log('Nom d\'utilisateur modifié avec succès.');
-            ModaleVisibleName(false); 
+            setNewFullName(newFullName);
+            props.extraData.fullName = newFullName;
+            setModaleVisibleName(false); 
         })
         .catch(error => {
             console.error('Erreur lors de la modification du nom d\'utilisateur :', error);
