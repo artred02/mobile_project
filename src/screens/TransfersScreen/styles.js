@@ -7,7 +7,7 @@ export default StyleSheet.create({
         backgroundColor: "#34495e",
     },
     userCard:{
-        backgroundColor:'#2980b9',
+        backgroundColor:'#2c3e50',
         height:75,
         margin:10,
         padding:10,
