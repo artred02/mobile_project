@@ -48,7 +48,6 @@ export default StyleSheet.create({
 
     bodyText:{
         fontSize: 15,
-        fontWeight: '',
         marginTop:5,
         marginRight:50,
         color:'#fff'
