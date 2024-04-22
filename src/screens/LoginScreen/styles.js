@@ -80,5 +80,31 @@ export default StyleSheet.create({
         paddingRight: 10,
         textAlign: "justify",
         paddingTop: 50
-    }
+    },
+    inputReset: {
+        height: 40,
+        borderWidth: 1,
+        padding: 10,
+        backgroundColor:'#fff',
+        borderRadius:10,
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+        color: '#fff'
+    },
+    btnAddBalance : {
+        backgroundColor: '#34495e',
+        padding: 10,
+        borderRadius: 10,
+        width: '90%',
+        height: 50,
+        margin: 10,
+        alignItems: 'center',
+    },
+    centeredView : {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
 })

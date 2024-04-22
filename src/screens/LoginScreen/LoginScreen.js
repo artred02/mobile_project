@@ -3,17 +3,45 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config'
 import styles from './styles';
+import Modale from '../../../components/Modale';
+import Button from '../../../components/Button';
 
 
 export default function LoginScreen({navigation, setUser, setUserApi}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [ModaleVisiblePass, setModaleVisiblePass] = useState(false);
+    const [emailReset, setEmailReset] = useState('');
 
+    const Passcontent = (
+        <View id='name' style={styles.centeredView}>
+            <View style={styles.modalView}>
+                <Text style={styles.modalText}>Votre mail</Text>
+                <TextInput
+                    style={styles.inputReset}
+                    onChangeText={(text) => setEmailReset(text)}
+                    autoCapitalize="none"
+                />
+                <Button title="Envoyer" onPress={() => resetPassword(emailReset)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+            </View>
+        </View>
+    );
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
-
+    var auth = firebase.auth();
+    function resetPassword(email) {
+        auth.sendPasswordResetEmail(email)
+          .then(function() {
+            console.log("Email de réinitialisation du mot de passe envoyé !");
+          })
+          .catch(function(error) {
+            console.log(error.message);
+          });
+          alert('Email de réinitialisation du mot de passe envoyé !')
+          setModaleVisiblePass(false);
+      }
     const onLoginPress = () => {
         firebase
             .auth()
@@ -84,6 +112,10 @@ export default function LoginScreen({navigation, setUser, setUserApi}) {
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
+                <View style={styles.footerView}>
+                        <Text style={styles.footerText}>Forgot your password ? <Text onPress={() => setModaleVisiblePass(true)} style={styles.footerLink}>Reset Password</Text></Text>
+                        {Modale(ModaleVisiblePass, setModaleVisiblePass,Passcontent)}
+                    </View>
                 <View style={styles.citationView}>
                     {/* <Image style={styles.citation} source={require("./../../../assets/citation.png")}/> */}
                     <Text style={styles.citationText}>
