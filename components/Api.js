@@ -92,10 +92,14 @@ const SetTokenNotification = async ({ userId, tokenNotification }) => {
             Accept: 'application/json'
         },
     };
-    const url = `${ip_address}/api/users/${userId}/${tokenNotification}`;
+    const url = `${ip_address}/api/users`;
     axios({
-        method: 'get',
+        method: 'post',
         url: url,
+        data: {
+            "userId": userId,
+            "tokenNotification": tokenNotification
+        },
         headers: headers
     }).then(() => {
         console.log('Token saved');
@@ -119,6 +123,24 @@ const GetAllUsers = async () => {
         });
 }
 
+const deleteByUserId = async ({ userId }) => {
+    const headers = {
+        headers: {
+            Accept: 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/users/delete/${userId}`;
+    axios({
+        method: 'get',
+        url: url,
+        headers: headers
+    }).then(() => {
+        console.log('User deleted');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 const Transfert = async ({ fromAccountId, toAccountId, amount, navigation }) => {
     const headers = {
         headers: {
@@ -137,4 +159,4 @@ const Transfert = async ({ fromAccountId, toAccountId, amount, navigation }) => 
     });
 }
 
-export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert };
+export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert, deleteByUserId };
