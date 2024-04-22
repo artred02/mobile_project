@@ -13,6 +13,7 @@ import Button from '../../../components/Button';
 export default function ConfidentialiteScreen(props) {
     const [email, setEmail ] = useState(props.extraData.email);
     const [ModaleVisible, setModaleVisible] = useState(false);
+    const [ModaleVisiblemail, setModaleVisiblemail] = useState(false);
     const [newFullName, setNewFullName] = useState(props.extraData.fullName);
 
     const modifyName = () => {
@@ -28,8 +29,25 @@ export default function ConfidentialiteScreen(props) {
         });
     };
 
+    const modifyEmail = () => {
+        firebase.firestore().collection('users').doc(props.extraData.id).update({
+            email: email 
+        })
+        .then(() => {
+            console.log('Email modifié avec succès.');
+            setModaleVisiblemail(false);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la modification de l email :', error);
+        });
+    };
+
     const handleFullNameChange = (text) => {
         setNewFullName(text); 
+    };
+
+    const handleEmailChange = (text) => {
+        setEmail(text); 
     };
 
     const nameModalContent = (
@@ -53,11 +71,11 @@ export default function ConfidentialiteScreen(props) {
                 <Text style={styles.modalText}>Changer l'adresse Email</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text) => handleFullNameChange(text)}
+                    onChangeText={(text) => handleEmailChange(text)}
                     value={email}
                     autoCapitalize="none"
                 />
-                <Button title="Sauvegarder" onPress={modifyName} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+                <Button title="Sauvegarder" onPress={modifyEmail} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );
@@ -85,12 +103,12 @@ export default function ConfidentialiteScreen(props) {
                             {Modale(ModaleVisible, setModaleVisible, nameModalContent)}
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setModaleVisible(true)}>
+                    <TouchableOpacity onPress={() => setModaleVisiblemail(true)}>
                         <View style={styles.information}>
                             <Text style={styles.title}>Email :</Text>
                             <Text style={styles.bodyText}>{email}</Text>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15} />
-                            {Modale(ModaleVisible, setModaleVisible, mailModalContent)}
+                            {Modale(ModaleVisiblemail, setModaleVisiblemail, mailModalContent)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setModaleVisible(true)}>
