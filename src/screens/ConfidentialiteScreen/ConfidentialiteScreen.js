@@ -40,6 +40,8 @@ export default function ConfidentialiteScreen(props) {
                 })
                 .then(() => {
                     console.log('Email modifié dans Firestore.');
+                    setEmail(newEmail);
+                    props.extraData.email = newEmail;
                     setModaleVisiblemail(false);
                 })
                 .catch(error => {
