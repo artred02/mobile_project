@@ -45,18 +45,13 @@ export default StyleSheet.create({
         marginTop:5,
         color:'#fff'
     },
-    bodyPassword:{
-        fontSize: 20,
-        width:'100%',
-        color:'#fff',
-        marginLeft:10,
+
+    bodyText:{
+        fontSize: 15,
+        fontWeight: '',
         marginTop:5,
-    },
-    bodyEmail:{
-        color:'#fff',
-        marginTop:5,
-        marginRight:100,
-        fontStyle:'italic'
+        marginRight:50,
+        color:'#fff'
     },
 
     Icon:{
@@ -72,7 +67,32 @@ export default StyleSheet.create({
         right:20,
         top:10,
         marginTop:5
-    }
-    
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+        color: '#fff'
+    },
+    input:{
+        height: 40,
+        borderWidth: 1,
+        padding: 10,
+        backgroundColor:'#fff',
+        borderRadius:10,
+        width:'100%'
+    },
+    btnAddBalance : {
+        backgroundColor: '#34495e',
+        padding: 10,
+        borderRadius: 10,
+        width: '90%',
+        height: 40,
+        margin: 10,
+        alignItems: 'center',
+    },
+    textbutton:{
+        color:'#fff',
+        fontSize:20
+    },
     
 })
