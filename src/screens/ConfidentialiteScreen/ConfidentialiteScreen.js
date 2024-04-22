@@ -68,30 +68,6 @@ export default function ConfidentialiteScreen(props) {
         });
     };
 
-    const modifyEmail = () => {
-        firebase.auth().currentUser.updateEmail(email)
-        .then(() => {
-            console.log('Email modifié avec succès.');
-            firebase.firestore().collection('users').doc(props.extraData.id).update({
-                email: email
-            })
-            .then(() => {
-                console.log('Email modifié dans Firestore.');
-                setModaleVisiblemail(false);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la modification de l\'email dans Firestore :', error);
-            });
-        })
-        .catch(error => {
-            console.error('Erreur lors de la modification de l\'email via Firebase Auth :', error);
-        });
-    };
-
-    useEffect(() => {
-        console.log(props.userApi)
-    }, []);
-
     const handleFullNameChange = (text) => {
         setNewFullName(text); 
     };
@@ -99,6 +75,10 @@ export default function ConfidentialiteScreen(props) {
     const handleEmailChange = (text) => {
         setEmail(text); 
     };
+
+    useEffect(() => {
+        setNewFullName(props.extraData.fullName);
+    }, [props.extraData.fullName]);
 
     const nameModalContent = (
         <View id='name' style={styles.centeredView}>
@@ -148,15 +128,12 @@ export default function ConfidentialiteScreen(props) {
                     value='*********'
                     autoCapitalize="none"
                 />
-                <Button title="Sauvegarder" onPress={modifyEmail} style={styles.btnAddBalance} textStyle={styles.textbutton} />
+                <Button title="Sauvegarder" onPress={() => changeEmail(props.extraData.currentPassword, email)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );
     
 
-    useEffect(() => {
-        setNewFullName(props.extraData.fullName);
-    }, [props.extraData.fullName]);
 
     return (
         <>
