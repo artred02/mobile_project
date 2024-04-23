@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        backgroundColor: '#6646ee',
+        backgroundColor: '#34495e',
         marginVertical: 10,
-        height: 60,
+        height: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 30,
+        borderRadius: 10,
     },
     buttonText: {
         color: 'white',
