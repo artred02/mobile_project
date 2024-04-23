@@ -58,6 +58,7 @@ export default function RegistrationScreen({navigation, setUser}) {
 
                 <TextInput
                     style={styles.input}
+                    maxLength={15}
                     placeholder='Full Name'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setFullName(text)}
@@ -67,6 +68,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                 />
                 <TextInput
                     style={styles.input}
+                    maxLength={50}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}

@@ -93,6 +93,7 @@ export default function ConfidentialiteScreen(props) {
                 <Text style={styles.modalText}>Changer le nom d'utilisateur</Text>
                 <TextInput
                     style={styles.input}
+                    maxLength={15}
                     onChangeText={(text) => setNewFullName(text)}
                     value={newFullName}
                     autoCapitalize="none"
@@ -110,6 +111,7 @@ export default function ConfidentialiteScreen(props) {
                 
                 <TextInput
                     style={styles.input}
+                    maxLength={50}
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     autoCapitalize="none"
