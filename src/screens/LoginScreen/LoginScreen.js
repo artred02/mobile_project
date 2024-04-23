@@ -6,7 +6,6 @@ import styles from './styles';
 import Modale from '../../../components/Modale';
 import Button from '../../../components/Button';
 
-
 export default function LoginScreen({ navigation, setUser }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -66,17 +65,6 @@ export default function LoginScreen({ navigation, setUser }) {
             setError(error.message);
         }
     };
-
-    const signInWithGoogle = async () => {
-        try {
-            const result = await firebase.auth().signInWithPopup(provider);
-            const user = result.user;
-            console.log(user);
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
@@ -114,9 +102,7 @@ export default function LoginScreen({ navigation, setUser }) {
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => signInWithGoogle()}>
+                <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonTitle}>Sign in with Google</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
