@@ -29,7 +29,7 @@ export default function AccountScreen(props) {
     const nameModalContent = (
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
-                <Text style={styles.modalText}>Nouveau Nom</Text>
+                <Text style={styles.modalText}>Modifier le nom :</Text>
                 <TextInput
                     style={styles.input}
                     placeholderTextColor="#aaaaaa"
@@ -45,7 +45,7 @@ export default function AccountScreen(props) {
     const balanceModalContent = (
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
-                <Text style={styles.modalText}>Nouveau Solde</Text>
+                <Text style={styles.modalText}>Modifier le solde :</Text>
                 <TextInput
                     style={styles.input}
                     keyboardType = 'numeric'
@@ -68,25 +68,15 @@ export default function AccountScreen(props) {
                 keyboardShouldPersistTaps="always"
             >
                 <Header title={"Compte"} navigation={props.navigation} setUser={props.setUser} />
-                <Text style={styles.accountsTitle} >Account:</Text>
-                <View style={styles.account} >
-                    <View style={styles.viewRow}>
-                        <Text style={styles.accountText} >Nom : {account.name}</Text>
-                        <TouchableOpacity onPress={() => setModalNameVisible(true)} style={styles.penTouchable}>
-                            <FontAwesomeIcon icon={faPen} style={styles.buttonIconPen} size={25}/>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.viewRow}>
-                        <Text style={styles.accountText} >Solde : {account.balance} €</Text>
-                        <TouchableOpacity onPress={() => setModalBalanceVisible(true)} style={styles.penTouchable}>
-                            <FontAwesomeIcon icon={faPen} style={styles.buttonIconPen} size={25}/>
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity>
-                        <View style={styles.viewRow}>
-                            <Text selectable={true} style={styles.accountText} >Iban : {account.iban}</Text>
-                        </View>
+                <View style={styles.card}>
+                    <TouchableOpacity onPress={() => setModalNameVisible(true)}>
+                        <Text style={styles.accountsTitle} >{account.name}</Text>
                     </TouchableOpacity>
+                    <Text style={styles.balance} onPress={() => setModalBalanceVisible(true)} >{account.balance} €</Text>
+                    <TouchableOpacity>
+                        <Text selectable={true} style={styles.iban} >{account.iban}</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.separation}>_________________________________________</Text>
                 </View>
                 <Button title="Supprimer" onPress={() => DeleteAccount({accountId: account.id, navigation: props.navigation}) } style={styles.btnDelete} textStyle={styles.textStyle} />
                 {Modale(modalBalanceVisible, setModalBalanceVisible, balanceModalContent)}

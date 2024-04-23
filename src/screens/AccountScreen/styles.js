@@ -64,9 +64,8 @@ export default StyleSheet.create({
     accountsTitle:{
         color:'#fff',
         fontSize:20,
-        margin:10,
-        marginTop:50,
         marginLeft:20,
+        marginTop:10,
     },
     account:{
         display:'flex',
@@ -79,6 +78,20 @@ export default StyleSheet.create({
         fontSize:20,
         margin:10,
         marginLeft:20,
+    },
+    balance : {
+        color:'#fff',
+        fontSize:20,
+        marginTop:10,
+        position:'absolute',
+        right:20,
+        
+    },
+    iban : {
+        color:'#fff',
+        fontSize:15,
+        marginLeft:20,
+        marginTop:10,
     },
     btnAddBalance:{
         width:200,
@@ -100,4 +113,20 @@ export default StyleSheet.create({
         alignSelf:'center',
         marginTop:20,
     },
+    card : {
+        backgroundColor: '#2c3e50',
+        height: 200,
+        borderRadius: 30,
+        margin: 20,
+        marginTop:0,
+        shadowColor: "black",
+        shadowOffset: { width: 7, height: 7 },
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
+    },
+    separation:{
+        color:'#fff',
+        marginLeft:20,
+    },
+    
 });
