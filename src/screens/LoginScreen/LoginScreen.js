@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { firebase } from '../../firebase/config'
+import { firebase } from '../../firebase/config';
 import styles from './styles';
 import Modale from '../../../components/Modale';
 import Button from '../../../components/Button';
 
 
-export default function LoginScreen({navigation, setUser}) {
+export default function LoginScreen({ navigation, setUser }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -20,60 +20,66 @@ export default function LoginScreen({navigation, setUser}) {
                 <Text style={styles.modalText}>Votre mail</Text>
                 <TextInput
                     style={styles.inputReset}
+                    placeholder='E-mail'
+                    placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmailReset(text)}
+                    underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
                 <Button title="Envoyer" onPress={() => resetPassword(emailReset)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>
         </View>
     );
+
     const onFooterLinkPress = () => {
-        navigation.navigate('Registration')
-    }
-    var auth = firebase.auth();
-    function resetPassword(email) {
+        navigation.navigate('Registration');
+    };
+
+    const resetPassword = (email) => {
+        const auth = firebase.auth();
         auth.sendPasswordResetEmail(email)
-          .then(function() {
-            console.log("Email de réinitialisation du mot de passe envoyé !");
-          })
-          .catch(function(error) {
+            .then(() => {
+                console.log("Email de réinitialisation du mot de passe envoyé !");
+                alert('Email de réinitialisation du mot de passe envoyé !');
+                setModaleVisiblePass(false);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+    };
+
+    const onLoginPress = async () => {
+        try {
+            const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+            const uid = response.user.uid;
+            const usersRef = firebase.firestore().collection('users');
+            const firestoreDocument = await usersRef.doc(uid).get();
+            if (!firestoreDocument.exists) {
+                setError("User does not exist anymore.");
+                return;
+            }
+            const user = firestoreDocument.data();
+            user.currentPassword = password;
+            setUser(user);
+            navigation.navigate('Home', { user: user });
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const signInWithGoogle = async () => {
+        try {
+            const result = await firebase.auth().signInWithPopup(provider);
+            const user = result.user;
+            console.log(user);
+        } catch (error) {
             console.log(error.message);
-          });
-          alert('Email de réinitialisation du mot de passe envoyé !')
-          setModaleVisiblePass(false);
-      }
-    const onLoginPress = () => {
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((response) => {
-                const uid = response.user.uid
-                const usersRef = firebase.firestore().collection('users')
-                usersRef
-                    .doc(uid)
-                    .get()
-                    .then(firestoreDocument => {
-                        if (!firestoreDocument.exists) {
-                            setError("User does not exist anymore.")
-                            return;
-                        }
-                        const user = firestoreDocument.data()
-                        user.currentPassword = password;
-                        setUser(user)
-                        navigation.navigate('Home', {user: user})
-                    })
-                    .catch(error => {
-                        setError(error.message)
-                    });
-            })
-            .catch(error => {
-                setError(error.message)
-            })
-    }
+        }
+    };
 
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView 
+            <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
                 <Image
@@ -108,19 +114,17 @@ export default function LoginScreen({navigation, setUser}) {
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => signInWithGoogle()}>
+                    <Text style={styles.buttonTitle}>Sign in with Google</Text>
+                </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
                 <View style={styles.footerView}>
-                        <Text style={styles.footerText}>Forgot your password ? <Text onPress={() => setModaleVisiblePass(true)} style={styles.footerLink}>Reset Password</Text></Text>
-                        {Modale(ModaleVisiblePass, setModaleVisiblePass,Passcontent)}
-                    </View>
-                <View style={styles.citationView}>
-                    {/* <Image style={styles.citation} source={require("./../../../assets/citation.png")}/> */}
-                    <Text style={styles.citationText}>
-                        "Soyez maître de vos finances en suivant attentivement vos comptes banquaires{"\n"}
-                        Chaque euro compte pour bâtir un avenir financier solide"
-                    </Text>
+                    <Text style={styles.footerText}>Forgot your password ? <Text onPress={() => setModaleVisiblePass(true)} style={styles.footerLink}>Reset Password</Text></Text>
+                    {Modale(ModaleVisiblePass, setModaleVisiblePass,Passcontent)}
                 </View>
             </KeyboardAwareScrollView>
         </View>
