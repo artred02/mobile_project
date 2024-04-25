@@ -47,20 +47,17 @@ const AddAccount = async ({ account, navigation }) => {
 const UpdateAccount = async ({ account, setModalVisible, navigation }) => {
     const headers = {
         headers: {
-            Accept: 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/merge-patch+json'
         },
     };
     const url = `${ip_address}/api/bank_accounts/${account.id}`;
-    axios({
-        method: 'put',
-        url: url,
-        data: {
-            "userId": account.userId,
-            "name": account.name,
-            "balance": account.balance
-        },
-        headers: headers
-    }).then(() => {
+
+    axios.patch(url, {
+        "userId": account.userId,
+        "name": account.name,
+        "balance": account.balance
+    }, headers).then(() => {
         setModalVisible(false);
         navigation.navigate('Account', { account: account });
     }).catch((error) => {
