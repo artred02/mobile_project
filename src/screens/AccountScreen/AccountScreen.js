@@ -3,7 +3,7 @@ import styles from './styles';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faIdCard } from '@fortawesome/free-solid-svg-icons';
 import { UpdateAccount, DeleteAccount } from '../../../components/Api';
 import Button from '../../../components/Button';
 import Modale from '../../../components/Modale';
@@ -17,7 +17,8 @@ export default function AccountScreen(props) {
     const [modalBalanceVisible, setModalBalanceVisible] = useState(false);
     const [accountName, setAccountName] = useState(props.route.params.account.name);
     const [balance, setBalance] = useState(props.route.params.account.balance);
-
+    console.log(props.route.params)
+    
     const addToBalance = () => {
         UpdateAccount({ account: {...account, balance: parseFloat(balance)}, setModalVisible: setModalBalanceVisible, navigation: props.navigation });
     }
@@ -25,6 +26,11 @@ export default function AccountScreen(props) {
     const modifyName = () => {
         UpdateAccount({ account: {...account, name: accountName}, setModalVisible: setModalNameVisible, navigation: props.navigation });
     }
+
+    const RibNavigation = () => {
+        props.navigation.navigate('Rib', {account: account});
+    };
+
 
     const nameModalContent = (
         <View style={styles.centeredView}>
@@ -76,7 +82,17 @@ export default function AccountScreen(props) {
                     <TouchableOpacity>
                         <Text selectable={true} style={styles.iban} >{account.iban}</Text>
                     </TouchableOpacity>
-                    <Text style={styles.separation}>_________________________________________</Text>
+                    <View style={styles.lastOperations}>
+                        <Text style={styles.lastOperationsTitle}>Dernières opérations</Text>
+                        <Text style={styles.lastOperationsText}>Aucune opération</Text>
+                    </View>                    
+                </View>
+                <Text style={styles.TitleSection}>Raccourcis</Text>
+                <View style={styles.ibanPdf}>
+                    <TouchableOpacity onPress={RibNavigation}>
+                        <FontAwesomeIcon icon={faIdCard} size={30} style={styles.fontAwesomeIcon} color='white'/>
+                        <Text style={styles.ibanPdfText}>Partager mon RIB</Text>
+                    </TouchableOpacity>
                 </View>
                 <Button title="Supprimer" onPress={() => DeleteAccount({accountId: account.id, navigation: props.navigation}) } style={styles.btnDelete} textStyle={styles.textStyle} />
                 {Modale(modalBalanceVisible, setModalBalanceVisible, balanceModalContent)}

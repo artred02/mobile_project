@@ -128,5 +128,47 @@ export default StyleSheet.create({
         color:'#fff',
         marginLeft:20,
     },
-    
+    lastOperations:{
+        borderTopColor:'#fff',
+        borderTopWidth:1,
+        margin:20,
+    },
+    lastOperationsTitle:{
+        color:'#fff',
+        fontSize:20,
+        marginTop:10,
+        fontStyle:'italic',
+    },
+    lastOperationsText:{
+        color:'#fff',
+        fontSize:15,
+        marginTop:10,
+    },
+    ibanPdf:{
+        backgroundColor:'#2c3e50',
+        width:'50%',
+        height:'20%',
+        margin:20,
+        marginTop:10,
+        padding:20,
+        borderRadius:30,
+        shadowColor: "black",
+        shadowOffset: { width: 7, height: 7 },
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
+    },
+    ibanPdfText:{
+        color:'#fff',
+        fontSize:20,
+        marginTop:10,
+    },
+    fontAwesomeIcon:{
+        color:'#fff',
+    },
+    TitleSection:{
+        color:'#fff',
+        fontSize:20,
+        marginLeft:30,
+        fontWeight:'bold',
+    },
 });

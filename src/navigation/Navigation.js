@@ -1,9 +1,10 @@
-import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen, AddAccountScreen, TransfersScreen } from '../screens'
-
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { HomeScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen, AddAccountScreen, TransfersScreen } from '../screens';
+import RibScreen from '../screens/RibScreen/RibScreen';
+import { LoginScreen, RegistrationScreen } from '../screens';
 
 const Stack = createStackNavigator();
-
 
 export default function Navigation ({user, setUser, tokenNotification}) {
   return (
@@ -79,6 +80,16 @@ export default function Navigation ({user, setUser, tokenNotification}) {
             headerLeft: null,
         }}>
           {props => <TransfersScreen {...props} extraData={user} setUser={setUser} />}
+        </Stack.Screen>
+        <Stack.Screen
+            name="Rib"
+            options={{
+                headerStyle: {
+                    height: 0
+                },
+                headerLeft: null,
+            }}>
+            {props => <RibScreen {...props} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         </>
       ) : (
