@@ -71,7 +71,7 @@ export default function RibScreen(props) {
             <View>
                 <TouchableOpacity style={styles.buttonShare} onPress={generatePdf}>
                     <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>Partager</Text>
-                    <FontAwesomeIcon icon={faFilePdf} size={20} style={styles.pdfIcon}/>
+                    <FontAwesomeIcon icon={faFilePdf} size={20} style={styles.pdfIcon} color='white'/>
                 </TouchableOpacity>
             </View>
         </View>
