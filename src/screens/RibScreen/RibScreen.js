@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, Clipboard } from 'react-native';
 import Header from '../../../components/Header';
-import { faAslInterpreting, faCopy, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faCopy, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
