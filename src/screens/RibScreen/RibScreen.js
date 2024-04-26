@@ -1,43 +1,51 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Clipboard } from 'react-native';
 import Header from '../../../components/Header';
-import { faCopy, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faAslInterpreting, faCopy, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 
 import styles from './styles';
+
 export default function RibScreen(props) {
-    console.log(props);
-    console.log(props.route.params.account)
+
+    const copyToClipboardIban = () => {
+        Clipboard.setString(props.route.params.account.iban);
+        alert('IBAN copié dans le presse-papier');
+    };
+    const copyToClipboardbic= () => {
+        Clipboard.setString(props.route.params.account.bic);
+        alert('BIC / SWIFT copié dans le presse-papier');
+    };
 
     const html = `
-      <html>
-        <body>
-            <h1>RELEVÉ D'IDENTITÉ BANCAIRE</h1>
-            <p>Ce relevé d'identité bancaire est destiné à tout organisme souhaitant connaître vos références bancaires pour domicilier des virements ou prélèvements survotre compte.</p>
-            <p>_____________________________________________________________</p>
-            <h2>Coin Keeper Banque</h2>
-            <p>Intitulé du compte : ${props.extraData.fullName}</p>
-            <p>IBAN : ${props.route.params.account.iban}</p>
-            <p>BIC / SWIFT : ${props.route.params.account.bic}</p>
-            <p>_____________________________________________________________</p>
-            <p>Je soussigné(e) : ${props.extraData.fullName}</p>
-            <p>certifie l'exactitude des informations ci-dessus.</p>
-            <p>Fait à Paris, le ${new Date().toLocaleDateString()}</p>
-        </body>
-      </html>
+        <html>
+            <body>
+                <h1>RELEVÉ D'IDENTITÉ BANCAIRE</h1>
+                <p>Ce relevé d'identité bancaire est destiné à tout organisme souhaitant connaître vos références bancaires pour domicilier des virements ou prélèvements sur votre compte.</p>
+                <p>_____________________________________________________________</p>
+                <h2>Coin Keeper Banque</h2>
+                <p>Intitulé du compte : ${props.extraData.fullName}</p>
+                <p>IBAN : ${props.route.params.account.iban}</p>
+                <p>BIC / SWIFT : ${props.route.params.account.bic}</p>
+                <p>_____________________________________________________________</p>
+                <p>Je soussigné(e) : ${props.extraData.fullName}</p>
+                <p>certifie l'exactitude des informations ci-dessus.</p>
+                <p>Fait à Paris, le ${new Date().toLocaleDateString()}</p>
+            </body>
+        </html>
     `;
-  
 
     let generatePdf = async () => {
-      const file = await printToFileAsync({
-        html: html,
-        base64: false
-      });
-  
-      await shareAsync(file.uri);
+        const file = await printToFileAsync({
+            html: html,
+            base64: false
+        });
+
+        await shareAsync(file.uri);
     };
+
     return (
         <View style={styles.container}>
             <View style={styles.containerView}>
@@ -50,12 +58,12 @@ export default function RibScreen(props) {
             </View>
             <View style={styles.ibanInfo}>
                 <Text style={styles.depotAccount}>IBAN</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>  copyToClipboardIban()}>
                     <FontAwesomeIcon icon={faCopy} size={20} style={styles.fontAwesomeIcon} color='white'/>
-                    <Text selectable={true}  style={styles.infoAccount}>{props.route.params.account.iban}</Text>
+                    <Text selectable={true} style={styles.infoAccount}>{props.route.params.account.iban}</Text>
                 </TouchableOpacity>
                 <Text style={styles.depotAccount}>BIC / SWIFT</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>  copyToClipboardbic()}>
                     <FontAwesomeIcon icon={faCopy} size={20} style={styles.fontAwesomeIcon} color='white'/>
                     <Text selectable={true} style={styles.infoAccount}>{props.route.params.account.bic}</Text>
                 </TouchableOpacity>
@@ -63,9 +71,8 @@ export default function RibScreen(props) {
             <View>
                 <TouchableOpacity style={styles.buttonShare} onPress={generatePdf}>
                     <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>Partager</Text>
-                    <FontAwesomeIcon icon={faFilePdf} size={20} style={styles.pdfIcon} color='white'/>
+                    <FontAwesomeIcon icon={faFilePdf} size={20} style={styles.pdfIcon}/>
                 </TouchableOpacity>
-                
             </View>
         </View>
     );
