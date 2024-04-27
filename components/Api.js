@@ -144,7 +144,7 @@ const Transfert = async ({ fromAccountId, toAccountId, amount, navigation }) => 
             Accept: 'application/json'
         },
     };
-    const url = `${ip_address}/api/transferts/${fromAccountId}/${toAccountId}/${amount}`;
+    const url = `${ip_address}/api/transfer/${fromAccountId}/${toAccountId}/${amount}`;
     axios({
         method: 'get',
         url: url,
@@ -156,4 +156,43 @@ const Transfert = async ({ fromAccountId, toAccountId, amount, navigation }) => 
     });
 }
 
-export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert, deleteByUserId };
+const AddBeneficiary = async ({ userId, iban, bic, name }) => {
+    const headers = {
+        headers: {
+            Accept: 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/beneficiaries`;
+    axios({
+        method: 'post',
+        url: url,
+        data: {
+            "userId": userId,
+            "iban": iban,
+            "bic": bic,
+            "name": name
+        },
+        headers: headers
+    }).then(() => {
+        console.log('Beneficiary added');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+const GetBeneficiaries = async ({ userId, setBeneficiaries }) => {
+    const headers = {
+        headers: {
+            Accept: 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/beneficiaries/user/${userId}`;
+    axios.get(url, headers)
+        .then((response) => {
+            setBeneficiaries(response.data);
+        }).catch((error) => {
+            console.log(error);
+        });
+}
+
+export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert, deleteByUserId, AddBeneficiary, GetBeneficiaries };
