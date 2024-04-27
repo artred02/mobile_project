@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
         fontSize:25,
         margin:10,
         marginLeft:20,
-        fontFamily: 'eagleLake',
-        position:'absolute'
+        position:'absolute',
+        fontWeight:"bold",
     },
     logoutTouchable: {
         marginLeft:'auto',
