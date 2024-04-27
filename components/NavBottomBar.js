@@ -1,7 +1,7 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import {Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome, faPlus, faUser, faMessage, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlus,faRightLeft, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavBottomBar({navigation}) {
 
@@ -25,23 +25,27 @@ export default function NavBottomBar({navigation}) {
     <View style={styles.container}>
       <View style={styles.background}>
           <View>
-            <TouchableOpacity onPress={home} >
-              <FontAwesomeIcon icon={faHome} style={styles.icon} size={30} />
+            <TouchableOpacity onPress={home} style={styles.icon_txt}>
+              <FontAwesomeIcon icon={faHome} style={styles.icon} size={25} />
+              <Text style={{color:'#fff'}}>Home</Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity onPress={addAccount} >
-              <FontAwesomeIcon icon={faPlus} style={styles.icon} size={30} />
+            <TouchableOpacity onPress={addAccount} style={styles.icon_txt}>
+              <FontAwesomeIcon icon={faPlus} style={styles.icon} size={25} />
+              <Text style={{color:'#fff'}}>Add Account</Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity onPress={transfers} >
-              <FontAwesomeIcon icon={faUserGroup} style={styles.icon} size={30} />
+            <TouchableOpacity onPress={transfers}style={styles.icon_txt} >
+              <FontAwesomeIcon icon={faRightLeft} style={styles.icon} size={25} />
+              <Text style={{color:'#fff'}}>Transfers</Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity onPress={chatbot} >
-              <FontAwesomeIcon icon={faMessage} style={styles.icon} size={30} />
+            <TouchableOpacity onPress={chatbot} style={styles.icon_txt}>
+              <FontAwesomeIcon icon={faMessage} style={styles.icon} size={25} />
+              <Text style={{color:'#fff'}}>Chatbot</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -57,18 +61,21 @@ const styles = StyleSheet.create({
     },
     
     icon:{
-      color:'#2ecc71',
+      color:'#fff',
+      alignItems:'center',
+      justifyContent:'center',
+      alignSelf:'center',
     },
 
     background:{
-      width:'95%',
+      width:'100%',
       backgroundColor:'#2c3e50',
-      marginBottom:20,
-      height:80,
+      height:85,
       alignSelf:'center',
-      borderRadius:25,
       flexDirection:'row',
       justifyContent:'space-around',
       alignItems:'center',
     },
+    icon_txt:{
+      marginBottom:20,}
 })
