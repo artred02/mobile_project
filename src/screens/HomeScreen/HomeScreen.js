@@ -7,7 +7,9 @@ import styles from './styles';
 import Header from '../../../components/Header';
 import NavBottomBar from '../../../components/NavBottomBar'
 
-export default function HomeScreen(props) {
+import * as SecureStore from 'expo-secure-store';
+
+const HomeScreen = (props) => {
     const [accounts, setAccounts] = useState([]);
     const [refreshing, setRefreshing] = React.useState(false);
 
@@ -83,3 +85,5 @@ export default function HomeScreen(props) {
         </>
     )
 }
+
+export default HomeScreen;

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { PermissionsAndroid, useColorScheme } from 'react-native';
 import Navigation from './src/navigation/Navigation';
 import { useFonts, Knewave_400Regular } from '@expo-google-fonts/knewave';
 import { EagleLake_400Regular } from '@expo-google-fonts/eagle-lake';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+
+import { SecureStoreSave, SecureStoreRead, storeData, getData } from './components/SecureStore';
 
 async function registerForPushNotificationsAsync() {
   let token;
@@ -32,9 +35,35 @@ async function registerForPushNotificationsAsync() {
   return token.data;
 }
 
-export default function App() {
+const requestUserPermission = async () => {
+  
+  await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE, {
+    title: 'Storage Permission',
+    message: 'App needs access to your storage',
+    buttonNeutral: 'Ask Me Later',
+    buttonNegative: 'Cancel',
+    buttonPositive: 'OK',
+  });
+
+  await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, {
+    title: 'Storage Permission',
+    message: 'App needs access to your storage',
+    buttonNeutral: 'Ask Me Later',
+    buttonNegative: 'Cancel',
+    buttonPositive: 'OK',
+  });
+}
+
+const App = () => {
   const [user, setUser] = useState(null);
   const [expoPushToken, setExpoPushToken] = useState('');
+  const [theme, setTheme] = useState('light');
+
+  
+  const requestTheme = async () => {
+    await getData('theme', setTheme);
+  }
+  
 
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -46,6 +75,8 @@ export default function App() {
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    requestUserPermission();
+    requestTheme();
   }, []);
 
   let [fontsLoaded] = useFonts({
@@ -59,10 +90,12 @@ export default function App() {
 
   return (
       <NavigationContainer>
-        <Navigation user={user} setUser={setUser} tokenNotification={expoPushToken} />
+        <Navigation theme={theme} user={user} setUser={setUser} tokenNotification={expoPushToken} />
       </NavigationContainer>
   );
 }
+
+export default App;
 
 // import { useState, useEffect, useRef } from 'react';
 // import { Text, View, Button, Platform } from 'react-native';

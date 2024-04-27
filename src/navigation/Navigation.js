@@ -6,7 +6,7 @@ import { LoginScreen, RegistrationScreen } from '../screens';
 
 const Stack = createStackNavigator();
 
-export default function Navigation ({user, setUser, tokenNotification}) {
+export default function Navigation ({theme, user, setUser, tokenNotification}) {
   return (
     <Stack.Navigator>
       { user ? (

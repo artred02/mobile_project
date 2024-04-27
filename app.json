@@ -34,7 +34,8 @@
             "node_modules/@expo-google-fonts/knewave/Knewave_400Regular.ttf"
           ]
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "extra": {
       "eas": {
