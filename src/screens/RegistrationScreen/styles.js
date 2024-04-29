@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
@@ -80,8 +80,8 @@ export default StyleSheet.create({
     },
     pointPassword: {
         backgroundColor: '#2c3e50',
-        height: 50,
-        width: 50,
+        height: (Platform.OS === 'ios') ? 50 : 40,
+        width: (Platform.OS === 'ios') ? 50 : 40,
         color: 'white',
         textAlign: 'center',
         lineHeight: 55,
@@ -106,9 +106,9 @@ export default StyleSheet.create({
     },
     buttonReset: {
         backgroundColor: '#e74c3c',
-        width: 50,
+        height: (Platform.OS === 'ios') ? 50 : 40,
+        width: (Platform.OS === 'ios') ? 50 : 40,
         marginLeft: 10,
-        height: 48,
         borderRadius: 30,
         overflow: 'hidden',
         alignItems: "center",
