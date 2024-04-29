@@ -11,7 +11,7 @@
         const [confirmPassword, setConfirmPassword] = useState('')
         const [compt, setCompt] = useState(0)
         const [passlist, setPasslist] = useState([])
-        const [point1, setPoint1] = useState("")
+        const [point1, setPoint1] = useState("*")
         const [point2, setPoint2] = useState("")
         const [point3, setPoint3] = useState("")
         const [point4, setPoint4] = useState("")
@@ -35,7 +35,7 @@
         }
         const passwordmaking = () => {
             if (passlist.length === 6) {
-                let password = passlist.join('')
+                let password = passlist
                 setPassword(password)
                 console.log('Mot de passe ok : ', password)
             }
@@ -75,6 +75,7 @@
         useEffect(() => {
             console.log(passlist.length)
             if (passlist.length === 1) {
+                console.log('passlist')
                 setPoint1("•")
             }
             if (passlist.length === 2) {
@@ -92,11 +93,17 @@
             if (passlist.length === 6) {
                 setPoint6("•")
             }
+            passwordmaking()
 
         },[passlist])
         
         useEffect(() => {
-            setRandomlist(randomNum())},[])
+            setRandomlist(randomNum())
+        }, [])
+
+        function passwordFunc(new_char) {
+            setPasslist(passlist + '' + new_char.toString())
+        }
         
         
         return (
@@ -132,47 +139,47 @@
                     />
                     <View style={styles.viewPointPassword}>
                         <Text style={styles.pointPassword}>{point1}</Text>                    
-                        <Text style={styles.pointPassword}>{point2}</Text>                    
-                        <Text style={styles.pointPassword}>{point3}</Text>                    
-                        <Text style={styles.pointPassword}>{point4}</Text>                    
-                        <Text style={styles.pointPassword}>{point5}</Text>                    
-                        <Text style={styles.pointPassword}>{point6}</Text>                    
+                        <Text style={styles.pointPassword}>{point2}</Text>
+                        <Text style={styles.pointPassword}>{point3}</Text>
+                        <Text style={styles.pointPassword}>{point4}</Text>
+                        <Text style={styles.pointPassword}>{point5}</Text>
+                        <Text style={styles.pointPassword}>{point6}</Text>
                     </View>
                     <View style={styles.password}>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[0]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[0])}}>
                             <Text style={styles.buttonNumber}>{randomList_[0]}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[1]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[1])}}>
                             <Text style={styles.buttonNumber}>{randomList_[1]}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[2]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[2])}}>
                             <Text style={styles.buttonNumber}>{randomList_[2]}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.password}>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[3]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[3])}}>
                             <Text style={styles.buttonNumber}>{randomList_[3]}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[4]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[4])}}>
                             <Text style={styles.buttonNumber}>{randomList_[4]}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[5]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[5])}}>
                             <Text style={styles.buttonNumber}>{randomList_[5]}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.password}>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[6]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[6])}}>
                             <Text style={styles.buttonNumber}>{randomList_[6]}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[7]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[7])}}>
                             <Text style={styles.buttonNumber}>{randomList_[7]}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[8]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[8])}}>
                             <Text style={styles.buttonNumber}>{randomList_[8]}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.passwordmiddle}>
-                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{setPasslist(passlist + randomList_[9]);passwordmaking()}}>
+                        <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[9])}}>
                             <Text style={styles.buttonNumber}>{randomList_[9]}</Text>
                         </TouchableOpacity>
                         

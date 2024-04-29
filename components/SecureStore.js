@@ -23,7 +23,8 @@ const storeData = async (key, value, setValue) => {
     }
 };
 
-const getData = async (key, setValue) => {
+const getData = async (key, setValue) => {  
+  
     try {
       const value = await AsyncStorage.getItem(key);
       if (value !== null) {

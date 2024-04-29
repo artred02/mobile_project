@@ -99,10 +99,7 @@ export default StyleSheet.create({
     viewPointPassword: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 5,
-        marginBottom: 5,
+        margin: 5,
     },
     
 })
