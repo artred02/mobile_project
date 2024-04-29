@@ -11,14 +11,13 @@ export default StyleSheet.create({
         width: 90,
         alignSelf: "center",
         margin:10,
-        marginTop: 100,
+        marginTop: 40,
     },
     nameapp:{
         color: '#fff',
         fontSize: 30,
         fontFamily: 'knewave',
         textAlign: 'center',
-        marginBottom: 50,
     },
     input: {
         height: 48,
@@ -59,5 +58,51 @@ export default StyleSheet.create({
         color: "#2ecc71",
         fontWeight: "bold",
         fontSize: 16
-    }
+    },
+    password: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 80,
+        marginRight: 80,
+        marginTop: 5,
+        marginBottom: 5,
+        
+    },
+    buttonNumber: {
+        backgroundColor: '#2c3e50',
+        height: 60,
+        width: 60,
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 25,
+        lineHeight: 60,
+    },
+    passwordmiddle: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 165,
+        marginRight: 165,
+        marginTop: 5,
+    },
+    pointPassword: {
+        backgroundColor: '#2c3e50',
+        height: 60,
+        width: 60,
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 25,
+        lineHeight: 60,
+        borderRadius: 30,
+        lineHeight: -60,
+        fontSize: 55,
+    },
+    viewPointPassword: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 5,
+        marginBottom: 5,
+    },
+    
 })
