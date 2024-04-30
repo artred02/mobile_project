@@ -90,7 +90,7 @@ const App = () => {
 
   return (
       <NavigationContainer>
-        <Navigation theme={theme} user={user} setUser={setUser} tokenNotification={expoPushToken} />
+        <Navigation theme={theme} setTheme={setTheme} user={user} setUser={setUser} tokenNotification={expoPushToken} />
       </NavigationContainer>
   );
 }

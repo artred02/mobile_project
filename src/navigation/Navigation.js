@@ -6,7 +6,7 @@ import { LoginScreen, RegistrationScreen } from '../screens';
 
 const Stack = createStackNavigator();
 
-export default function Navigation ({theme, user, setUser, tokenNotification}) {
+export default function Navigation ({theme, setTheme, user, setUser, tokenNotification}) {
   return (
     <Stack.Navigator>
       { user ? (
@@ -19,7 +19,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
           },
           headerLeft: null,
         }}>
-          {props => <HomeScreen {...props} extraData={user} setUser={setUser} tokenNotification={tokenNotification} />}
+          {props => <HomeScreen {...props} theme={theme} extraData={user} setUser={setUser} tokenNotification={tokenNotification} />}
         </Stack.Screen>
         <Stack.Screen
           name="Settings"
@@ -29,7 +29,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
             },
             headerLeft: null,
           }}>
-          {props => <SettingsScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <SettingsScreen {...props} theme={theme} setTheme={setTheme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="Chatbot"
@@ -39,7 +39,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
             },
             headerLeft: null,
         }}>
-          {props => <ChatScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <ChatScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="Confidentialite"
@@ -49,7 +49,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
             },
             headerLeft: null,
         }}>
-          {props => <ConfidentialiteScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <ConfidentialiteScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="Account"
@@ -59,7 +59,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
             },
             headerLeft: null,
         }}>
-          {props => <AccountScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <AccountScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="AddAccount"
@@ -69,7 +69,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
             },
             headerLeft: null,
         }}>
-          {props => <AddAccountScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <AddAccountScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
           name="Transfers"
@@ -79,7 +79,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
             },
             headerLeft: null,
         }}>
-          {props => <TransfersScreen {...props} extraData={user} setUser={setUser} />}
+          {props => <TransfersScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen
             name="Rib"
@@ -89,7 +89,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
                 },
                 headerLeft: null,
             }}>
-            {props => <RibScreen {...props} extraData={user} setUser={setUser} />}
+            {props => <RibScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         </>
       ) : (
@@ -101,7 +101,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
                 height: 0,
               },
           }}>
-            {props => <LoginScreen {...props} setUser={setUser} />}
+            {props => <LoginScreen {...props} theme={theme} setUser={setUser} />}
           </Stack.Screen>
           <Stack.Screen
             name="Registration"
@@ -110,7 +110,7 @@ export default function Navigation ({theme, user, setUser, tokenNotification}) {
                 height: 0,
               },
           }}>
-            {props => <RegistrationScreen {...props} setUser={setUser}/>}
+            {props => <RegistrationScreen {...props} theme={theme} setUser={setUser}/>}
           </Stack.Screen>
         </>
       )}

@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { AddAccount } from "../../../components/Api";
 import NavBottomBar from "../../../components/NavBottomBar";
 import Header from "../../../components/Header";
-import styles from "./styles";
+import { styles, Colors } from './styles';
 import Button from "../../../components/Button";
 
 export default function AddAccountScreen(props) {
@@ -22,7 +22,7 @@ export default function AddAccountScreen(props) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
             >
-                <Header title={"Nouveau Compte"} navigation={props.navigation} setUser={props.setUser} />
+                <Header title={"Nouveau Compte"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
                 <TextInput
                     style={styles.input}
                     placeholder='Nom du compte'
@@ -44,7 +44,7 @@ export default function AddAccountScreen(props) {
                 <Button style={styles.buttonAdd} title={"Créer"} onPress={() => addAccount()} />
             </KeyboardAwareScrollView>
         </View>
-        <NavBottomBar navigation={props.navigation} />
+        <NavBottomBar navigation={props.navigation} theme={props.theme} />
         
         </>
     )

@@ -5,10 +5,10 @@ import { faCopy, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
-
-import styles from './styles';
+import { styles, Colors } from './styles';
 
 export default function RibScreen(props) {
+    const colors = Colors(props.theme);
 
     const copyToClipboardIban = () => {
         Clipboard.setString(props.route.params.account.iban);
@@ -49,7 +49,7 @@ export default function RibScreen(props) {
     return (
         <View style={styles.container}>
             <View style={styles.containerView}>
-                <Header title={"Partager mon RIB"} navigation={props.navigation} setUser={props.setUser} />
+                <Header title={"Partager mon RIB"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
             </View>
             <View style={styles.containerInfo}>
                 <Text style={styles.textTitle}>Mes coordonnées bancaires</Text>

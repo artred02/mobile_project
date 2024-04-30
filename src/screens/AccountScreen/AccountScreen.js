@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './styles';
+import { styles, Colors } from './styles';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -17,7 +17,7 @@ export default function AccountScreen(props) {
     const [modalBalanceVisible, setModalBalanceVisible] = useState(false);
     const [accountName, setAccountName] = useState(props.route.params.account.name);
     const [balance, setBalance] = useState(props.route.params.account.balance);
-    console.log(props.route.params)
+    const colors = Colors(props.theme);
     
     const addToBalance = () => {
         UpdateAccount({ account: {...account, balance: parseFloat(balance)}, setModalVisible: setModalBalanceVisible, navigation: props.navigation });
@@ -68,12 +68,12 @@ export default function AccountScreen(props) {
 
     return (
         <>
-        <View style={styles.container}>
+        <View style={[styles.container, colors.container]}>
             <KeyboardAwareScrollView
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
-                <Header title={"Compte"} navigation={props.navigation} setUser={props.setUser} />
+                <Header title={"Compte"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
                 <View style={styles.card}>
                     <TouchableOpacity onPress={() => setModalNameVisible(true)}>
                         <Text style={styles.accountsTitle} >{account.name}</Text>
@@ -99,7 +99,7 @@ export default function AccountScreen(props) {
                 {Modale(modalNameVisible, setModalNameVisible, nameModalContent)}
             </KeyboardAwareScrollView>
         </View>
-        <NavBottomBar navigation={props.navigation} />
+        <NavBottomBar navigation={props.navigation} theme={props.theme} />
         </>
     );
 }

@@ -1,7 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 
-export default StyleSheet.create({
+const Colors = (theme) => {
+    if(theme === 'dark'){
+        return styles.dark;
+    }
+    return styles.light;
+}
+
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
@@ -107,4 +114,6 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     
-})
+});
+
+export { styles, Colors };

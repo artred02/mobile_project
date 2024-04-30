@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config'
-import styles from './styles';
+import { styles, Colors } from './styles';
 import Password from '../../../components/Password';
-export default function RegistrationScreen({navigation, setUser}) {
+export default function RegistrationScreen({navigation, setUser, theme}) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const colors = Colors(theme);
 
     const onFooterLinkPress = () => {
         navigation.navigate('Login')

@@ -1,7 +1,23 @@
 import { StyleSheet } from 'react-native';
 
+const Colors = (theme) => {
+    if(theme === 'dark'){
+        return styles.dark;
+    }
+    return styles.light;
+}
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#34495e",
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#f5f5f5",
+        },
+    },
     container: {
         flex: 1,
         alignItems: 'center',
@@ -172,3 +188,5 @@ export default StyleSheet.create({
         fontWeight:'bold',
     },
 });
+
+export { styles, Colors };

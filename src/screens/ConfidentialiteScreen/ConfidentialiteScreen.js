@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { firebase } from '../../firebase/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
+import { styles, Colors } from './styles';
 import { faPen } from '@fortawesome/free-solid-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Modale from '../../../components/Modale';
@@ -174,7 +174,7 @@ export default function ConfidentialiteScreen(props) {
                 </KeyboardAwareScrollView>
             </View>
             <View style={styles.navbar}>
-                <NavBottomBar navigation={props.navigation} />
+                <NavBottomBar navigation={props.navigation} theme={props.theme} />
             </View>
         </>
     )
