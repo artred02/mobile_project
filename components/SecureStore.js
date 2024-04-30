@@ -16,7 +16,8 @@ const SecureStoreRead = async (key, setValue) => {
 const storeData = async (key, value, setValue) => {
     try {
       await AsyncStorage.setItem(key, value).then(() => {
-        setValue(value);
+        if(setValue !== undefined)
+          setValue(value);
       });
     } catch (e) {
         console.log(e);
