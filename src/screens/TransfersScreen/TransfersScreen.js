@@ -4,18 +4,18 @@ import { AddBeneficiary, GetBeneficiaries } from '../../../components/Api';
 import NavBottomBar from '../../../components/NavBottomBar';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
-import styles_global from '../../../assets/styles_global';
-import styles from './styles';
 import AccountScreen from '../AccountScreen/AccountScreen';
+import { styles, Colors } from './styles';
 
 export default function TransfersScreen(props) {
     const [iban, setIban] = useState('');
     const [bic, setBic] = useState('');
     const [accountName, setAccountName] = useState('');
+    const colors = Colors(props.theme);
     const [beneficiaries, setBeneficiaries] = useState([]);
 
     useEffect(() => {
-        console.log(props);
+        console.log(props.theme);
     }, []);
 
     const addAccountOnTransfers = (accountName, iban, bic) => {
@@ -28,11 +28,11 @@ export default function TransfersScreen(props) {
 
     return (
         <>
-        <View style={styles.container}>
-            <View style={styles.containerView}>
-                <Header title={"Transferts"} navigation={props.navigation} setUser={props.setUser} />
+        <View style={[styles.container, colors.container]}>
+            <View style={[styles.containerView, colors.containerView]}>
+                <Header title={"Transferts"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, colors.input]}
                     placeholder='Nom du compte'
                     onChangeText={(text) => setAccountName(text)}
                     value={iban}
@@ -40,7 +40,7 @@ export default function TransfersScreen(props) {
                     autoCapitalize="none"
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, colors.input]}
                     placeholder='IBAN'
                     onChangeText={(text) => setIban(text)}
                     value={iban}
@@ -48,17 +48,17 @@ export default function TransfersScreen(props) {
                     autoCapitalize="none"
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, colors.input]}
                     placeholder='BIC'
                     onChangeText={(text) => setBic(text)}
                     value={iban}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <Button title="Ajouter" onPress={() => addAccountOnTransfers(accountName, iban, bic)} style={styles.btnAddBalance} textStyle={styles.textStyle} />
+                <Button title="Ajouter" onPress={() => addAccountOnTransfers(accountName, iban, bic)} style={[styles.btnAddBalance, colors.btnAddBalance]} textStyle={[styles.textStyle, colors.textStyle]} />
             </View>
         </View>
-        <NavBottomBar navigation={props.navigation} />
+        <NavBottomBar navigation={props.navigation} theme={props.theme} />
         </>
     )
 }

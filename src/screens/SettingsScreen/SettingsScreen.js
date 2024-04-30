@@ -2,11 +2,14 @@ import React from 'react'
 import { Text, TouchableOpacity, View,Alert } from 'react-native'
 import { firebase } from '../../firebase/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faGear, faLightbulb, faTrash } from '@fortawesome/free-solid-svg-icons/';
 import NavBottomBar from '../../../components/NavBottomBar';
+import { storeData } from '../../../components/SecureStore';
+import { styles, Colors } from './styles';
+
 export default function SettingsScreen(props) {
+    const colors = Colors(props.theme);
 
     const confidentialite = () => {
         props.navigation.navigate('Confidentialite')
@@ -50,6 +53,30 @@ export default function SettingsScreen(props) {
     );
     };
 
+    const ThemeSelect = () => {
+        // Affichage d'une alerte avec une lise de choix
+        Alert.alert(
+            "Choix du thème",
+            "Choisissez le thème de l'application",
+            [
+                {
+                    text: "Dark mode",
+                    onPress: () => {
+                        storeData('theme', 'dark', props.setTheme);
+                        props.setTheme('dark');
+                    }
+                },
+                {
+                    text: "Light mode",
+                    onPress: () => {
+                        storeData('theme', 'light', props.setTheme);
+                    }
+                }
+            ],
+            { cancelable: false }
+        );
+    }
+
     return (
         <>
         <View style={styles.container}>
@@ -77,7 +104,7 @@ export default function SettingsScreen(props) {
                 </View>
                 <View style={styles.body}>
                     <Text style={styles.title}>Thème</Text>
-                    <TouchableOpacity onPress={confidentialite}>
+                    <TouchableOpacity onPress={ThemeSelect}>
                         <View style={styles.information}>
                             <FontAwesomeIcon icon={faLightbulb} style={styles.Icon} size={25}/>
                             <Text style={styles.bodyTxt}>Passer en Dark mode</Text>
@@ -87,7 +114,7 @@ export default function SettingsScreen(props) {
             </KeyboardAwareScrollView>
         </View>
         <View style={styles.navbar}>
-            <NavBottomBar navigation={props.navigation} />
+            <NavBottomBar navigation={props.navigation} theme={props.theme} />
         </View>
         </>
     )

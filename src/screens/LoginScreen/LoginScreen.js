@@ -2,16 +2,17 @@ import React, { useState,useEffect } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config';
-import styles from './styles';
+import { styles, Colors } from './styles';
 import Modale from '../../../components/Modale';
 import Button from '../../../components/Button';
 import Password from '../../../components/Password';
-export default function LoginScreen({ navigation, setUser }) {
+export default function LoginScreen({ navigation, setUser, theme }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [ModaleVisiblePass, setModaleVisiblePass] = useState(false);
     const [emailReset, setEmailReset] = useState('');
+    const colors = Colors(theme);
 
     const Passcontent = (
         <View id='name' style={styles.centeredView}>

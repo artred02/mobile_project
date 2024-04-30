@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View, FlatList, Pressable, RefreshControl } fro
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { GetAccountsList, SetTokenNotification } from '../../../components/Api'
-import styles from './styles';
+import { styles, Colors } from './styles';
 import Header from '../../../components/Header';
 import NavBottomBar from '../../../components/NavBottomBar'
 
@@ -12,6 +12,7 @@ import * as SecureStore from 'expo-secure-store';
 const HomeScreen = (props) => {
     const [accounts, setAccounts] = useState([]);
     const [refreshing, setRefreshing] = React.useState(false);
+    const colors = Colors(props.theme);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -57,9 +58,9 @@ const HomeScreen = (props) => {
 
     return (
         <>
-        <View style={styles.container}>
+        <View style={[styles.container, colors.container]}>
             <View style={styles.containerView}>
-                <Header title={"Accounts"} navigation={props.navigation} setUser={props.setUser} />
+                <Header title={"Accounts"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
                 {/* <Button title={"Accounts"} onPress={() => reloadList() } /> */}
                 <FlatList
                     data={accounts}
@@ -81,7 +82,7 @@ const HomeScreen = (props) => {
                 />
             </View>
         </View>
-        <NavBottomBar navigation={props.navigation} />
+        <NavBottomBar navigation={props.navigation} theme={props.theme} />
         </>
     )
 }

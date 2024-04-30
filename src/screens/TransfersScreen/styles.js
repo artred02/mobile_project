@@ -1,10 +1,26 @@
 import { StyleSheet } from 'react-native';
 
 
-export default StyleSheet.create({
+const Colors = (theme) => {
+    if(theme === 'dark'){
+        return styles.dark;
+    }
+    return styles.light;
+}
+
+const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#34495e",
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#ecf0f1",
+        },
+    },
     container: {
         flex: 1,
-        backgroundColor: "#34495e",
     },
     userCard:{
         backgroundColor:'#2c3e50',
@@ -28,3 +44,5 @@ export default StyleSheet.create({
         width: '100%',
     },
 });
+
+export { styles, Colors };

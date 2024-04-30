@@ -1,27 +1,30 @@
 import { StyleSheet } from 'react-native';
 
+const Colors = (theme) => {
+    if(theme === 'dark'){
+        return styles.dark;
+    }
+    return styles.light;
+}
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#34495e",
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#f5f5f5",
+        },
+    },
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#34495e",
     },
 
     containerView: {
         width: '100%',
-    },
-
-    input: {
-        height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
     },
 
     accountCard:{
@@ -66,6 +69,6 @@ export default StyleSheet.create({
         fontWeight: '600',
         padding: 20,
     },
-
-    
 })
+
+export { styles, Colors };
