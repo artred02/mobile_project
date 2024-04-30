@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config';
@@ -33,6 +33,13 @@ export default function LoginScreen({ navigation, setUser }) {
     const onFooterLinkPress = () => {
         navigation.navigate('Registration');
     };
+
+    useEffect(()=>{
+        if (password.length === 6 && email) {
+            let password = password
+            onLoginPress()
+        }
+    },[password])
 
     const resetPassword = (email) => {
         const auth = firebase.auth();
