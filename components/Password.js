@@ -67,7 +67,7 @@ export default function Password({setPassword}) {
     }
     return(
     <>
-    <Text style={styles.passwordTitle}>Créer votre mot de passe</Text>
+    <Text style={styles.passwordTitle}>Entrer votre mot de passe</Text>
             <View style={styles.viewPointPassword}>
                 <Text style={styles.pointPassword}>{point1}</Text>                    
                 <Text style={styles.pointPassword}>{point2}</Text>
