@@ -12,10 +12,23 @@ const styles = StyleSheet.create({
         container: {
             backgroundColor: "#34495e",
         },
+        accountCard:{
+            backgroundColor:'#2c3e50',
+        },
+        buttonIcon:{
+            color:'#2ecc71',
+            
+        },
     },
     light: {
         container: {
-            backgroundColor: "#f5f5f5",
+            backgroundColor: "#dcdde1",
+        },
+        accountCard:{
+            backgroundColor:'#95a5a6',
+        },
+        buttonIcon:{
+            color:'#fff',
         },
     },
     container: {
@@ -28,7 +41,6 @@ const styles = StyleSheet.create({
     },
 
     accountCard:{
-        backgroundColor:'#2c3e50',
         height:75,
         margin:10,
         padding:10,
@@ -40,7 +52,6 @@ const styles = StyleSheet.create({
     },
 
     buttonIcon:{
-        color:'#2ecc71',
         margin:15,
     },
 

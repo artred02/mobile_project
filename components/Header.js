@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     light: {
         header: {
-            backgroundColor: "#ecf0f1",
+            backgroundColor: "#dcdde1",
         },
         headerTxt: {
             color: 'black',

@@ -39,10 +39,10 @@ const HomeScreen = (props) => {
     }
 
     const Item = ({ account }) => (
-        <View style={styles.accountCard}>
+        <View style={[styles.accountCard, colors.accountCard]}>
             <Text style={styles.title}>{account.name}</Text>
             <Text style={styles.title}>{account.balance} €</Text>
-            <FontAwesomeIcon icon={faArrowRight} style={styles.buttonIcon} size={25}/>
+            <FontAwesomeIcon icon={faArrowRight} style={[styles.buttonIcon, colors.buttonIcon]} size={25}/>
         </View>
     );
 
