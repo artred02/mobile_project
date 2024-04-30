@@ -6,6 +6,7 @@ import { styles, Colors } from './styles';
 import Modale from '../../../components/Modale';
 import Button from '../../../components/Button';
 import Password from '../../../components/Password';
+import { getData, storeData } from '../../../components/SecureStore';
 export default function LoginScreen({ navigation, setUser, theme }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,6 +37,7 @@ export default function LoginScreen({ navigation, setUser, theme }) {
     };
 
     useEffect(()=>{
+        getData('userMail', setEmail);
         if (password.length === 6 && email) {
             let password = password
             onLoginPress()
@@ -68,6 +70,7 @@ export default function LoginScreen({ navigation, setUser, theme }) {
             const user = firestoreDocument.data();
             user.currentPassword = password;
             setUser(user);
+            storeData('userMail', user.email);
             navigation.navigate('Home', { user: user });
         } catch (error) {
             setError(error.message);
