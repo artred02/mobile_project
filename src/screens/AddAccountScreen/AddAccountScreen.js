@@ -10,6 +10,7 @@ import Button from "../../../components/Button";
 export default function AddAccountScreen(props) {
     const [accountName, setAccountName] = React.useState('')
     const [balance, setBalance] = React.useState('')
+    const colors = Colors(props.theme);
 
     const addAccount = () => {
         AddAccount({ account: {name: accountName, balance: parseFloat(balance), userId: props.extraData.id }, navigation: props.navigation });
@@ -18,7 +19,7 @@ export default function AddAccountScreen(props) {
     return (
         // formulaire création de compte
         <>
-        <View style={styles.container}>
+        <View style={[styles.container,colors.container]}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
             >
@@ -41,7 +42,7 @@ export default function AddAccountScreen(props) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <Button style={styles.buttonAdd} title={"Créer"} onPress={() => addAccount()} />
+                <Button style={[styles.buttonAdd,colors.buttonAdd]} title={"Créer"} onPress={() => addAccount()} />
             </KeyboardAwareScrollView>
         </View>
         <NavBottomBar navigation={props.navigation} theme={props.theme} />

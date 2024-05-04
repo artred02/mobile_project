@@ -25,7 +25,7 @@ export default function ConfidentialiteScreen(props) {
     const [ModaleVisiblemail, setModaleVisiblemail] = useState(false);
     const [ModaleVisiblePassword, setModaleVisiblePassword] = useState(false);
     const [newFullName, setNewFullName] = useState(props.extraData.fullName);
-    
+    const colors = Colors(props.theme);
     const changeEmail = (currentPassword, newEmail) => {
         reauthenticate(currentPassword).then(() => {
             var user = firebase.auth().currentUser;
@@ -135,40 +135,38 @@ export default function ConfidentialiteScreen(props) {
         </View>
     );
     
-
-
     return (
         <>
-            <View style={styles.container}>
+            <View style={[styles.container, colors.container]}>
                 <KeyboardAwareScrollView
                     style={styles.scrollView}
                     keyboardShouldPersistTaps="always"
                 >
                     <View style={styles.header}>
-                        <Text style={styles.headerTxt}>Confidentialité</Text>
+                        <Text style={[styles.headerTxt, colors.headerTxt]}>Confidentialité</Text>
                     </View>
                     <TouchableOpacity onPress={() => setModaleVisibleName(true)}>
-                        <View style={styles.information}>
+                        <View style={[styles.information, colors.information]}>
                             <Text style={styles.title}>Nom d'utilisateur :</Text>
                             <Text style={styles.bodyText}>{newFullName}</Text>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15} />
-                            {Modale(ModaleVisibleName, setModaleVisibleName, nameModalContent)}
+                            {Modale(ModaleVisibleName, setModaleVisibleName, nameModalContent,props.theme)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setModaleVisiblemail(true)}>
-                        <View style={styles.information}>
+                        <View style={[styles.information, colors.information]}>
                             <Text style={styles.title}>Email :</Text>
                             <Text style={styles.bodyText}>{email}</Text>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15} />
-                            {Modale(ModaleVisiblemail, setModaleVisiblemail, mailModalContent)}
+                            {Modale(ModaleVisiblemail, setModaleVisiblemail, mailModalContent,props.theme)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setModaleVisiblePassword(true)}>
-                        <View style={styles.information}>
+                        <View style={[styles.information, colors.information]}>
                             <Text style={styles.title}>Mot de passe :</Text>
                             <Text style={styles.bodyText}>*********</Text>
                             <FontAwesomeIcon icon={faPen} style={styles.buttonIcon} size={15} />
-                            {Modale(ModaleVisiblePassword, setModaleVisiblePassword, passwordModalContent)}
+                            {Modale(ModaleVisiblePassword, setModaleVisiblePassword, passwordModalContent,props.theme)}
                         </View>
                     </TouchableOpacity>
                 </KeyboardAwareScrollView>

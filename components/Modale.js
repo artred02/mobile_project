@@ -3,7 +3,9 @@ import { Modal, Pressable, Text, View, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-export default function Modale (modalVisible, setModalVisible, modalContent) {
+export default function Modale (modalVisible, setModalVisible, modalContent,theme) {
+    const colors = Colors(theme);
+    
     return (
         <Modal
             animationType="slide"
@@ -14,7 +16,7 @@ export default function Modale (modalVisible, setModalVisible, modalContent) {
             }}
         >
             <View style={styles.centeredView}>
-                <View style={styles.modalView}>
+                <View style={[styles.modalView,colors.modalView]}>
                     <Pressable
                     style={styles.fontAwesomeIcon}
                         onPress={() => setModalVisible(!modalVisible)}
@@ -27,8 +29,24 @@ export default function Modale (modalVisible, setModalVisible, modalContent) {
         </Modal>
     )
 }
-
+const Colors = (theme) => {
+    if(theme === 'dark'){
+        return styles.dark;
+    }
+    return styles.light;
+}
 const styles = StyleSheet.create({
+    dark: {
+        modalView: {
+            backgroundColor: '#34495e',
+        },
+    },
+    light: {
+        modalView: {
+            backgroundColor: '#95a5a6',
+ 
+        },
+    },
     centeredView: {
       flex: 1,
       justifyContent: 'center',
@@ -37,7 +55,6 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: '#2c3e50',
       borderRadius: 20,
       padding: 35,
       alignItems: 'center',

@@ -9,10 +9,31 @@ const Colors = (theme) => {
 }
 
 const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#2c3e50",
+        },
+        footerText: {
+            color: '#fff',
+        },
+        nameapp:{
+            color: '#fff',
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#dcdde1",
+        },
+        footerText: {
+            color: '#000',
+        },
+        nameapp:{
+            color: '#000',
+        },
+    },
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#34495e"
     },
     logo: {
         height: 120,
@@ -22,7 +43,6 @@ const styles = StyleSheet.create({
         marginTop: 100
     },
     nameapp:{
-        color: '#fff',
         fontSize: 30,
         fontFamily: 'eagleLake',
         textAlign: 'center',
@@ -60,7 +80,6 @@ const styles = StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        color: '#fff'
     },
     footerLink: {
         color: "#2ecc71",

@@ -77,7 +77,7 @@ export default function LoginScreen({ navigation, setUser, theme }) {
         }
     };
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,colors.container]}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
@@ -86,7 +86,7 @@ export default function LoginScreen({ navigation, setUser, theme }) {
                     source={require('./../../../assets/logo.png')}
                 />
 
-                <Text style={styles.nameapp} >CoinKeeper</Text>
+                <Text style={[styles.nameapp,colors.nameapp]} >CoinKeeper</Text>
 
                 {error ? <Text style={styles.error} >{error}</Text> : null}
                 <TextInput
@@ -98,17 +98,17 @@ export default function LoginScreen({ navigation, setUser, theme }) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <Password setPassword={setPassword}/>
+                <Password setPassword={setPassword} theme={theme}/>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+                    <Text style={[styles.footerText,colors.footerText]}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Forgot your password ? <Text onPress={() => setModaleVisiblePass(true)} style={styles.footerLink}>Reset Password</Text></Text>
+                    <Text style={[styles.footerText,colors.footerText]}>Forgot your password ? <Text onPress={() => setModaleVisiblePass(true)} style={styles.footerLink}>Reset Password</Text></Text>
                     {Modale(ModaleVisiblePass, setModaleVisiblePass,Passcontent)}
                 </View>
             </KeyboardAwareScrollView>

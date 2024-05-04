@@ -9,11 +9,43 @@ const Colors = (theme) => {
 }
 
 const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#34495e",
+        },
+        accountCard:{
+            backgroundColor:'#2c3e50',
+        },
+        buttonIcon:{
+            color:'#2ecc71',  
+        },
+        information:{
+            backgroundColor:'#2c3e50',
+        },
+        headerTxt:{
+            color:'#fff',
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#dcdde1",
+        },
+        accountCard:{
+            backgroundColor:'#95a5a6',
+        },
+        buttonIcon:{
+            color:'#fff',
+        },
+        information:{
+            backgroundColor:'#95a5a6',
+        },
+        headerTxt:{
+            color:'black',
+        },
+    },
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#34495e",
-
     },
     header:{
         justifyContent:'flex-start',
@@ -23,7 +55,6 @@ const styles = StyleSheet.create({
         marginBottom:30
     },
     headerTxt:{
-        color:'#fff',
         fontSize:30,
         margin:10,
         marginLeft:20,
@@ -36,7 +67,6 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     information:{
-        backgroundColor:'#2c3e50',
         borderRadius: 10,
         margin: 10,
         padding: 10,
@@ -107,7 +137,6 @@ const styles = StyleSheet.create({
         paddingTop:10,
 
     },
-    
 });
 
 export { styles, Colors };

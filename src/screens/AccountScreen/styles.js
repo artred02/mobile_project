@@ -12,10 +12,28 @@ const styles = StyleSheet.create({
         container: {
             backgroundColor: "#34495e",
         },
+        TitleSection:{
+            color:'#fff',
+        },
+        card: {
+            backgroundColor: '#2c3e50',
+        },
+        ibanPdf:{
+            backgroundColor:'#2c3e50',
+        },
     },
     light: {
         container: {
-            backgroundColor: "#f5f5f5",
+            backgroundColor: "#dcdde1",
+        },
+        TitleSection:{
+            color:'#000',
+        },
+        card: {
+            backgroundColor: '#95a5a6',
+        },
+        ibanPdf:{
+            backgroundColor:'#95a5a6',
         },
     },
     container: {
@@ -130,7 +148,6 @@ const styles = StyleSheet.create({
         marginTop:20,
     },
     card : {
-        backgroundColor: '#2c3e50',
         height: 200,
         borderRadius: 30,
         margin: 20,
@@ -161,7 +178,6 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     ibanPdf:{
-        backgroundColor:'#2c3e50',
         width:'50%',
         height:'20%',
         margin:20,
@@ -182,7 +198,6 @@ const styles = StyleSheet.create({
         color:'#fff',
     },
     TitleSection:{
-        color:'#fff',
         fontSize:20,
         marginLeft:30,
         fontWeight:'bold',

@@ -74,7 +74,7 @@ export default function AccountScreen(props) {
                 keyboardShouldPersistTaps="always"
             >
                 <Header title={"Compte"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
-                <View style={styles.card}>
+                <View style={[styles.card,colors.card]}>
                     <TouchableOpacity onPress={() => setModalNameVisible(true)}>
                         <Text style={styles.accountsTitle} >{account.name}</Text>
                     </TouchableOpacity>
@@ -87,8 +87,8 @@ export default function AccountScreen(props) {
                         <Text style={styles.lastOperationsText}>Aucune opération</Text>
                     </View>                    
                 </View>
-                <Text style={styles.TitleSection}>Raccourcis</Text>
-                <View style={styles.ibanPdf}>
+                <Text style={[styles.TitleSection,colors.TitleSection]}>Raccourcis</Text>
+                <View style={[styles.ibanPdf,colors.ibanPdf]}>
                     <TouchableOpacity onPress={RibNavigation}>
                         <FontAwesomeIcon icon={faIdCard} size={30} style={styles.fontAwesomeIcon} color='white'/>
                         <Text style={styles.ibanPdfText}>Partager mon RIB</Text>

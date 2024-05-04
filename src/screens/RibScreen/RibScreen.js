@@ -47,25 +47,25 @@ export default function RibScreen(props) {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,colors.container]}>
             <View style={styles.containerView}>
                 <Header title={"Partager mon RIB"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
             </View>
             <View style={styles.containerInfo}>
-                <Text style={styles.textTitle}>Mes coordonnées bancaires</Text>
-                <Text style={styles.depotAccount}>Compte de dépôt</Text>
-                <Text style={styles.infoAccount}>M. / Mme : {props.extraData.fullName}</Text>
+                <Text style={[styles.textTitle,colors.textTitle]}>Mes coordonnées bancaires</Text>
+                <Text style={[styles.depotAccount,colors.depotAccount]}>Compte de dépôt</Text>
+                <Text style={[styles.infoAccount,colors.infoAccount]}>M. / Mme : {props.extraData.fullName}</Text>
             </View>
             <View style={styles.ibanInfo}>
-                <Text style={styles.depotAccount}>IBAN</Text>
+                <Text style={[styles.depotAccount,colors.depotAccount]}>IBAN</Text>
                 <TouchableOpacity onPress={() =>  copyToClipboardIban()}>
-                    <FontAwesomeIcon icon={faCopy} size={20} style={styles.fontAwesomeIcon} color='white'/>
-                    <Text selectable={true} style={styles.infoAccount}>{props.route.params.account.iban}</Text>
+                    <FontAwesomeIcon icon={faCopy} size={20} style={[styles.fontAwesomeIcon,colors.fontAwesomeIcon]}/>
+                    <Text selectable={true} style={[styles.infoAccount,colors.infoAccount]}>{props.route.params.account.iban}</Text>
                 </TouchableOpacity>
-                <Text style={styles.depotAccount}>BIC / SWIFT</Text>
+                <Text style={[styles.depotAccount,colors.depotAccount]}>BIC / SWIFT</Text>
                 <TouchableOpacity onPress={() =>  copyToClipboardbic()}>
-                    <FontAwesomeIcon icon={faCopy} size={20} style={styles.fontAwesomeIcon} color='white'/>
-                    <Text selectable={true} style={styles.infoAccount}>{props.route.params.account.bic}</Text>
+                    <FontAwesomeIcon icon={faCopy} size={20} style={[styles.fontAwesomeIcon,colors.fontAwesomeIcon]}/>
+                    <Text selectable={true} style={[styles.infoAccount,colors.infoAccount]}>{props.route.params.account.bic}</Text>
                 </TouchableOpacity>
             </View>
             <View>

@@ -9,9 +9,45 @@ const Colors = (theme) => {
 }
 
 const styles = StyleSheet.create({
+    dark:{
+        container: {
+            backgroundColor: "#34495e",
+        },
+        textTitle: {
+            color: '#fff',
+        },
+        depotAccount: {
+            color: '#fff',
+        },
+        infoAccount: {
+            color: '#fff',
+        },
+        fontAwesomeIcon: {
+            color: '#fff',
+        },
+
+    
+    },
+    light:{
+        container: {
+            backgroundColor: "#dcdde1",
+        },
+        textTitle: {
+            color: '#000',
+        },
+        depotAccount: {
+            color: '#000',
+        },
+        infoAccount: {
+            color: '#000',
+        },
+        fontAwesomeIcon: {
+            color: '#000',
+        },
+    
+    },
     container: {
         flex: 1,
-        backgroundColor: "#34495e",
     },
     containerView: {
         width: '100%',
@@ -20,13 +56,11 @@ const styles = StyleSheet.create({
         margin: 20,
     },
     textTitle: {
-        color: 'white',
         fontSize: 25,
         marginBottom: 10,
         fontWeight: 'bold',
     },
     depotAccount: {
-        color: 'white',
         fontSize: 15,
         marginTop: 40,
         fontSize: 20,
@@ -34,7 +68,6 @@ const styles = StyleSheet.create({
 
     },
     infoAccount: {
-        color: 'white',
         fontSize: 15,
         marginTop: 10,
     },

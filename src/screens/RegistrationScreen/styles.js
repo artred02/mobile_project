@@ -8,10 +8,25 @@ const Colors = (theme) => {
 }
 
 const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: '#2c3e50',
+        },
+        footerText: {
+            color: '#fff',
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: '#dcdde1',
+        },
+        footerText: {
+            color: '#000',
+        },
+    },
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#34495e",
     },
     logo: {
         height: 120,

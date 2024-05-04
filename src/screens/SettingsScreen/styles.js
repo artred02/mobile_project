@@ -9,6 +9,34 @@ const Colors = (theme) => {
 }
 
 const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#34495e",
+        },
+        information:{
+            backgroundColor:'#2c3e50',
+        },
+        headerTxt:{
+            color:'#fff',
+        },
+        title:{
+            color:'#fff',
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#dcdde1",
+        },
+        information:{
+            backgroundColor:'#95a5a6',
+        },
+        headerTxt:{
+            color:'black',
+        },
+        title:{
+            color:'black',
+        },
+    },
     container: {
         flex: 1,
         alignItems: 'center',

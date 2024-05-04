@@ -43,7 +43,7 @@ export default function RegistrationScreen({navigation, setUser, theme}) {
     }
     
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,colors.container]}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
@@ -73,14 +73,14 @@ export default function RegistrationScreen({navigation, setUser, theme}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <Password setPassword={setPassword}/>
+                <Password setPassword={setPassword} theme={theme}/>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
                     <Text style={styles.buttonTitle}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
+                    <Text style={[styles.footerText,colors.footerText]}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>

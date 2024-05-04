@@ -79,35 +79,35 @@ export default function SettingsScreen(props) {
 
     return (
         <>
-        <View style={styles.container}>
+        <View style={[styles.container, colors.container]}>
             <KeyboardAwareScrollView
                 style={styles.scrollView}
                 keyboardShouldPersistTaps="always"
             >
                 <View style={styles.header}>
-                    <Text style={styles.headerTxt}>Paramètres</Text>
+                    <Text style={[styles.headerTxt, colors.headerTxt]}>Paramètres</Text>
                 </View>
                 <View style={styles.body}>
-                    <Text style={styles.title}>Mes Informations</Text>
+                    <Text style={[styles.title, colors.title]}>Mes Informations</Text>
                     <TouchableOpacity onPress={confidentialite}>
-                        <View style={styles.information}>
+                        <View style={[styles.information,colors.information]}>
                             <FontAwesomeIcon icon={faGear} style={styles.Icon} size={25}/>
                             <Text style={styles.bodyTxt}>Confidentialité</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={deleteAccountFunction}>
-                        <View style={styles.information}>
+                        <View style={[styles.information,colors.information]}>
                             <FontAwesomeIcon icon={faTrash} style={styles.Icon} size={25}/>
                             <Text style={styles.bodyTxt}>Supprimer le compte</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.body}>
-                    <Text style={styles.title}>Thème</Text>
+                    <Text style={[styles.title, colors.title]}>Thème</Text>
                     <TouchableOpacity onPress={ThemeSelect}>
-                        <View style={styles.information}>
+                        <View style={[styles.information,colors.information]}>
                             <FontAwesomeIcon icon={faLightbulb} style={styles.Icon} size={25}/>
-                            <Text style={styles.bodyTxt}>Passer en Dark mode</Text>
+                            <Text style={styles.bodyTxt}>Changer le mode d'affichage</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

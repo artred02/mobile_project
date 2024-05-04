@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
 
-export default function Password({setPassword}) {
+export default function Password({setPassword,theme}) {
     const [passlist, setPasslist] = useState([])
     const [point1, setPoint1] = useState("")
     const [point2, setPoint2] = useState("")
@@ -12,8 +12,9 @@ export default function Password({setPassword}) {
     const [point4, setPoint4] = useState("")
     const [point5, setPoint5] = useState("")
     const [point6, setPoint6] = useState("")
-
     const [randomList_, setRandomlist] = useState('')
+    
+    const colors = Colors(theme);
 
     const randomNum = () => {
         let numbers = Array.from({length: 10}, (_, i) => i);
@@ -67,14 +68,14 @@ export default function Password({setPassword}) {
     }
     return(
     <>
-    <Text style={styles.passwordTitle}>Entrer votre mot de passe</Text>
+    <Text style={[styles.passwordTitle,colors.passwordTitle ]}>Entrer votre mot de passe</Text>
             <View style={styles.viewPointPassword}>
-                <Text style={styles.pointPassword}>{point1}</Text>                    
-                <Text style={styles.pointPassword}>{point2}</Text>
-                <Text style={styles.pointPassword}>{point3}</Text>
-                <Text style={styles.pointPassword}>{point4}</Text>
-                <Text style={styles.pointPassword}>{point5}</Text>
-                <Text style={styles.pointPassword}>{point6}</Text>
+                <Text style={[styles.pointPassword,colors.pointPassword]}>{point1}</Text>                    
+                <Text style={[styles.pointPassword,colors.pointPassword]}>{point2}</Text>
+                <Text style={[styles.pointPassword,colors.pointPassword]}>{point3}</Text>
+                <Text style={[styles.pointPassword,colors.pointPassword]}>{point4}</Text>
+                <Text style={[styles.pointPassword,colors.pointPassword]}>{point5}</Text>
+                <Text style={[styles.pointPassword,colors.pointPassword]}>{point6}</Text>
             <View style={styles.resetButton}>
                 <TouchableOpacity style={styles.buttonReset} onPress={()=>{setPasslist(''); setPoint1(''); setPoint2(''); setPoint3(''); setPoint4(''); setPoint5(''); setPoint6('')}}>
                     <FontAwesomeIcon icon={faDeleteLeft} style={styles.buttonIcon} size={25} color='white'/>
@@ -82,37 +83,37 @@ export default function Password({setPassword}) {
             </View>
             </View>
             <View style={styles.password}>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[0])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[0]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[0])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[0]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[1])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[1]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[1])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[1]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[2])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[2]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[2])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[2]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[3])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[3]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[3])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[3]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[4])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[4]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[4])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[4]}</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.password}> 
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[5])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[5]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[5])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[5]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[6])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[6]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[6])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[6]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[7])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[7]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[7])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[7]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[8])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[8]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[8])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[8]}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonNumber} onPress={()=>{passwordFunc(randomList_[9])}}>
-                    <Text style={styles.buttonNumber}>{randomList_[9]}</Text>
+                <TouchableOpacity style={[styles.buttonNumber,colors.buttonNumber]} onPress={()=>{passwordFunc(randomList_[9])}}>
+                    <Text style={[styles.buttonNumber,colors.buttonNumber]}>{randomList_[9]}</Text>
                 </TouchableOpacity>
                 
             </View>
@@ -121,8 +122,39 @@ export default function Password({setPassword}) {
 
 }
 
+const Colors = (theme) => {
+    if(theme === 'dark'){
+        return styles.dark;
+    }
+    return styles.light;
+}
 const styles = StyleSheet.create({
-
+    dark: {
+        passwordTitle: {
+            color: '#fff',
+        },
+        pointPassword: {
+            backgroundColor: '#34495e',
+            color: '#fff',
+        },
+        buttonNumber: {
+            backgroundColor: '#34495e',
+            color: '#fff',
+        },
+    },
+    light: {
+        passwordTitle: {
+            color: '#000',
+        },
+        pointPassword: {
+            backgroundColor: '#fff',
+            color: '#000',
+        },
+        buttonNumber: {
+            backgroundColor: '#fff',
+            color: '#000',
+        },
+    },
     password: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -132,10 +164,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,        
     },
     buttonNumber: {
-        backgroundColor: '#2c3e50',
         height: 60,
         width: 60,
-        color: 'white',
         textAlign: 'center',
         fontSize: 25,
         lineHeight: 60,
@@ -143,10 +173,8 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     pointPassword: {
-        backgroundColor: '#2c3e50',
         height: (Platform.OS === 'ios') ? 50 : 40,
         width: (Platform.OS === 'ios') ? 50 : 40,
-        color: 'white',
         textAlign: 'center',
         lineHeight: 55,
         fontSize: 55,
@@ -162,7 +190,6 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     passwordTitle: {
-        color: '#fff',
         fontSize: 15,
         textAlign: 'center',
         paddingTop: 15,

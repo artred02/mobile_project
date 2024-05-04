@@ -8,6 +8,22 @@ const Colors = (theme) => {
 }
 
 const styles = StyleSheet.create({
+    dark: {
+        container: {
+            backgroundColor: "#34495e",
+        },
+        buttonAdd: {
+            backgroundColor: "#2c3e50",
+        },
+    },
+    light: {
+        container: {
+            backgroundColor: "#dcdde1",
+        },
+        buttonAdd: {
+            backgroundColor: "#95a5a6",
+        },
+    },
     container: {
         flex: 1,
         alignItems: "center",
