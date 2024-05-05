@@ -126,9 +126,11 @@ export default function ConfidentialiteScreen(props) {
                 <Text style={styles.modalText}>Changer le mot de passe</Text>
                 <TextInput
                     style={styles.input}
+                    keyboardType='numeric'
                     onChangeText={(text) => setPassword(text)}
                     placeholder='*********'
                     autoCapitalize="none"
+                    maxLength={6}
                 />
                 <Button title="Sauvegarder" onPress={() => changePassword(props.extraData.currentPassword, password)} style={styles.btnAddBalance} textStyle={styles.textbutton} />
             </View>

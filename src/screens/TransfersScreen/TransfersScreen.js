@@ -137,6 +137,7 @@ export default function TransfersScreen(props) {
             <TextInput
                 style={[styles.montant, colors.montant]} 
                 placeholder='0,00 €'
+                keyboardType='numeric'
                 onChangeText={(text) => setVisibility(text)}
                 placeholderTextColor={colors.montant.color}
                 underlineColorAndroid="transparent"
