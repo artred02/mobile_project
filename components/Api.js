@@ -195,4 +195,31 @@ const GetBeneficiaries = async ({ userId, setBeneficiaries }) => {
         });
 }
 
-export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert, deleteByUserId, AddBeneficiary, GetBeneficiaries };
+const MakeNewOpe = async ({ IdAccountSource, IdAccountTarget, amount, type }) => {
+    const headers = {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+    };
+    const url = `${ip_address}/api/operations`;
+    data = {
+        "IdAccountSource": parseInt(IdAccountSource),
+        "IdAccountTarget": parseInt(IdAccountTarget),
+        "amount": parseInt(amount),
+        "type": type
+    }
+    console.log(data);
+    axios({
+        method: 'post',
+        data: data,
+        url: url,
+        headers: headers
+    }).then(() => {
+        console.log('Operation added');
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+export { GetAccountsList, AddAccount, UpdateAccount, DeleteAccount, SetTokenNotification, GetAllUsers, Transfert, deleteByUserId, AddBeneficiary, GetBeneficiaries, MakeNewOpe };

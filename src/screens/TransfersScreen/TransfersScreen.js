@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, TextInput, Text, FlatList, RefreshControl, Pressable } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import { AddBeneficiary, GetBeneficiaries } from '../../../components/Api';
+import { AddBeneficiary, GetAccountsList, GetBeneficiaries, MakeNewOpe } from '../../../components/Api';
 import NavBottomBar from '../../../components/NavBottomBar';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
@@ -13,12 +12,18 @@ export default function TransfersScreen(props) {
     const [bic, setBic] = useState('');
     const [accountName, setAccountName] = useState('');
     const colors = Colors(props.theme);
-    const [ModaleVirement, setModaleVirement] = useState(false);
     const [beneficiaries, setBeneficiaries] = useState([]);
     const [seeBeneficiaryForm, setSeeBeneficiaryForm] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const [Ammount, setAmmount] = useState(0);
     const [refreshing, setRefreshing] = useState(false);
-
-    const [targetAccount, setTargetAccount] = useState({});
+    const [accNameIn, setAccNameIn] = useState('Compte à débiter');
+    const [accNameOut, setAccNameOut] = useState('Compte à créditer');
+    const [GetListMyAcc, setListMyAcc] = useState([]);
+    const [accIdIn, setAccIdIn] = useState([]);
+    const [accIdOut, setAccIdOut] = useState([]);
+    const [myAccModale, setMyAccModale] = useState(false);
+    const [benefAccModale, setBenefAccModale] = useState(false);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -30,6 +35,7 @@ export default function TransfersScreen(props) {
 
     useEffect(() => {
         GetListBeneficiaries();
+        GetAccountsList({ userId: props.extraData.id, setAccounts: setListMyAcc });
     }, []);
 
     const addAccountOnTransfers = (accountName, iban, bic) => {
@@ -40,32 +46,6 @@ export default function TransfersScreen(props) {
     const GetListBeneficiaries = () => {
         GetBeneficiaries({ userId: props.extraData.id, setBeneficiaries: setBeneficiaries });
     }
-    
-    const Item = ({ benef }) => (
-        <View style={styles.benefCard}>
-            <Text style={colors.benefTitle}>{benef.name}</Text>
-        </View>
-    );
-
-    const beginTransfert = (targetAccount) => {
-        setTargetAccount(targetAccount);
-        setModaleVirement(true);
-    }
-
-    const makeTransfertModale = (
-        <View>
-            <RNPickerSelect
-                onValueChange={(value) => console.log(value)}
-                items={[
-                    { label: 'Football', value: 'football' },
-                    { label: 'Baseball', value: 'baseball' },
-                    { label: 'Hockey', value: 'hockey' },
-                ]}
-                style={styles.picker}
-            />
-            <Button title="Valider" onPress={() =>makeTransfert} style={[styles.btnAddBalance, colors.btnAddBalance]} textStyle={[styles.textStyle, colors.textStyle]} />
-        </View>
-    )
 
     const AddBeneficiaryForm = (
         <View style={styles.containerViewModale}>
@@ -99,32 +79,80 @@ export default function TransfersScreen(props) {
         </View>
     );
 
+
+
+    const setVisibility = (text) => {
+        if (text !== '') {
+            setIsVisible(true);
+            setAmmount(text);
+        } else {
+            setIsVisible(false);
+        }
+    }
+
+    const listMyAcc = (
+        <FlatList
+            data={GetListMyAcc}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            renderItem={({ item }) => (
+                <Pressable onPress={() => { setAccNameIn(item.name); setAccIdIn(item.id); setMyAccModale(false) }}>
+                    <Text style={styles.title}>{item.name}</Text>
+                </Pressable>
+            )}
+        />
+    );
+
+    const listMyBeneficiaries = (
+        <FlatList
+            data={GetListMyAcc}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            renderItem={({ item }) => (
+                <Pressable onPress={() => {setAccNameOut(item.name); setAccIdOut(item.id); setBenefAccModale(false)}}>
+                    <Text style={styles.title}>{item.name}</Text>
+                </Pressable>
+            )}
+        />
+    );
+
+    const ValidateVirement = () => {
+        if (accIdIn === '' || accIdOut === '') {
+            alert('Veuillez sélectionner un compte à débiter et un compte à créditer');
+        } else if (accIdIn === accIdOut) {
+            alert('Virement impossible');
+        } else if (isNaN(Ammount) || Ammount === 0) {
+            alert('Veuillez entrer un montant valide');
+        } else {
+            MakeNewOpe({ IdAccountSource: accIdIn, IdAccountTarget: accIdOut, amount: Ammount, type: 'virement' })
+        }
+    }
+
     return (
         <>
         <View style={[styles.container, colors.container]}>
             <Header title={"Transferts"} navigation={props.navigation} setUser={props.setUser} theme={props.theme} />
             <Button title={"Ajouter un bénéficiaire"} onPress={() => setSeeBeneficiaryForm(true)} style={[styles.btnAddBalance, colors.btnAddBalance]} textStyle={[styles.textStyle, colors.textStyle]} />
             <View style={styles.containerView}>
-                <Text style={[styles.title, colors.benefTitle]}>Vos bénéficiaires</Text>
-                <FlatList
-                    data={beneficiaries}
-                    ItemSeparatorComponent={() => <View style={styles.separator} />}
-                    refreshControl={
-                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                    }
-                    renderItem={({ item }) => (
-                        <Pressable onPress={() => beginTransfert(item)}>
-                            <Item benef={item} />
-                        </Pressable>
-                    )}
-                    keyExtractor={item => item.id}
-                    style={styles.flatList}
-                    height={"65%"}
-                />
+                <Text style={[styles.title, colors.benefTitle]}>Je fais un virement de</Text>
             </View>
+            <TextInput
+                style={[styles.montant, colors.montant]} 
+                placeholder='0,00 €'
+                onChangeText={(text) => setVisibility(text)}
+                placeholderTextColor={colors.montant.color}
+                underlineColorAndroid="transparent"
+                autoCapitalize="none"
+            />
+            {isVisible ? (
+                <View style={styles.containerViewHide} visible={isVisible}>
+                    <Button title={accNameIn} onPress={() => setMyAccModale(true)} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
+                    <Button title={accNameOut} onPress={() => setBenefAccModale(true)} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
+                    <Button title={"Valider"} onPress={() => {ValidateVirement()}} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
+                </View>
+            ) : null}
         </View>
         {Modale(seeBeneficiaryForm, setSeeBeneficiaryForm, AddBeneficiaryForm)}
-        {Modale(ModaleVirement, setModaleVirement, makeTransfertModale)}
+        {Modale(myAccModale, setMyAccModale, listMyAcc)}
+        {Modale(benefAccModale, setBenefAccModale, listMyBeneficiaries)}
         <NavBottomBar navigation={props.navigation} theme={props.theme} />
         </>
     )

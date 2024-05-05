@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
         btnAddBalance: {
             backgroundColor: '#2c3e50',
         },
+        btnAccountSelect: {
+            backgroundColor: '#2c3e50',
+        },
         benefTitle: {
             color: 'white',
         },
@@ -30,6 +33,9 @@ const styles = StyleSheet.create({
         },
         textStyle: {
             color: 'white',
+        },
+        montant:{
+            color: 'red',
         },
     },
     light: {
@@ -42,6 +48,9 @@ const styles = StyleSheet.create({
         btnAddBalance: {
             backgroundColor: '#2ecc71',
         },
+        btnAccountSelect: {
+            backgroundColor: '#2ecc71',
+        },
         benefTitle: {
             color: 'black',
         },
@@ -50,6 +59,9 @@ const styles = StyleSheet.create({
         },
         textStyle: {
             color: 'black',
+        },
+        montant:{
+            color: 'red',
         },
     },
     container: {
@@ -92,12 +104,17 @@ const styles = StyleSheet.create({
         width: 250,
     },
     btnAddBalance: {
-        backgroundColor: '#34495e',
         borderRadius: 10,
         width: '95%',
         height: 50,
         margin: 10,
         alignItems: 'center',
+    },
+    btnAccountSelect: {
+        width: 300,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     textStyle: {
         color: 'white',
@@ -116,12 +133,24 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         
     },
+    containerViewHide: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     picker: {
         height: 50,
         width: 200,
         backgroundColor: 'white',
         margin: 10,
         borderRadius: 5,
+    },
+    montant:{
+        fontSize:30,
+        marginLeft:30,
+        borderBottomWidth:1,
+        borderColor:'red',
+        width:90,
+        textAlign:'center',
     },
 });
 
