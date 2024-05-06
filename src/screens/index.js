@@ -7,3 +7,4 @@ export { default as ConfidentialiteScreen } from './ConfidentialiteScreen/Confid
 export { default as AccountScreen } from './AccountScreen/AccountScreen'
 export { default as AddAccountScreen } from './AddAccountScreen/AddAccountScreen'
 export { default as TransfersScreen } from './TransfersScreen/TransfersScreen'
+export { default as OperationsScreen } from './OperationsScreen/OperationsScreen'

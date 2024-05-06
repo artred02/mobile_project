@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
         marginLeft:'auto',
         
     },
+    btnOperations:{
+        width:200,
+        justifyContent:'center',
+    },
     parametreTouchable:{
         position:'absolute',
         right:0,
@@ -169,7 +173,6 @@ const styles = StyleSheet.create({
     lastOperationsTitle:{
         color:'#fff',
         fontSize:20,
-        marginTop:10,
         fontStyle:'italic',
     },
     lastOperationsText:{

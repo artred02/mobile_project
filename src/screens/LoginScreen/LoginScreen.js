@@ -99,11 +99,6 @@ export default function LoginScreen({ navigation, setUser, theme }) {
                     autoCapitalize="none"
                 />
                 <Password setPassword={setPassword} theme={theme}/>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in</Text>
-                </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={[styles.footerText,colors.footerText]}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>

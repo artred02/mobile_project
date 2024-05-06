@@ -128,7 +128,7 @@ export default function ConfidentialiteScreen(props) {
                     style={styles.input}
                     keyboardType='numeric'
                     onChangeText={(text) => setPassword(text)}
-                    placeholder='*********'
+                    placeholder='******'
                     autoCapitalize="none"
                     maxLength={6}
                 />

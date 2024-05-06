@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen, AddAccountScreen, TransfersScreen } from '../screens';
+import { HomeScreen, SettingsScreen, ChatScreen, ConfidentialiteScreen, AccountScreen, AddAccountScreen, TransfersScreen, OperationsScreen } from '../screens';
 import RibScreen from '../screens/RibScreen/RibScreen';
 import { LoginScreen, RegistrationScreen } from '../screens';
 
@@ -90,6 +90,16 @@ export default function Navigation ({theme, setTheme, user, setUser, tokenNotifi
                 headerLeft: null,
             }}>
             {props => <RibScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
+        </Stack.Screen>
+        <Stack.Screen
+            name="Operations"
+            options={{
+                headerStyle: {
+                    height: 0
+                },
+                headerLeft: null,
+            }}>
+            {props => <OperationsScreen {...props} theme={theme} extraData={user} setUser={setUser} />}
         </Stack.Screen>
         </>
       ) : (

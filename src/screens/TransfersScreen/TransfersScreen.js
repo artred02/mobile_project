@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, TextInput, Text, FlatList, RefreshControl, Pressable } from 'react-native';
+import { View, TextInput, Text, FlatList, RefreshConlistBeneficiariestrol, Pressable } from 'react-native';
 import { AddBeneficiary, GetAccountsList, GetBeneficiaries, MakeNewOpe } from '../../../components/Api';
 import NavBottomBar from '../../../components/NavBottomBar';
 import Header from '../../../components/Header';
@@ -16,7 +16,6 @@ export default function TransfersScreen(props) {
     const [seeBeneficiaryForm, setSeeBeneficiaryForm] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [Ammount, setAmmount] = useState(0);
-    const [refreshing, setRefreshing] = useState(false);
     const [accNameIn, setAccNameIn] = useState('Compte à débiter');
     const [accNameOut, setAccNameOut] = useState('Compte à créditer');
     const [GetListMyAcc, setListMyAcc] = useState([]);
@@ -24,18 +23,15 @@ export default function TransfersScreen(props) {
     const [accIdOut, setAccIdOut] = useState([]);
     const [myAccModale, setMyAccModale] = useState(false);
     const [benefAccModale, setBenefAccModale] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-        setTimeout(() => {
-            GetListBeneficiaries();
-            setRefreshing(false);
-        }, 1000);
-    }, []);
+    const [listeMyAccModified, setListeMyAccModified] = useState([]);
 
     useEffect(() => {
         GetListBeneficiaries();
-        GetAccountsList({ userId: props.extraData.id, setAccounts: setListMyAcc });
+        GetAccountsList({ userId: props.extraData.id, setAccounts: setListMyAcc }).then(() => {
+            setListeMyAccModified(GetListMyAcc.map((acc) => {
+                return { accId: acc.id, name: acc.name }
+            }));
+        });
     }, []);
 
     const addAccountOnTransfers = (accountName, iban, bic) => {
@@ -75,7 +71,7 @@ export default function TransfersScreen(props) {
                     autoCapitalize="none"
                 />
             </View>
-            <Button title="Ajouter" onPress={() => addAccountOnTransfers(accountName, iban, bic)} style={[styles.btnAddBalance, colors.btnAddBalance]} textStyle={[styles.textStyle, colors.textStyle]} />
+            <Button title="Ajouter" onPress={() => {addAccountOnTransfers(accountName, iban, bic); GetListBeneficiaries}} style={[styles.btnAddBalance, colors.btnAddBalance]} textStyle={[styles.textStyle, colors.textStyle]} />
         </View>
     );
 
@@ -95,7 +91,9 @@ export default function TransfersScreen(props) {
             data={GetListMyAcc}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
             renderItem={({ item }) => (
-                <Pressable onPress={() => { setAccNameIn(item.name); setAccIdIn(item.id); setMyAccModale(false) }}>
+                <Pressable onPress={() => { setAccNameIn(item.name); setAccIdIn(item.id); setMyAccModale(false);
+                    setListeMyAccModified(GetListMyAcc.filter((acc) => acc.id !== item.id))
+                }}>
                     <Text style={styles.title}>{item.name}</Text>
                 </Pressable>
             )}
@@ -104,10 +102,10 @@ export default function TransfersScreen(props) {
 
     const listMyBeneficiaries = (
         <FlatList
-            data={GetListMyAcc}
+            data={[...beneficiaries, ...listeMyAccModified]}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
             renderItem={({ item }) => (
-                <Pressable onPress={() => {setAccNameOut(item.name); setAccIdOut(item.id); setBenefAccModale(false)}}>
+                <Pressable onPress={() => {setAccNameOut(item.name); setAccIdOut(item.accId); setBenefAccModale(false)}}>
                     <Text style={styles.title}>{item.name}</Text>
                 </Pressable>
             )}
@@ -147,7 +145,7 @@ export default function TransfersScreen(props) {
                 <View style={styles.containerViewHide} visible={isVisible}>
                     <Button title={accNameIn} onPress={() => setMyAccModale(true)} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
                     <Button title={accNameOut} onPress={() => setBenefAccModale(true)} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
-                    <Button title={"Valider"} onPress={() => {ValidateVirement()}} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
+                    <Button title={"Valider"} onPress={() => ValidateVirement()} style={[styles.btnAccountSelect, colors.btnAccountSelect]} textStyle={[styles.textStyle, colors.textStyle]} />
                 </View>
             ) : null}
         </View>

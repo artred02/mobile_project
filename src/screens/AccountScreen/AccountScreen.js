@@ -83,9 +83,8 @@ export default function AccountScreen(props) {
                         <Text selectable={true} style={styles.iban} >{account.iban}</Text>
                     </TouchableOpacity>
                     <View style={styles.lastOperations}>
-                        <Text style={styles.lastOperationsTitle}>Dernières opérations</Text>
-                        <Text style={styles.lastOperationsText}>Aucune opération</Text>
-                    </View>                    
+                        <Button title="Voir les opérations" onPress={() => props.navigation.navigate('Operations', {account: account})} style={styles.btnOperations} textStyle={styles.lastOperationsTitle} />
+                    </View>
                 </View>
                 <Text style={[styles.TitleSection,colors.TitleSection]}>Raccourcis</Text>
                 <View style={[styles.ibanPdf,colors.ibanPdf]}>
