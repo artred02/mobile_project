@@ -98,8 +98,6 @@ const SetTokenNotification = async ({ userId, tokenNotification }) => {
             "tokenNotification": tokenNotification
         },
         headers: headers
-    }).then(() => {
-        console.log('Token saved');
     }).catch((error) => {
         console.log(error);
     });
@@ -209,7 +207,9 @@ const MakeNewOpe = async ({ IdAccountSource, IdAccountTarget, amount, type }) =>
         "amount": parseFloat(amount),
         "type": type
     }
-    console.log(data);
+    if(IdAccountTarget === null) {
+        delete data.IdAccountTarget;
+    }
     axios({
         method: 'post',
         data: data,
@@ -222,13 +222,13 @@ const MakeNewOpe = async ({ IdAccountSource, IdAccountTarget, amount, type }) =>
     });
 }
 
-const GetOperations = async ({ userId, setOperations }) => {
+const GetOperations = async ({ accountId, setOperations }) => {
     const headers = {
         headers: {
             Accept: 'application/json'
         },
     };
-    const url = `${ip_address}/api/operations/user/${userId}`;
+    const url = `${ip_address}/api/operations/account/${accountId}`;
     console.log(url)
     axios.get(url, headers)
         .then((response) => {

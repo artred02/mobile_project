@@ -13,19 +13,44 @@ export default function OperationsScreen(props) {
     const colors = Colors(props.theme);
     const [operations, setOperations] = useState([]);
     const [modaleAddOpe, setModaleAddOpe] = useState(false);
-    const [opeType, setOpeType] = useState('ope_add');
+    const [opeType, setOpeType] = useState('ope_in');
     const [opeAmount, setOpeAmount] = useState(0);
 
     useEffect(() => {
-        GetOperations({ userId: props.extraData.id, setOperations: setOperations });
-        console.log();
+        GetOpe(props.route.params.account.id);
     }, []);
+
+    const GetOpe = (accountId) => {
+        GetOperations({ accountId: accountId, setOperations: setOperations });
+    }
 
     const ValidateOpe = () => {
         if (!isNaN(opeAmount)) {
             MakeNewOpe({ IdAccountSource: props.route.params.account.id, IdAccountTarget: null, type: opeType, amount: opeAmount }).then(() => {
-                GetOperations({ userId: props.extraData.id, setOperations: setOperations });
+                // wait 1s
+                setTimeout(() => {
+                    GetOpe(props.route.params.account.id);
+                }, 1000);
             });
+            setModaleAddOpe(false);
+        }
+    }
+
+    const getDate = (date) => {
+        let d = new Date(date);
+        return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+    }
+
+    const getTypeOpe = (type) => {
+        switch (type) {
+            case 'ope_in':
+                return 'Entrée d\'argent';
+            case 'ope_out':
+                return 'Sortie d\'argent';
+            case 'virement':
+                return 'Virement';
+            default:
+                return 'Type inconnu';
         }
     }
 
@@ -38,8 +63,8 @@ export default function OperationsScreen(props) {
                         onValueChange={(value) => setOpeType(value)}
                         useNativeAndroidPickerStyle={false}
                         items={[
-                            { label: 'OPE IN', value: 'ope_add' },
-                            { label: 'OPE OUT', value: 'ope_out' }
+                            { label: 'Entrée d\'Argent', value: 'ope_in' },
+                            { label: 'Sortie d\'Argent', value: 'ope_out' }
                         ]}
                         style={pickerSelectStyles}
                     />
@@ -67,7 +92,8 @@ export default function OperationsScreen(props) {
                     data={operations}
                     renderItem={({ item }) => (
                         <View style={[styles.accountCard, colors.accountCard]}>
-                            <Text style={[styles.title, colors.title]}>{item.type}</Text>
+                            <Text style={[styles.title, colors.title]}>{getTypeOpe(item.type)}</Text>
+                            <Text style={[styles.title, colors.title]}>{getDate(item.date)}</Text>
                             <Text style={[styles.title, colors.title]}>{item.amount} €</Text>
                         </View>
                     )}

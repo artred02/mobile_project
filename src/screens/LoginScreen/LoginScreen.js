@@ -48,7 +48,6 @@ export default function LoginScreen({ navigation, setUser, theme }) {
         const auth = firebase.auth();
         auth.sendPasswordResetEmail(email)
             .then(() => {
-                console.log("Email de réinitialisation du mot de passe envoyé !");
                 alert('Email de réinitialisation du mot de passe envoyé !');
                 setModaleVisiblePass(false);
             })

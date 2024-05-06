@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
     containerViewModale: {
         alignItems: 'center',
         justifyContent: 'center',
-        
     },
     containerViewHide: {
         alignItems: 'center',

@@ -77,6 +77,10 @@ export default function SettingsScreen(props) {
         );
     }
 
+    const GoBeneficiaries = () => {
+        props.navigation.navigate('Beneficiaries')
+    }
+
     return (
         <>
         <View style={[styles.container, colors.container]}>
@@ -99,6 +103,15 @@ export default function SettingsScreen(props) {
                         <View style={[styles.information,colors.information]}>
                             <FontAwesomeIcon icon={faTrash} style={styles.Icon} size={25}/>
                             <Text style={styles.bodyTxt}>Supprimer le compte</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.body}>
+                    <Text style={[styles.title, colors.title]}>Gestion</Text>
+                    <TouchableOpacity onPress={GoBeneficiaries}>
+                        <View style={[styles.information,colors.information]}>
+                            <FontAwesomeIcon icon={faLightbulb} style={styles.Icon} size={25}/>
+                            <Text style={styles.bodyTxt}>Gérer mes bénéficiaires</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

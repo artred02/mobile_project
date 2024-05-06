@@ -31,7 +31,6 @@ export default function Password({setPassword,theme}) {
         if (passlist.length === 6) {
             let password = passlist
             setPassword(password)
-            console.log('Mot de passe ok : ', password)
         }
     }
     useEffect(() => {
