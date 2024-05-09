@@ -90,6 +90,7 @@ export default function OperationsScreen(props) {
                 <Button title={"Ajouter une opération"} onPress={() => setModaleAddOpe(true)} style={[styles.btnAddOpe, colors.btnAddOpe]} textStyle={styles.textStyle} />
                 <FlatList
                     data={operations}
+                    ItemSeparatorComponent={() => <View style={styles.separator} />}
                     renderItem={({ item }) => (
                         <View style={[styles.accountCard, colors.accountCard]}>
                             <Text style={[styles.title, colors.title]}>{getTypeOpe(item.type)}</Text>
@@ -98,6 +99,7 @@ export default function OperationsScreen(props) {
                         </View>
                     )}
                     keyExtractor={item => item.id.toString()}
+                    height={"60%"}
                 />
             </View>
         </View>

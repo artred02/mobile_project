@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     btnAddBalance: {
         borderRadius: 10,
-        width: '95%',
+        width: 250,
         height: 50,
         margin: 10,
         alignItems: 'center',

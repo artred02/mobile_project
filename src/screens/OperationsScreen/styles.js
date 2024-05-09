@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     separator:{
         height:1,
         backgroundColor:'black',
+        marginHorizontal: 16,
     },
     title:{
         fontSize:20,
